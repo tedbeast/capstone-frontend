@@ -1,7 +1,7 @@
 import { Employee } from "./Employee";
 
 export interface PerformanceReview{
-    performanceReviewId:number; 
+    performanceReviewID:number; 
     goalType:string;
     employeeComments:string;
     targetDate:Date;

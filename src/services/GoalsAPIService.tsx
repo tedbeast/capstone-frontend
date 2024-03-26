@@ -9,7 +9,7 @@ export function getAllGoalsAPI(){
     });
 }
 
-export function getGoalsByEmployeeAPI(data:PerformanceReview["performanceReviewId"]){
+export function getGoalsByEmployeeAPI(data:PerformanceReview["performanceReviewID"]){
     return fetch(apiBaseURL + "employee/" + data + "/performanceReview", {
         method:"GET",
         mode:"cors"

@@ -19,7 +19,7 @@ export function ListGoal(props:PerformanceReviewInterface){
     return (
         <>
         <h3>All Goals List!</h3>
-        {allGoals.map(goals =>{return <SingleGoal key={goals.performanceReviewId} data={goals}></SingleGoal>})}
+        {allGoals.map(goals =>{return <SingleGoal key={goals.performanceReviewID} data={goals}></SingleGoal>})}
         </>
     )
 }
