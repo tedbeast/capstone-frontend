@@ -2,7 +2,7 @@ import React from "react";
 import { Login } from "../components/Login";
 
 export function LoginPage() {
-    const handleLogin = () =>{
+    const handleLogin = () => {
     console.log("User logged in.");
     };
 

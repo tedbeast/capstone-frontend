@@ -16,7 +16,7 @@ const getCredentials = async (event: React.FormEvent<HTMLFormElement>) => {
     let getPassword = (document.getElementById('password') as HTMLInputElement).value;
 
     try {
-        const response = await fetch('http://localhost:3000/login', {
+        const response = await fetch('http://localhost:8080/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -24,14 +24,15 @@ const getCredentials = async (event: React.FormEvent<HTMLFormElement>) => {
             body: JSON.stringify({ employeeID: getEmployeeID, password:
             getPassword }),
         });
-        const data = await response.json();
+
         if (response.ok) {
-        const data = await response.text();
-        console.log("Login successful: ", data);
+            const data = await response.json();
+            console.log("Login successful: ", data);
             setLoggedIn(true);
             onLogin(); //Call the onLogin function passed as prop
             history.push('/welcome');
             } else {
+                console.log('Response: ', response);
                 console.error('Login failed: ', response.statusText);
         }
     } catch (error) {
