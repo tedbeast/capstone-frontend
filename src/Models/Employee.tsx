@@ -1,12 +1,10 @@
+import { Leave } from "./Leave";
+import { Manager } from "./Manager";
+import { PerformanceReview } from "./PerformanceReview";
+import { Roles } from "./Roles";
 
 
-export enum Roles {
-    EMPLOYEE = 'EMPLOYEE',
-    MANAGER = 'MANAGER',
-    ADMIN = 'ADMIN'
-}
-
-export interface SiteUser {
+export interface Employee {
     employeeID: number;
     password: string;
     name: string;
@@ -20,6 +18,8 @@ export interface SiteUser {
     postalCode: number;
     birthDate: Date;
     anniversary: Date;
-    managerID: number;
+    manager: Manager;
+    performanceReview: PerformanceReview[];
+    leave: Leave[];
     role: Roles;
 }

@@ -1,8 +1,9 @@
-import { SiteUser } from "../Models/SiteUser";
+import { Employee } from "../Models/Employee";
+
 
 const apiBaseURL = "http://localhost:9004/"
 
-export function updateAdminAPI(employeeID: number, data: SiteUser) {
+export function updateAdminAPI(employeeID: number, data: Employee) {
     return fetch(apiBaseURL + `product/${employeeID}`, {
       method: "PUT",
       mode: "cors",

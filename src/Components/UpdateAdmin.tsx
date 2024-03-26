@@ -1,64 +1,126 @@
 import { useState } from "react";
 import { updateAdminAPI } from "../Services/AdminAPIService";
-import { Roles, SiteUser } from "../Models/SiteUser";
+
 import { Modal, Button } from 'react-bootstrap';
+import { PerformanceReview } from "../Models/PerformanceReview";
+import { Employee } from "../Models/Employee";
+import { Leave } from "../Models/Leave";
+import { Roles } from "../Models/Roles";
 
-function UpdateAdmin() {
-    const [show, setShow] = useState(false);
-    const [employeeID, setEmployeeID] = useState<number>(0);
-    const [updatedName, setName] = useState<string>('');
-    const [updatedPassword, setPassword] = useState<string>('');
-    const [updatedJobTitle, setJobTitle] = useState<string>(''); 
-    const [updatedPhoneNumber, setPhoneNumber] = useState<string>('');
-    const [updatedEmail, setEmail] = useState<string>('');
-    const [updatedAddressLine1, setAddressLine1] = useState<string>('');
-    const [updatedAddressLine2, setAddressLine2] = useState<string>('');
-    const [updatedCity, setCity] = useState<string>('');
-    const [updatedState, setState] = useState<string>('');
-    const [updatedPostalCode , setPostalCode] = useState<number>(0);
-    const [updatedBirthDate, setBirthDate] = useState<Date>(new Date());
-    const [updatedAnniversary, setAnniversary] = useState<Date>(new Date());
-    const [updatedManagerID, setManagerID] = useState<number>(0);
-    const [updatedRole, setRole] = useState<Roles>(Roles.EMPLOYEE);
+// function UpdateAdmin() {
+//     const [show, setShow] = useState(false);
+//     const [employeeID, setEmployeeID] = useState<number>(0);
+//     const [updatedName, setName] = useState<string>('');
+//     const [updatedPassword, setPassword] = useState<string>('');
+//     const [updatedJobTitle, setJobTitle] = useState<string>(''); 
+//     const [updatedPhoneNumber, setPhoneNumber] = useState<string>('');
+//     const [updatedEmail, setEmail] = useState<string>('');
+//     const [updatedAddressLine1, setAddressLine1] = useState<string>('');
+//     const [updatedAddressLine2, setAddressLine2] = useState<string>('');
+//     const [updatedCity, setCity] = useState<string>('');
+//     const [updatedState, setState] = useState<string>('');
+//     const [updatedBirthDate, setBirthDate] = useState<Date>(new Date());
+//     const [updatedAnniversary, setAnniversary] = useState<Date>(new Date());
+//     const [updatedManagerID, setManagerID] = useState<number>(0);
+//     const [updatedPerformanceReview, setPerformanceReview] = useState<PerformanceReview[]>([]);
+//     const [updatedLeave, setLeave] = useState<Leave[]>([]);
+//    const [updatedRole, setRole] = useState<Roles>(Roles.EMPLOYEE);
 
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+
+//     const handleClose = () => setShow(false);
+//     const handleShow = () => setShow(true);
   
         
        
-    async function handleUpdate() {
-      const updatedSiteUser: SiteUser = {
-          employeeID: employeeID,
-          name: updatedName,
-          password: updatedPassword,
-          jobTitle: updatedJobTitle,
-          phoneNumber: updatedPhoneNumber,
-          email: updatedEmail,
-          addressLine1: updatedAddressLine1,
-          addressLine2: updatedAddressLine2,
-          city: updatedCity,
-          state: updatedState,
-          postalCode: updatedPostalCode,
-          birthDate: updatedBirthDate,
-          anniversary: updatedAnniversary,
-          managerID: updatedManagerID,
-          role: updatedRole
-      };
+//     async function handleUpdate() {
+//       const updatedEmployee: Employee = {
+//           employeeID: employeeID,
+//           name: updatedName,
+//           password: updatedPassword,
+//           jobTitle: updatedJobTitle,
+//           phoneNumber: updatedPhoneNumber,
+//           email: updatedEmail,
+//           addressLine1: updatedAddressLine1,
+//           addressLine2: updatedAddressLine2,
+//           city: updatedCity,
+//           state: updatedState,
+//           postalCode: updatedPostalCode,
+//           birthDate: updatedBirthDate,
+//           anniversary: updatedAnniversary,
+//           Manager: updatedManagerID,
+//           role: updatedRole
+//       };
   
+//       try {
+//         const response = await updateAdminAPI(employeeID, updatedSiteUser);
+  
+//         if (response.ok) {
+//           console.log('Product updated successfully.');
+//           window.location.reload();
+//         } else {
+//           console.error('Error updating product:', response.statusText);
+//         }
+//       } catch (error) {
+//         console.error('Error:', error);
+//       }
+//     }
+function UpdateAdmin() {
+  const [show, setShow] = useState(false);
+  const [employeeID, setEmployeeID] = useState<number>(0);
+  const [password, setPassword] = useState<string>('');
+  const [name, setName] = useState<string>('');
+  const [jobTitle, setJobTitle] = useState<string>('');
+  const [phoneNumber, setPhoneNumber] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
+  const [addressLine1, setAddressLine1] = useState<string>('');
+  const [addressLine2, setAddressLine2] = useState<string>('');
+  const [city, setCity] = useState<string>('');
+  const [state, setState] = useState<string>('');
+  const [postalCode, setPostalCode] = useState<number>(0);
+  const [birthDate, setBirthDate] = useState<Date>(new Date());
+  const [anniversary, setAnniversary] = useState<Date>(new Date());
+  const [managerID, setManagerID] = useState<number>(0);
+  const [performanceReview, setPerformanceReview] = useState<PerformanceReview[]>([]);
+  const [leave, setLeave] = useState<Leave[]>([]);
+  const [role, setRole] = useState<Roles>(Roles.EMPLOYEE);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  async function handleUpdate() {
+    const updatedEmployee: Employee = {
+        employeeID,
+        password,
+        name,
+        jobTitle,
+        phoneNumber,
+        email,
+        addressLine1,
+        addressLine2,
+        city,
+        state,
+        postalCode,
+        birthDate,
+        anniversary,
+        manager: { managerID, employees: [] },
+        performanceReview,
+        leave,
+        role
+    };
+
       try {
-        const response = await updateAdminAPI(employeeID, updatedSiteUser);
-  
-        if (response.ok) {
-          console.log('Product updated successfully.');
-          window.location.reload();
-        } else {
-          console.error('Error updating product:', response.statusText);
-        }
+          const response = await updateAdminAPI(employeeID, updatedEmployee);
+
+          if (response.ok) {
+              console.log('Employee updated successfully.');
+              window.location.reload();
+          } else {
+              console.error('Error updating employee:', response.statusText);
+          }
       } catch (error) {
-        console.error('Error:', error);
+          console.error('Error:', error);
       }
-    }
-  
+  }
   return (
     <>
         <Button variant="primary" onClick={handleShow}>
@@ -85,7 +147,7 @@ function UpdateAdmin() {
                 Employee Name: <input
                   type="text"
                   placeholder="Enter Name"
-                  value={updatedName}
+                  value={name}
                   onChange={(e) => setName(e.target.value)}
                   style={{ margin: '5px 0' }}
                   />
@@ -95,7 +157,7 @@ function UpdateAdmin() {
                 Password: <input
                   type="password"
                   placeholder="Enter Password"
-                  value={updatedPassword}
+                  value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   style={{ margin: '5px 0' }}
                   />
@@ -105,7 +167,7 @@ function UpdateAdmin() {
                 Job Title: <input
                   type="text"
                   placeholder="Enter Job Title"
-                  value={updatedJobTitle}
+                  value={jobTitle}
                   onChange={(e) => setJobTitle(e.target.value)}
                   style={{ margin: '5px 0' }}
                   />
@@ -115,7 +177,7 @@ function UpdateAdmin() {
                 Phone Number: <input
                   type="text"
                   placeholder="Enter Phone Number"
-                  value={updatedPhoneNumber}
+                  value={phoneNumber}
                   onChange={(e) => setPhoneNumber(e.target.value)}
                   style={{ margin: '5px 0' }}
                   />
@@ -125,7 +187,7 @@ function UpdateAdmin() {
                 Email Address: <input
                   type="email"
                   placeholder="Enter Email"
-                  value={updatedEmail}
+                  value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   style={{ margin: '5px 0' }}
                   />
@@ -135,7 +197,7 @@ function UpdateAdmin() {
                 Address line 1: <input
                   type="text"
                   placeholder="Enter Address Line 1"
-                  value={updatedAddressLine1}
+                  value={addressLine1}
                   onChange={(e) => setAddressLine1(e.target.value)}
                   style={{ margin: '5px 0' }}
                   />
@@ -145,7 +207,7 @@ function UpdateAdmin() {
                 Address line 2: <input
                   type="text"
                   placeholder="Enter Address Line 2"
-                  value={updatedAddressLine2}
+                  value={addressLine2}
                   onChange={(e) => setAddressLine2(e.target.value)}
                   style={{ margin: '5px 0' }}
                   />
@@ -155,7 +217,7 @@ function UpdateAdmin() {
                 City: <input
                   type="text"
                   placeholder="Enter City"
-                  value={updatedCity}
+                  value={city}
                   onChange={(e) => setCity(e.target.value)}
                   style={{ margin: '5px 0' }}
                   />
@@ -165,7 +227,7 @@ function UpdateAdmin() {
                  State: <input
                   type="text"
                   placeholder="Enter State"
-                  value={updatedState}
+                  value={state}
                   onChange={(e) => setState(e.target.value)}
                   style={{ margin: '5px 0' }}
                   />
@@ -175,7 +237,7 @@ function UpdateAdmin() {
                 Postal Code: <input
                   type="number"
                   placeholder="Enter Postal Code"
-                  value={updatedPostalCode}
+                  value={postalCode}
                   onChange={(e) => setPostalCode(parseInt(e.target.value))}
                   style={{ margin: '5px 0' }}
                   />
@@ -185,7 +247,7 @@ function UpdateAdmin() {
                 Birth Date: <input
                   type="date"
                   placeholder="Enter Birth Date"
-                  value={updatedBirthDate.toISOString().substr(0, 10)}
+                  value={birthDate.toISOString().substr(0, 10)}
                   onChange={(e) => setBirthDate(new Date(e.target.value))}
                   style={{ margin: '5px 0' }}
                   />
@@ -195,7 +257,7 @@ function UpdateAdmin() {
                 Work Anniversary: <input
                   type="date"
                   placeholder="Enter Anniversary"
-                  value={updatedAnniversary.toISOString().substr(0, 10)}
+                  value={anniversary.toISOString().substr(0, 10)}
                   onChange={(e) => setAnniversary(new Date(e.target.value))}
                   style={{ margin: '5px 0' }}
                   />
@@ -205,7 +267,7 @@ function UpdateAdmin() {
                 Manager ID: <input
                   type="number"
                   placeholder="Enter Manager ID"
-                  value={updatedManagerID}
+                  value={managerID}
                   onChange={(e) => setManagerID(parseInt(e.target.value))}
                   style={{ margin: '5px 0' }}
                   />
@@ -214,7 +276,7 @@ function UpdateAdmin() {
                 <label>
                   Employee Role:
                   <select
-                      value={updatedRole}
+                      value={role}
                       onChange={(e) => setRole(e.target.value as Roles)}
                       style={{ margin: '5px 0' }}
                   >
