@@ -5,6 +5,7 @@ import { PageNotFoundPage } from "./Pages/PageNotFound";
 import { WelcomePage } from "./Pages/WelcomePage";
 import { NavigationBar } from "./Components/NavigationBar";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { GoalsPage } from "./Pages/GoalsPage";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="home" element={<WelcomePage></WelcomePage>}></Route>
         <Route path="/" element={<WelcomePage></WelcomePage>}></Route>
         <Route path="*" element={<PageNotFoundPage></PageNotFoundPage>}></Route>
+        <Route path='Goals' element={<GoalsPage></GoalsPage>}></Route>
       </Routes>
     </BrowserRouter>
     </>
