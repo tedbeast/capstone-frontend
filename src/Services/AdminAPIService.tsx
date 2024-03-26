@@ -11,3 +11,11 @@ export function updateAdminAPI(employeeID: number, data: Employee) {
       body: JSON.stringify(data),
     });
   }
+
+  export function addAdminAPI(employee: Employee){
+    return fetch(apiBaseURL + `manager/${employee}/employee`, {
+        method:"POST",
+        mode:"cors",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify(employee)});
+}
