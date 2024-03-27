@@ -1,16 +1,23 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-import { BrowserRouter, Route } from 'react-router-dom';
-import { LoginPage } from './pages/LoginPage'
-import { Homepage } from './pages/Homepage'
+import React from "react";
+import logo from "./logo.svg";
+import "./App.css";
+import { PageNotFoundPage } from "./Pages/PageNotFound";
+import { WelcomePage } from "./Pages/WelcomePage";
+import { NavigationBar } from "./Components/NavigationBar";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { PasswordResetPage } from "./Pages/PasswordResetPage";
 
 function App() {
   return (
     <>
     <BrowserRouter>
-      <Route path="" component={Homepage} />
-      <Route path="/login" component={LoginPage} />
+    <NavigationBar></NavigationBar>
+      <Routes>
+        <Route path="home" element={<WelcomePage></WelcomePage>}></Route>
+        <Route path="/" element={<WelcomePage></WelcomePage>}></Route>
+        <Route path="*" element={<PageNotFoundPage></PageNotFoundPage>}></Route>
+        <Route path="password reset" element={<PasswordResetPage></PasswordResetPage>}></Route>
+      </Routes>
     </BrowserRouter>
     </>
   );
