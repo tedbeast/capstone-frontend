@@ -1,6 +1,7 @@
 import { getAllGoalsAPI} from "../services/GoalsAPIService";
 import { postGoalsAPI } from "../services/GoalsAPIService";
 import React, { SyntheticEvent, useState } from "react";
+import { ListGoal } from "./ListGoal";
 
 
 interface GoalsModel {
@@ -57,6 +58,17 @@ export function AddGoal(){
     //     console.log(textBox.value);
     // }
 
+    const[showListGoalComponent, setShowListGoalComponent] = useState(false);
+
+    function showPerformanceList(){
+        if(showListGoalComponent) {
+            setShowListGoalComponent(false)
+        }
+        else {
+            setShowListGoalComponent(true);
+        }
+    }
+
 
 function buttonClickHandler(){
     const GoalsData = {
@@ -88,7 +100,6 @@ function buttonClickHandler(){
 
 
         return(<>
-    
             <h1>Enter your Goals</h1>
             <div className="w3-half">
                 <label>Goal Type: Agile / Team Work</label>
@@ -139,6 +150,10 @@ function buttonClickHandler(){
                 <input type="text" onChange={GoalReviewHandlerC} value={goalreviewC}></input>
             </div>
                 <button onClick={buttonClickHandler}>Submit</button>
+            <div>
+                <button onClick={showPerformanceList}>Show Current Goals</button>
+                {showListGoalComponent && <ListGoal data = {1}></ListGoal>}
+            </div>
             </>
             );
 
