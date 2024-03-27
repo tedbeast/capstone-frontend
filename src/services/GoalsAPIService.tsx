@@ -1,6 +1,6 @@
-import { GoalsModel } from "../Models/GoalsModel";
+import { GoalsModel } from "../models/GoalsModel";
 
-const apiBaseURL = "http://localhost:9003/"
+const apiBaseURL = "http://localhost:8080/"
 export function getAllGoalsAPI(){
     return fetch(apiBaseURL+"goal"
     ,{
@@ -29,3 +29,13 @@ export function postGoalsAPI(data:GoalsModel){
 
     
 }
+
+// get all performance reviews by managerID
+export function getAllPerformanceByManagerAPI(managerID: number) {
+    return fetch(apiBaseURL + "performance?managerID=" + managerID, {
+        method: "GET",
+        mode: "cors"
+    }
+    );
+}
+
