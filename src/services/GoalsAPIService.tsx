@@ -32,6 +32,14 @@ export function postGoalsAPI(data:GoalsModel){
         //body:JSON.stringify({name:name, id:10})
         body:JSON.stringify(data)
     })
+}
 
-    
+// api call to list of employees by ManagerID
+export function getAllEmployeeByManagerIdAPI(managerId: number){
+    return fetch(apiBaseURL+"employee/"+ managerId,
+    {
+        method: "GET",
+        mode:"cors",
+
+    })
 }
