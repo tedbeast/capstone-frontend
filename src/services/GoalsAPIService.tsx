@@ -1,3 +1,4 @@
+
 import { GoalsModel } from "../Models/GoalsModel";
 import { PerformanceReview } from "../Models/PerformanceReview";
 
@@ -35,3 +36,13 @@ export function postGoalsAPI(data:GoalsModel){
 
     
 }
+
+// get all performance reviews by managerID
+export function getAllPerformanceByManagerAPI(managerID: number) {
+    return fetch(apiBaseURL + "performance?managerID=" + managerID, {
+        method: "GET",
+        mode: "cors"
+    }
+    );
+}
+
