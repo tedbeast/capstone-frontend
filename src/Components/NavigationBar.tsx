@@ -1,13 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import './Nav.css';
+import "./Nav.css";
 
 export function NavigationBar() {
-    return (<>
-    <ul>
-        <li><Link to="home">Home Page</Link></li>
-        <li><Link to="pagenotfound">PageNotFound Page</Link></li>
-        <li><Link to="Goals">Goals Page</Link></li>
-    </ul>
-    </>);
+  return (
+    <>
+      <ul>
+        <li>
+          <Link to="home">Home Page</Link>
+        </li>
+        <li>
+          <Link to="Goals">Goals Page</Link>
+        </li>
+      </ul>
+    </>
+  );
 }
