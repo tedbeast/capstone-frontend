@@ -1,74 +1,11 @@
 import { useState } from "react";
 import { updateAdminAPI } from "../Services/AdminAPIService";
-<<<<<<< HEAD
-
-=======
-import { addAdminAPI } from "../Services/AdminAPIService";
-import { Roles, SiteUser } from "../Models/SiteUser";
->>>>>>> marc
 import { Modal, Button } from 'react-bootstrap';
 import { PerformanceReview } from "../Models/PerformanceReview";
 import { Employee } from "../Models/Employee";
 import { Leave } from "../Models/Leave";
 import { Roles } from "../Models/Roles";
 
-// function UpdateAdmin() {
-//     const [show, setShow] = useState(false);
-//     const [employeeID, setEmployeeID] = useState<number>(0);
-//     const [updatedName, setName] = useState<string>('');
-//     const [updatedPassword, setPassword] = useState<string>('');
-//     const [updatedJobTitle, setJobTitle] = useState<string>(''); 
-//     const [updatedPhoneNumber, setPhoneNumber] = useState<string>('');
-//     const [updatedEmail, setEmail] = useState<string>('');
-//     const [updatedAddressLine1, setAddressLine1] = useState<string>('');
-//     const [updatedAddressLine2, setAddressLine2] = useState<string>('');
-//     const [updatedCity, setCity] = useState<string>('');
-//     const [updatedState, setState] = useState<string>('');
-//     const [updatedBirthDate, setBirthDate] = useState<Date>(new Date());
-//     const [updatedAnniversary, setAnniversary] = useState<Date>(new Date());
-//     const [updatedManagerID, setManagerID] = useState<number>(0);
-//     const [updatedPerformanceReview, setPerformanceReview] = useState<PerformanceReview[]>([]);
-//     const [updatedLeave, setLeave] = useState<Leave[]>([]);
-//    const [updatedRole, setRole] = useState<Roles>(Roles.EMPLOYEE);
-
-
-//     const handleClose = () => setShow(false);
-//     const handleShow = () => setShow(true);
-  
-        
-       
-//     async function handleUpdate() {
-//       const updatedEmployee: Employee = {
-//           employeeID: employeeID,
-//           name: updatedName,
-//           password: updatedPassword,
-//           jobTitle: updatedJobTitle,
-//           phoneNumber: updatedPhoneNumber,
-//           email: updatedEmail,
-//           addressLine1: updatedAddressLine1,
-//           addressLine2: updatedAddressLine2,
-//           city: updatedCity,
-//           state: updatedState,
-//           postalCode: updatedPostalCode,
-//           birthDate: updatedBirthDate,
-//           anniversary: updatedAnniversary,
-//           Manager: updatedManagerID,
-//           role: updatedRole
-//       };
-  
-//       try {
-//         const response = await updateAdminAPI(employeeID, updatedSiteUser);
-  
-//         if (response.ok) {
-//           console.log('Product updated successfully.');
-//           window.location.reload();
-//         } else {
-//           console.error('Error updating product:', response.statusText);
-//         }
-//       } catch (error) {
-//         console.error('Error:', error);
-//       }
-//     }
 function UpdateAdmin() {
   const [show, setShow] = useState(false);
   const [employeeID, setEmployeeID] = useState<number>(0);

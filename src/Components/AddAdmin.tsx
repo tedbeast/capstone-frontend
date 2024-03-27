@@ -2,47 +2,54 @@ import { useState } from "react";
 import { addAdminAPI, updateAdminAPI } from "../Services/AdminAPIService";
 import { Roles } from "../Models/Roles";
 import { Modal, Button } from 'react-bootstrap';
+import { Employee } from "../Models/Employee";
+import { PerformanceReview } from "../Models/PerformanceReview";
+import { Leave } from "../Models/Leave";
 
 function AddAdmin() {
-    const [show, setShow] = useState(false);
-    const [employeeID, setEmployeeID] = useState<number>(0);
-    const [addName, setName] = useState<string>('');
-    const [addPassword, setPassword] = useState<string>('');
-    const [addJobTitle, setJobTitle] = useState<string>(''); 
-    const [addPhoneNumber, setPhoneNumber] = useState<string>('');
-    const [addEmail, setEmail] = useState<string>('');
-    const [addAddressLine1, setAddressLine1] = useState<string>('');
-    const [addAddressLine2, setAddressLine2] = useState<string>('');
-    const [addCity, setCity] = useState<string>('');
-    const [addState, setState] = useState<string>('');
-    const [addPostalCode , setPostalCode] = useState<number>(0);
-    const [addBirthDate, setBirthDate] = useState<Date>(new Date());
-    const [addAnniversary, setAnniversary] = useState<Date>(new Date());
-    const [addManagerID, setManagerID] = useState<number>(0);
-    const [addRole, setRole] = useState<Roles>(Roles.EMPLOYEE);
+  const [show, setShow] = useState(false);
+  const [employeeID, setEmployeeID] = useState<number>(0);
+  const [password, setPassword] = useState<string>('');
+  const [name, setName] = useState<string>('');
+  const [jobTitle, setJobTitle] = useState<string>('');
+  const [phoneNumber, setPhoneNumber] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
+  const [addressLine1, setAddressLine1] = useState<string>('');
+  const [addressLine2, setAddressLine2] = useState<string>('');
+  const [city, setCity] = useState<string>('');
+  const [state, setState] = useState<string>('');
+  const [postalCode, setPostalCode] = useState<number>(0);
+  const [birthDate, setBirthDate] = useState<Date>(new Date());
+  const [anniversary, setAnniversary] = useState<Date>(new Date());
+  const [managerID, setManagerID] = useState<number>(0);
+  const [performanceReview, setPerformanceReview] = useState<PerformanceReview[]>([]);
+  const [leave, setLeave] = useState<Leave[]>([]);
+  const [role, setRole] = useState<Roles>(Roles.EMPLOYEE);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
 
     async function handleAdd() {
-      const addSiteUser: SiteUser = {
-          employeeID: employeeID,
-          name: addName,
-          password: addPassword,
-          jobTitle: addJobTitle,
-          phoneNumber: addPhoneNumber,
-          email: addEmail,
-          addressLine1: addAddressLine1,
-          addressLine2: addAddressLine2,
-          city: addCity,
-          state: addState,
-          postalCode: addPostalCode,
-          birthDate: addBirthDate,
-          anniversary: addAnniversary,
-          managerID: addManagerID,
-          role: addRole
-      };
+      const addSiteUser: Employee = {
+        employeeID,
+        password,
+        name,
+        jobTitle,
+        phoneNumber,
+        email,
+        addressLine1,
+        addressLine2,
+        city,
+        state,
+        postalCode,
+        birthDate,
+        anniversary,
+        manager: { managerID, employees: [] },
+        performanceReview,
+        leave,
+        role
+    };
   
       try {
         const response = await addAdminAPI(addSiteUser);
@@ -76,7 +83,7 @@ function AddAdmin() {
                 Employee Name: <input
                   type="text"
                   placeholder="Enter Name"
-                  value={addName}
+                  value={name}
                   onChange={(e) => setName(e.target.value)}
                   style={{ margin: '5px 0' }}
                   />
@@ -86,7 +93,7 @@ function AddAdmin() {
                 Password: <input
                   type="password"
                   placeholder="Enter Password"
-                  value={addPassword}
+                  value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   style={{ margin: '5px 0' }}
                   />
@@ -96,7 +103,7 @@ function AddAdmin() {
                 Job Title: <input
                   type="text"
                   placeholder="Enter Job Title"
-                  value={addJobTitle}
+                  value={jobTitle}
                   onChange={(e) => setJobTitle(e.target.value)}
                   style={{ margin: '5px 0' }}
                   />
@@ -106,7 +113,7 @@ function AddAdmin() {
                 Phone Number: <input
                   type="text"
                   placeholder="Enter Phone Number"
-                  value={addPhoneNumber}
+                  value={phoneNumber}
                   onChange={(e) => setPhoneNumber(e.target.value)}
                   style={{ margin: '5px 0' }}
                   />
@@ -116,7 +123,7 @@ function AddAdmin() {
                 Email Address: <input
                   type="email"
                   placeholder="Enter Email"
-                  value={addEmail}
+                  value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   style={{ margin: '5px 0' }}
                   />
@@ -126,7 +133,7 @@ function AddAdmin() {
                 Address line 1: <input
                   type="text"
                   placeholder="Enter Address Line 1"
-                  value={addAddressLine1}
+                  value={addressLine1}
                   onChange={(e) => setAddressLine1(e.target.value)}
                   style={{ margin: '5px 0' }}
                   />
@@ -136,7 +143,7 @@ function AddAdmin() {
                 Address line 2: <input
                   type="text"
                   placeholder="Enter Address Line 2"
-                  value={addAddressLine2}
+                  value={addressLine2}
                   onChange={(e) => setAddressLine2(e.target.value)}
                   style={{ margin: '5px 0' }}
                   />
@@ -146,7 +153,7 @@ function AddAdmin() {
                 City: <input
                   type="text"
                   placeholder="Enter City"
-                  value={addCity}
+                  value={city}
                   onChange={(e) => setCity(e.target.value)}
                   style={{ margin: '5px 0' }}
                   />
@@ -156,7 +163,7 @@ function AddAdmin() {
                  State: <input
                   type="text"
                   placeholder="Enter State"
-                  value={addState}
+                  value={state}
                   onChange={(e) => setState(e.target.value)}
                   style={{ margin: '5px 0' }}
                   />
@@ -166,7 +173,7 @@ function AddAdmin() {
                 Postal Code: <input
                   type="number"
                   placeholder="Enter Postal Code"
-                  value={addPostalCode}
+                  value={postalCode}
                   onChange={(e) => setPostalCode(parseInt(e.target.value))}
                   style={{ margin: '5px 0' }}
                   />
@@ -176,7 +183,7 @@ function AddAdmin() {
                 Birth Date: <input
                   type="date"
                   placeholder="Enter Birth Date"
-                  value={addBirthDate.toISOString().substr(0, 10)}
+                  value={birthDate.toISOString().substr(0, 10)}
                   onChange={(e) => setBirthDate(new Date(e.target.value))}
                   style={{ margin: '5px 0' }}
                   />
@@ -186,7 +193,7 @@ function AddAdmin() {
                 Work Anniversary: <input
                   type="date"
                   placeholder="Enter Anniversary"
-                  value={addAnniversary.toISOString().substr(0, 10)}
+                  value={anniversary.toISOString().substr(0, 10)}
                   onChange={(e) => setAnniversary(new Date(e.target.value))}
                   style={{ margin: '5px 0' }}
                   />
@@ -196,7 +203,7 @@ function AddAdmin() {
                 Manager ID: <input
                   type="number"
                   placeholder="Enter Manager ID"
-                  value={addManagerID}
+                  value={managerID}
                   onChange={(e) => setManagerID(parseInt(e.target.value))}
                   style={{ margin: '5px 0' }}
                   />
@@ -205,7 +212,7 @@ function AddAdmin() {
                 <label>
                   Employee Role:
                   <select
-                      value={addRole}
+                      value={role}
                       onChange={(e) => setRole(e.target.value as Roles)}
                       style={{ margin: '5px 0' }}
                   >
