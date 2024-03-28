@@ -14,9 +14,10 @@ const getCredentials = async (event: React.FormEvent<HTMLFormElement>) => {
     let getEmployeeID = (document.getElementById('employeeID') as
     HTMLInputElement).value;
     let getPassword = (document.getElementById('password') as HTMLInputElement).value;
+    let role = localStorage.getItem('role');
 
     try {
-        const response = await fetch('http://localhost:8080/login', {
+        const response = await fetch('http://localhost:9004/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -24,7 +25,7 @@ const getCredentials = async (event: React.FormEvent<HTMLFormElement>) => {
             body: JSON.stringify({ employeeID: getEmployeeID, password:
             getPassword }),
         });
-
+        console.log("reached response block");
         if (response.ok) {
             const data = await response.json();
             console.log("Login successful: ", data);
@@ -40,7 +41,7 @@ const getCredentials = async (event: React.FormEvent<HTMLFormElement>) => {
     } catch (error) {
         console.error('Error:', error);
     }
-    console.log(getEmployeeID, getPassword);
+    console.log(getEmployeeID, getPassword, role);
 };
 
 return (
