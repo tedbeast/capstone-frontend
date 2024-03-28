@@ -1,7 +1,8 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { LoginPage } from './pages/LoginPage'
 import { Homepage } from './pages/Homepage'
 import { NavigationBar } from './components/NavigationBar';
@@ -13,10 +14,12 @@ function App() {
     <>
     <BrowserRouter>
     <NavigationBar></NavigationBar>
-      <Route path="" component={Homepage} />
-      <Route path="/login" component={LoginPage} />
-      <Route path="/welcome" component={WelcomeLoggedInUser} />
-      <Route path="/passwordreset" component={PasswordResetPage} />
+    <Routes>
+      <Route path="" element={<Homepage/>} />
+      <Route path="/login" element={<LoginPage/>} />
+      <Route path="/welcome" element={<WelcomeLoggedInUser/>} />
+      <Route path="/passwordreset" element={<PasswordResetPage/>} />
+      </Routes>
     </BrowserRouter>
     </>
   );
