@@ -48,8 +48,8 @@ export function SingleEmployee(props: PropsInterface) {
             <p>Birthday: {formatDate(props.data.birthDate)}</p>
             <p>Anniversary: {formatDate(props.data.anniversary)}</p>
             <p>Role: {props.data.role}</p>
-            
-            
+           
+    
         </div>
     );
 }
