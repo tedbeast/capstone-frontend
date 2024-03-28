@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { WelcomeLoggedInUser } from '../pages/WelcomeLoggedInUser';
 
 interface LoginProps {
@@ -7,7 +7,7 @@ onLogin: () => void;
 }
 export const Login: React.FC<LoginProps> = ({ onLogin }) => {
 const [loggedIn, setLoggedIn] = useState(false);
-const history = useHistory();
+const navigate = useNavigate();
 
 const getCredentials = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -30,7 +30,9 @@ const getCredentials = async (event: React.FormEvent<HTMLFormElement>) => {
             console.log("Login successful: ", data);
             setLoggedIn(true);
             onLogin(); //Call the onLogin function passed as prop
-            history.push('/welcome');
+            navigate('/welcome');
+            localStorage.setItem('username', getEmployeeID);
+            localStorage.setItem('role', data.role);
             } else {
                 console.log('Response: ', response);
                 console.error('Login failed: ', response.statusText);
