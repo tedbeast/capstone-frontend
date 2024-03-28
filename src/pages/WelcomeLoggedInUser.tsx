@@ -1,12 +1,12 @@
 import React, {useState} from 'react';
 import {Login} from "../components/Login";
-import {useHistory} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 export function WelcomeLoggedInUser() {
   const userId = localStorage.getItem('username');
   const userRole = localStorage.getItem('role');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const handleLogin = () => {
     setIsLoggedIn(true);
@@ -16,7 +16,7 @@ export function WelcomeLoggedInUser() {
     localStorage.removeItem('username');
     localStorage.removeItem('role');
     setIsLoggedIn(false);
-    history.push('/login');
+    navigate('/login');
   }
 
   return (
