@@ -6,7 +6,7 @@ import { EmployeeList } from "../Components/EmployeeList";
 import DeleteEmployee from "../Components/DeleteEmployee";
 export function AdminPage(){
     return (<>
-        <AddAdmin></AddAdmin>
+    <AddAdmin></AddAdmin>
     <UpdateAdmin></UpdateAdmin>
     <AddManager></AddManager>
     <DeleteEmployee></DeleteEmployee>
