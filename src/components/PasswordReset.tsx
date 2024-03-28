@@ -1,5 +1,5 @@
 import React, { SyntheticEvent, useState } from "react";
-import { getEmployeeById, postPassword } from "../services/LoginAPIService";
+import { getEmployeeById, putPassword } from "../services/LoginAPIService";
 
 export function ResetPassword (){
     const [employeeIdInput, setEmployeeIdInput] = useState<number>()
@@ -36,7 +36,6 @@ export function ResetPassword (){
         //get values from input fields and create variables
         let employeeId = employeeIdInput
         let password = passwordInput
-        //***update with correct GET by ID API name once determined
         //check that employee ID is for a valid, existing employee
         if(getEmployeeById(employeeId) == null) {
             return setAlertMessage("Employee ID does not exist")
@@ -46,7 +45,7 @@ export function ResetPassword (){
             return setAlertMessage("Passwords must match");
         }
         //if no errors, send update to back end
-        postPassword(employeeId, password);
+        putPassword(employeeId, password);
         //what do we want to have happen? return them to the login page?
     }
 
@@ -57,33 +56,45 @@ export function ResetPassword (){
                 {alertMessage}
                 </span>}
             <form onSubmit={resetSubmit}>
+                <div>
                 <label>
                     EmployeeID
+                    <div>
                         <input
                             name="employeeid"
                             type="employeeid"
                             value={employeeIdInput}
                             onChange={employeeIdInputHandler}
                         />
+                        </div>
                 </label>
+                </div>
+                <div>
                 <label>
                     Password
+                    <div>
                         <input
                             name="password"
                             type="password"
                             value={passwordInput}
                             onChange={passwordInputHandler}
                         />
+                        </div>
                 </label>
+                </div>
+                <div>
                 <label>
                     Confirm Password
+                    <div>
                         <input
                             name="confirmpassword"
                             type="password"
                             value={confirmPasswordInput}
                             onChange={confirmPasswordInputHandler}
                         />
+                        </div>
                 </label>
+                </div>
                 <button type="submit">Reset Password</button>
             </form>
         </div>

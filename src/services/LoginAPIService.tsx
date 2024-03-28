@@ -1,7 +1,7 @@
 const apiBaseURL = "http://localhost:9004/"
-export function postPassword(employeeId:number|undefined, password:string) {
+export function putPassword(employeeId:number|undefined, password:string) {
     return fetch(apiBaseURL+"employee"+employeeId, {
-        method:"POST",
+        method:"PUT",
         mode:"cors",
         headers:{"Content-Type":"application/json"},
         body:JSON.stringify(password)

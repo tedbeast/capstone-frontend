@@ -7,6 +7,7 @@ import { Homepage } from './pages/Homepage'
 import { NavigationBar } from './components/NavigationBar';
 import { PasswordResetPage } from './pages/PasswordResetPage';
 import { WelcomeLoggedInUser } from './pages/WelcomeLoggedInUser';
+import { PageNotFoundPage } from './pages/PageNotFound';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
       <Route path="/login" component={LoginPage} />
       <Route path="/welcome" component={WelcomeLoggedInUser} />
       <Route path="/passwordreset" component={PasswordResetPage} />
+      <Route path="*" component={PageNotFoundPage} />
     </BrowserRouter>
     </>
   );
