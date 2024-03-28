@@ -31,6 +31,8 @@ const getCredentials = async (event: React.FormEvent<HTMLFormElement>) => {
             setLoggedIn(true);
             onLogin(); //Call the onLogin function passed as prop
             history.push('/welcome');
+            localStorage.setItem('username', getEmployeeID);
+            localStorage.setItem('role', data.role);
             } else {
                 console.log('Response: ', response);
                 console.error('Login failed: ', response.statusText);
