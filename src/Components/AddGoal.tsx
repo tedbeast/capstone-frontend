@@ -1,5 +1,5 @@
 import React, { SyntheticEvent, useState } from "react";
-import { GoalsModel } from "../Models/GoalsModel";
+import { Goal } from "../Models/Goal";
 import { postGoalsAPI } from "../services/GoalsAPIService";
 
 export function AddGoal(){
@@ -19,7 +19,7 @@ export function AddGoal(){
     }
 
     function buttonClickHandler(){
-        let newGoal : GoalsModel = {
+        let newGoal : Goal = {
             goalType:userGoalType,
             goalDescription:userGoalDescription,
             employeeComments:"",

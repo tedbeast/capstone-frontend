@@ -1,5 +1,5 @@
 
-import { GoalsModel } from "../Models/GoalsModel";
+import { Goal } from "../Models/Goal";
 import { PerformanceReview } from "../Models/PerformanceReview";
 
 const apiBaseURL = "http://localhost:9004/"
@@ -19,7 +19,7 @@ export function getGoalsByEmployeeAPI(data:PerformanceReview["employee"]["employ
     })
 }
 
-export function postGoalsAPI(data:GoalsModel, id:PerformanceReview["employee"]["employeeID"]){
+export function postGoalsAPI(data:Goal, id:PerformanceReview["employee"]["employeeID"]){
     return fetch(apiBaseURL + "employee/" + id + "/goals", {
         method:"POST",
         mode:"cors",

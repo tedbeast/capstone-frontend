@@ -1,4 +1,4 @@
-export interface GoalsModel {
+export interface Goal {
     goalType:string;
     goalDescription:string;
     employeeComments:string;
