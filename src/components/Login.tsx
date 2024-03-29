@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { WelcomeLoggedInUser } from '../pages/WelcomeLoggedInUser';
+import { WelcomeLoggedInUser } from '../Pages/WelcomeLoggedInUser';
 
 interface LoginProps {
 onLogin: () => void;
@@ -16,7 +16,7 @@ const getCredentials = async (event: React.FormEvent<HTMLFormElement>) => {
     let getPassword = (document.getElementById('password') as HTMLInputElement).value;
 
     try {
-        const response = await fetch('http://localhost:8080/login', {
+        const response = await fetch('http://localhost:9004/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
