@@ -6,8 +6,9 @@ interface LoginProps {
 onLogin: () => void;
 }
 export const Login: React.FC<LoginProps> = ({ onLogin }) => {
-const [loggedIn, setLoggedIn] = useState(false);
-const navigate = useNavigate();
+    const [loggedIn, setLoggedIn] = useState(false);
+    const [error, setError] = useState<string | null>(null);
+    const navigate = useNavigate();
 
 const getCredentials = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -17,6 +18,11 @@ const getCredentials = async (event: React.FormEvent<HTMLFormElement>) => {
     let role = localStorage.getItem('role');
 
     try {
+
+        if(!/^\d+$/.test(getEmployeeID)){
+            setError("Employee ID must contain only numbers");
+            return;
+        }
         const response = await fetch('http://localhost:9004/login', {
             method: 'POST',
             headers: {
@@ -26,7 +32,15 @@ const getCredentials = async (event: React.FormEvent<HTMLFormElement>) => {
             getPassword }),
         });
         console.log("reached response block");
-        if (response.ok) {
+        if (!response.ok){
+            if(response.status === 401) {
+                setError("Invalid credentials. Please check your username and password.");
+                }
+            else{
+                setError("An error occurred. Please try again later.");
+            }
+            return;
+        }
             const data = await response.json();
             console.log("Login successful: ", data);
             setLoggedIn(true);
@@ -34,12 +48,9 @@ const getCredentials = async (event: React.FormEvent<HTMLFormElement>) => {
             navigate('/welcome');
             localStorage.setItem('username', getEmployeeID);
             localStorage.setItem('role', data.role);
-            } else {
-                console.log('Response: ', response);
-                console.error('Login failed: ', response.statusText);
-        }
     } catch (error) {
         console.error('Error:', error);
+        setError('An error occurred. Please try again later.');
     }
     console.log(getEmployeeID, getPassword, role);
 };
@@ -48,6 +59,8 @@ return (
     loggedIn ? (
         <WelcomeLoggedInUser />
     ) : (
+
+    <div>
         <form onSubmit={getCredentials}>
             <div>
                 <label>Employee ID: </label><input type="text"
@@ -60,6 +73,8 @@ return (
             </div>
             <button type="submit">Login</button>
         </form>
+        {error && <div style={{ color:'red' }}>{error}</div>}
+        </div>
     )
 );
 };
