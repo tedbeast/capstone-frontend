@@ -17,13 +17,15 @@ function App() {
     <BrowserRouter>
     <NavigationBar></NavigationBar>
       <Routes>
-        <Route path="home" element={<WelcomeLoggedInUser></WelcomeLoggedInUser>}></Route>
-        <Route path="leave" element={<LeavesPage></LeavesPage>}></Route>
+        <Route path="/login" element={<LoginPage/>} />
+
+        <Route path="/home" element={<WelcomeLoggedInUser></WelcomeLoggedInUser>}></Route>
+        <Route path="/leave" element={<LeavesPage></LeavesPage>}></Route>
         <Route path="/" element={<WelcomeLoggedInUser></WelcomeLoggedInUser>}></Route>
         <Route path="*" element={<PageNotFoundPage></PageNotFoundPage>}></Route>
 
       <Route path="" element={<Homepage/>} />
-      <Route path="/login" element={<LoginPage/>} />
+
       <Route path="/welcome" element={<WelcomeLoggedInUser/>} />
       <Route path="/passwordreset" element={<PasswordResetPage/>} />
       </Routes>
