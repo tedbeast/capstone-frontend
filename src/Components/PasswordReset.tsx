@@ -1,5 +1,5 @@
 import React, { SyntheticEvent, useState } from "react";
-import { Employee } from "../models/Employee";
+import { Employee } from "../Models/Employee";
 import { getEmployeeById, putPassword } from "../Services/LoginAPIService";
 
 //interface propsInterface {

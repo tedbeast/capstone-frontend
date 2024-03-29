@@ -1,4 +1,4 @@
-import { Employee } from "../models/Employee";
+import { Employee } from "../Models/Employee";
 
 const apiBaseURL = "http://localhost:9004/"
 export function putPassword(employee:Employee) {

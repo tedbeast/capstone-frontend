@@ -19,6 +19,15 @@ const getCredentials = async (event: React.FormEvent<HTMLFormElement>) => {
 
     try {
 
+        if(getEmployeeID == "" || getEmployeeID == null){
+            setError("Employee ID field cannot be blank.");
+            return;
+        }
+
+        if(getPassword == "" || getPassword == null){
+            setError("Password field cannot be blank.");
+            return;
+        }
         if(!/^\d+$/.test(getEmployeeID)){
             setError("Employee ID must contain only numbers");
             return;
