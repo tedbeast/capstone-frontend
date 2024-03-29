@@ -1,5 +1,5 @@
 
-import { GoalsModel } from "../Models/GoalsModel";
+import { Goal } from "../Models/Goal";
 import { PerformanceReview } from "../Models/PerformanceReview";
 
 const apiBaseURL = "http://localhost:9004/"
@@ -12,32 +12,20 @@ export function getAllGoalsAPI(){
 
 
 //export function getGoalsByEmployeeAPI(data:PerformanceReview["performanceReviewID"]){
-
 export function getGoalsByEmployeeAPI(data:PerformanceReview["employee"]["employeeID"]){
     return fetch(apiBaseURL + "employee/" + data + "/performanceReview", {
         method:"GET",
         mode:"cors"
     })
 }
-// export function postGoalAPI(data:GoalModel){
-//     return fetch(apiBaseURL+"goal", {
-//         method:"POST",
-//         mode:"cors",
-//         headers:{"Content-Type":"application/json"},
-//         //body:JSON.stringify({name:name, id:10})
-//         body:JSON.stringify(data)
-//     });
-//}
-export function postGoalsAPI(data:GoalsModel){
-    return fetch(apiBaseURL+"goal", {
+
+export function postGoalsAPI(data:Goal, id:PerformanceReview["employee"]["employeeID"]){
+    return fetch(apiBaseURL + "employee/" + id + "/goals", {
         method:"POST",
         mode:"cors",
         headers:{"Content-Type":"application/json"},
-        //body:JSON.stringify({name:name, id:10})
         body:JSON.stringify(data)
     })
-
-    
 }
 
 // get all performance reviews by managerID
