@@ -9,6 +9,7 @@ import { NavigationBar } from "./Components/NavBar";
 import { PageNotFoundPage } from "./Pages/PageNotFoundPage";
 import { AdminPage } from "./Pages/AdminPage";
 import { WelcomePage } from "./Pages/WelcomePage";
+import { ReportingPage } from "./Pages/ReportingPage";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/" element={<WelcomePage></WelcomePage>}></Route>
         <Route path="admin" element={<AdminPage></AdminPage>}></Route>
         <Route path="*" element={<PageNotFoundPage></PageNotFoundPage>}></Route>
+        <Route path="reporting" element={<ReportingPage></ReportingPage>}></Route>
       </Routes>
     </BrowserRouter>
     </>
