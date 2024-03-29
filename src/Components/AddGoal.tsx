@@ -58,17 +58,6 @@ export function AddGoal(){
     //     console.log(textBox.value);
     // }
 
-    const[showListGoalComponent, setShowListGoalComponent] = useState(false);
-
-    function showPerformanceList(){
-        if(showListGoalComponent) {
-            setShowListGoalComponent(false)
-        }
-        else {
-            setShowListGoalComponent(true);
-        }
-    }
-
 
 function buttonClickHandler(){
     const GoalsData = {
@@ -150,10 +139,6 @@ function buttonClickHandler(){
                 <input type="text" onChange={GoalReviewHandlerC} value={goalreviewC}></input>
             </div>
                 <button onClick={buttonClickHandler}>Submit</button>
-            <div>
-                <button onClick={showPerformanceList}>Show Current Goals</button>
-                {showListGoalComponent && <ListGoal data = {1}></ListGoal>}
-            </div>
             </>
             );
 
