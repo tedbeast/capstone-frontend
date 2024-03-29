@@ -1,5 +1,5 @@
 import React, { SyntheticEvent, useState } from "react";
-import { getEmployeeById, postPassword } from "../services/LoginAPIService";
+import { getEmployeeById, postPassword } from "../Services/LoginAPIService";
 
 export function ResetPassword (){
     const [employeeIdInput, setEmployeeIdInput] = useState<number>()

@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "../components/Nav.css";
+import "../Components/Nav.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { faSquareCaretDown } from "@fortawesome/free-solid-svg-icons";
 import { faBars } from "@fortawesome/free-solid-svg-icons";

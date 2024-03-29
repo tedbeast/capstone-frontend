@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Login } from "../components/Login";
+import { Login } from "../Components/Login";
 import { useNavigate } from "react-router-dom";
 
 export function WelcomeLoggedInUser() {

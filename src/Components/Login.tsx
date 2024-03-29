@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { WelcomeLoggedInUser } from '../pages/WelcomeLoggedInUser';
+import { WelcomeLoggedInUser } from '../Pages/WelcomeLoggedInUser';
 
 interface LoginProps {
 onLogin: () => void;
