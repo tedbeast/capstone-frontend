@@ -2,7 +2,7 @@
 import { GoalsModel } from "../Models/GoalsModel";
 import { PerformanceReview } from "../Models/PerformanceReview";
 
-const apiBaseURL = "http://localhost:8080/"
+const apiBaseURL = "http://localhost:9004/"
 
 export function getAllGoalsAPI(){
     return fetch(apiBaseURL + "performanceReview",{
@@ -44,5 +44,12 @@ export function getAllPerformanceByManagerAPI(managerID: number) {
         mode: "cors"
     }
     );
+}
+//get performance review by employeeID
+export function getPerformanceByEmployeeAPI(employeeID: number){
+    return fetch(apiBaseURL + "employee/" + employeeID + "/performanceReview", {
+        method:"GET",
+        mode:"cors"
+    })
 }
 
