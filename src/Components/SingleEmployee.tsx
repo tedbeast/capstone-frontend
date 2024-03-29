@@ -4,6 +4,7 @@ import { Manager } from "../Models/Manager";
 
 interface PropsInterface {
     data: Employee;
+    
 }
 
 export function SingleEmployee(props: PropsInterface) {
@@ -12,18 +13,16 @@ export function SingleEmployee(props: PropsInterface) {
         setShowPassword(!showPassword);
     };
 
-    // Function to format Date object to 'yyyy-mm-dd'
+
     const formatDate = (date: Date) => {
         const d = new Date(date);
         let month = '' + (d.getMonth() + 1);
         let day = '' + d.getDate();
         const year = d.getFullYear();
-
         if (month.length < 2) 
             month = '0' + month;
         if (day.length < 2) 
             day = '0' + day;
-
         return [year, month, day].join('-');
     }
 
@@ -47,9 +46,9 @@ export function SingleEmployee(props: PropsInterface) {
             <p>Postal Code: {props.data.postalCode}</p>
             <p>Birthday: {formatDate(props.data.birthDate)}</p>
             <p>Anniversary: {formatDate(props.data.anniversary)}</p>
+            {props.data.manager && <p>Manager ID: {props.data.manager.managerID}</p>}
             <p>Role: {props.data.role}</p>
-           
-    
+            
         </div>
     );
 }

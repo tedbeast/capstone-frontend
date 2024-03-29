@@ -11,7 +11,7 @@ export function getAllEmployeesAPI(){
 }
 
 export function updateAdminAPI(employeeID: number, data: Employee) {
-    return fetch(apiBaseURL + `emplpyee/${employeeID}`, {
+    return fetch(apiBaseURL + `employee/${employeeID}`, {
       method: "PUT",
       mode: "cors",
       headers: { "Content-Type": "application/json" },
@@ -28,7 +28,7 @@ export function updateAdminAPI(employeeID: number, data: Employee) {
     }
 
   export function addAdminAPI(employee: Employee){
-    return fetch(apiBaseURL + `manager/${employee}/employee`, {
+    return fetch(apiBaseURL + `manager/${employee.manager.managerID}/employee`, {
         method:"POST",
         mode:"cors",
         headers:{"Content-Type":"application/json"},

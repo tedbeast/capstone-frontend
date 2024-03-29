@@ -18,7 +18,7 @@ function AddAdmin() {
   const [addressLine2, setAddressLine2] = useState<string>('');
   const [city, setCity] = useState<string>('');
   const [state, setState] = useState<string>('');
-  const [postalCode, setPostalCode] = useState<number>(0);
+  const [postalCode, setPostalCode] = useState<string>('');
   const [birthDate, setBirthDate] = useState<Date>(new Date());
   const [anniversary, setAnniversary] = useState<Date>(new Date());
   const [managerID, setManagerID] = useState<number>(0);
@@ -45,7 +45,7 @@ function AddAdmin() {
         postalCode,
         birthDate,
         anniversary,
-        manager: { managerID, employees: [] },
+        manager: { managerID:managerID, employees: [] },
         performanceReview,
         leave,
         role
@@ -174,7 +174,7 @@ function AddAdmin() {
                   type="number"
                   placeholder="Enter Postal Code"
                   value={postalCode}
-                  onChange={(e) => setPostalCode(parseInt(e.target.value))}
+                  onChange={(e) => setPostalCode(e.target.value)}
                   style={{ margin: '5px 0' }}
                   />
               </label>

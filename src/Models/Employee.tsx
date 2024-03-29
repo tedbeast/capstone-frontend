@@ -15,7 +15,7 @@ export interface Employee {
     addressLine2: string;
     city: string;
     state: string;
-    postalCode: number;
+    postalCode: string;
     birthDate: Date;
     anniversary: Date;
     manager: Manager;

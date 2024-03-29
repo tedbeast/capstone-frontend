@@ -18,52 +18,51 @@ function AddManager() {
   const [addressLine2, setAddressLine2] = useState<string>('');
   const [city, setCity] = useState<string>('');
   const [state, setState] = useState<string>('');
-  const [postalCode, setPostalCode] = useState<number>(0);
+  const [postalCode, setPostalCode] = useState<string>('');
   const [birthDate, setBirthDate] = useState<Date>(new Date());
   const [anniversary, setAnniversary] = useState<Date>(new Date());
-  const [managerID, setManagerID] = useState<number>(0);
+  const [managerID, setManagerID] = useState<number | null>(null); // Set managerID
   const [performanceReview, setPerformanceReview] = useState<PerformanceReview[]>([]);
   const [leave, setLeave] = useState<Leave[]>([]);
   const [role, setRole] = useState<Roles>(Roles.EMPLOYEE);
 
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
-
-    async function handleAdd() {
-      const addSiteUser: Employee = {
-        employeeID,
-        password,
-        name,
-        jobTitle,
-        phoneNumber,
-        email,
-        addressLine1,
-        addressLine2,
-        city,
-        state,
-        postalCode,
-        birthDate,
-        anniversary,
-        manager: { managerID, employees: [] },
-        performanceReview,
-        leave,
-        role
+  async function handleAdd() {
+    const addSiteUser: Employee = {
+      employeeID,
+      password,
+      name,
+      jobTitle,
+      phoneNumber,
+      email,
+      addressLine1,
+      addressLine2,
+      city,
+      state,
+      postalCode,
+      birthDate,
+      anniversary,
+      manager: { managerID, employees: [] },
+      performanceReview,
+      leave,
+      role
     };
-  
-      try {
-        const response = await addManagerAPI(addSiteUser);
-  
-        if (response.ok) {
-          console.log('Employee added successfully.');
-          window.location.reload();
-        } else {
-          console.error('Error adding employee:', response.statusText);
-        }
-      } catch (error) {
-        console.error('Error:', error);
+
+    try {
+      const response = await addManagerAPI(addSiteUser);
+
+      if (response.ok) {
+        console.log('Employee added successfully.');
+        window.location.reload();
+      } else {
+        console.error('Error adding employee:', response.statusText);
       }
+    } catch (error) {
+      console.error('Error adding employee:', error);
     }
+  }
   
   return (
     <>
@@ -174,7 +173,7 @@ function AddManager() {
                   type="number"
                   placeholder="Enter Postal Code"
                   value={postalCode}
-                  onChange={(e) => setPostalCode(parseInt(e.target.value))}
+                  onChange={(e) => setPostalCode(e.target.value)}
                   style={{ margin: '5px 0' }}
                   />
               </label>
@@ -199,16 +198,7 @@ function AddManager() {
                   />
               </label>
                 <br></br>
-                {/* <label>
-                Manager ID: <input
-                  type="number"
-                  placeholder="Enter Manager ID"
-                  value={managerID}
-                  onChange={(e) => setManagerID(parseInt(e.target.value))}
-                  style={{ margin: '5px 0' }}
-                  />
-              </label> */}
-                <br></br>
+                                <br></br>
                 <label>
                   Employee Role:
                   <select
