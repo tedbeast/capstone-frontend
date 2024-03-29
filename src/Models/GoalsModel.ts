@@ -1,8 +1,6 @@
 export interface GoalsModel {
-    goalreviewA:string
-    goalreviewB:string
-    goalreviewC:string
-    // goalreview:string,
-    // goaltargetdate:Date,
-    // goalweightage:number
+    goalType:string;
+    goalDescription:string;
+    employeeComments:string;
+    weight:number
 }
