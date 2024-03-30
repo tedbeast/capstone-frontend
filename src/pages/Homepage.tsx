@@ -1,7 +1,22 @@
 import React from "react";
+import {Login} from "../components/Login";
 
 export function Homepage() {
+    const userId = localStorage.getItem("username");
+    const userRole = localStorage.getItem("role");
+
     return (<>
-    <h1 style={{padding:20, textAlign:"center"}}>Welcome!</h1>
-    </>)
+            {userId ? (
+                <>
+                    <h1 style={{padding: 20, textAlign: "center"}}>
+                        <h1>Welcome, {userRole}!</h1>!
+                    </h1>
+                </>) : (
+                <>
+                    <h1 style={{padding: 20, textAlign: "center"}}>
+                        <h1>Welcome, {userRole}!</h1></h1>
+                </>
+            )}
+        </>
+    );
 }
