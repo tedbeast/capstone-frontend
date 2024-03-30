@@ -1,13 +1,12 @@
 import React from "react";
 import { Employee } from "./Employee";
+import { Goal } from "./Goal";
 
 export interface PerformanceReview {
     performanceReviewID: number,
-    goalType: string,
-    employeeComments: string,
-    targetDate: Date,
-    weight: number,
-    deadlineDate: Date,
+    deadlineDate: string,
     managerComments: string,
-    employee: Employee
+    rating: number,  
+    goals: Goal[]
+
 }
