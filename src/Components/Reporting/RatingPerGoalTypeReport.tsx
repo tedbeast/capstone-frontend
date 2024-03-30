@@ -1,28 +1,28 @@
 import React, { useState, useEffect } from 'react';
-import { getAverageRatingPerEmployeeId, getLowRatingEmployees } from '../../Services/ReportingAPIServices';
+import { getRatingPerGoalType } from '../../Services/ReportingAPIServices';
 import './AverageRatingReports.css'; // Import your CSS file
 
 interface RatingData {
-    employeeId: number;
-    employeeName: string;
-    managerId: number;
+    goalType: string;
     averageRating: number;
+    employeeID: number;
+    managerID: number;
 }
 
-function AverageRatingReport() {
+function RatingPerGoalTypeReport() {
     const [averageRatings, setAverageRatings] = useState<RatingData[]>([]);
 
     useEffect(() => {
         async function fetchData() {
             try {
-                const response = await getLowRatingEmployees();
+                const response = await getRatingPerGoalType();
                 if (response.ok) {
                     const data: number[][] = await response.json();
-                    const formattedData: RatingData[] = data.map((item) => ({
-                        employeeId: item[0],
-                        employeeName: item[1].toString(),
-                        managerId: item[2],
-                        averageRating: item[3],
+                    const formattedData: RatingData[] = data.map((item, index) => ({
+                        goalType: String(item[0]),
+                        averageRating: item[1],
+                        employeeID: item[2],
+                        managerID: item[3],
                     }));
                     setAverageRatings(formattedData);
                 } else {
@@ -37,23 +37,23 @@ function AverageRatingReport() {
 
     return (
         <div className="average-ratings-container">
-            <h1>Low Ratings Report</h1>
+            <h2>Average Ratings per Goal Type</h2>
             <table className="ratings-table">
                 <thead>
                     <tr>
-                        <th>Employee ID</th>
-                        <th>Employee Name</th>
-                        <th>Manager ID</th>
+                        <th>Goal Type</th>
                         <th>Average Rating</th>
+                        <th>Employee ID</th>
+                        <th>Manager ID</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {averageRatings.map((rating) => (
-                        <tr key={rating.employeeId}>
-                            <td>{rating.employeeId}</td>
-                            <td>{rating.employeeName}</td>
-                            <td>{rating.managerId}</td>
+                    {averageRatings.map((rating, index) => (
+                        <tr key={index}>
+                            <td>{rating.goalType}</td>
                             <td>{rating.averageRating}</td>
+                            <td>{rating.employeeID}</td>
+                            <td>{rating.managerID}</td>
                         </tr>
                     ))}
                 </tbody>
@@ -62,4 +62,4 @@ function AverageRatingReport() {
     );
 }
 
-export default AverageRatingReport;
+export default RatingPerGoalTypeReport;
