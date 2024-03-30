@@ -26,10 +26,10 @@ function RatingPerGoalTypeReport() {
                     }));
                     setAverageRatings(formattedData);
                 } else {
-                    console.error('Error fetching low rating report:', response.statusText);
+                    console.error('Error fetching Ratings per goal type report:', response.statusText);
                 }
             } catch (error) {
-                console.error('Error fetching low:', error);
+                console.error('Error fetching Ratings per goal type report:', error);
             }
         }
         fetchData();
