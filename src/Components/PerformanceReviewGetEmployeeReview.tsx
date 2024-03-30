@@ -11,7 +11,7 @@ export function EmployeeDropdown() {
         const [empoloyees, setEmployees] = useState<Employee[]>([]);
         const [selectedEmployee, setSelectedEmployee] = useState('');
     
-    
+        const managerId = 1;
         useEffect(() => {
             getAllEmployeeByManagerIdAPI(managerId) // this will come as prop???
                 .then((response) => { 
@@ -37,7 +37,7 @@ export function EmployeeDropdown() {
                 <select value={selectedEmployee} onChange={handleEmployeeChange}>
                     <option value = "">Select an Employee</option>
                     {empoloyees.map((employee) =>(
-                        <option key={employee.id} value={employee.name}>
+                        <option key={employee.employeeID} value={employee.name}>
                             {employee.name}
                         </option>
                     ))}

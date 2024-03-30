@@ -48,7 +48,7 @@ export function getPerformanceByEmployeeAPI(employeeID: number){
 
 // api call to list of employees by ManagerID
 export function getAllEmployeeByManagerIdAPI(managerId: number){
-    return fetch(apiBaseURL+"employee/"+ managerId,
+    return fetch(apiBaseURL+"employee/manager/"+ managerId,
     {
         method: "GET",
         mode:"cors",
@@ -69,9 +69,9 @@ export function getAllPerformanceByManagerAPI(managerID: number) {
 
 // update manager comments and or rating
 export function updateManagerCommentsRatingAPI(employeeID: number, perfReviewID: number, data:PerformanceReview){
-    return fetch(apiBaseURL+"employee/"+{employeeID}+"/performanceReview/"+{perfReviewID}+"/managerReview",
+    return fetch(apiBaseURL+"employee/"+employeeID+"/performanceReview/"+perfReviewID+"/managerReview",
      {
-        method:"POST",
+        method:"PUT",
         mode:"cors",
         headers:{"Content-Type":"application/json"},
         //body:JSON.stringify({name:name, id:10})

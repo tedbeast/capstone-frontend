@@ -14,7 +14,7 @@ export function EmployeePerformanceReview() {
 
     //API call
     const [performanceReview, setperformanceReview] = useState<PerformanceReview[]>([]);
-    const [employeeID, setEmployeeID] =useState<number>(4);
+    const [employeeID, setEmployeeID] =useState<number>(3);
    
       
     function getItem<T>(key: string): T | null {

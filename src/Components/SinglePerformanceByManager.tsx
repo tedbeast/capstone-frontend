@@ -7,7 +7,7 @@ interface myPerformanceProps {
   data: PerformanceReview;
 }
 
-export function PerformanceReviewEntry(props: myPerformanceProps) {
+export function SinglePerformanceByManager(props: myPerformanceProps) {
   return (
     <>
       <div className="perform-div">
@@ -16,10 +16,10 @@ export function PerformanceReviewEntry(props: myPerformanceProps) {
         </label>
       </div>
       <div className="perform-div">
-        <label className="perform-label">Goal:</label> {props.data.goalType}
+        <label className="perform-label">Goal:</label> 
         <br></br>
         <label className="perform-label">Weight: </label>
-        {props.data.weight}
+        
         <br></br>
         <label className="perform-label">Target Date: </label>
         <br></br>
@@ -27,7 +27,7 @@ export function PerformanceReviewEntry(props: myPerformanceProps) {
       </div>
       <div className="perform-div">
         <label className="perform-label">Employee Comments: </label>
-        {props.data.employeeComments}
+        
         <br></br>
         <label className="perform-label">Employee Rating: </label>
       </div>
