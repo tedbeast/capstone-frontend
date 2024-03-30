@@ -7,3 +7,11 @@ export function getAverageRatingPerEmployeeId(){
           mode:"cors"
       });
 }
+
+export function getLowRatingEmployees() {
+ 
+      return fetch(apiBaseURL +"/employees/lowRating", {
+          method: "GET",
+          mode: "cors",
+      });
+    }
