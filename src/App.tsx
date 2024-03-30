@@ -1,15 +1,14 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { useNavigate } from 'react-router-dom';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { LoginPage } from './pages/LoginPage'
-import { Homepage } from './pages/Homepage'
-import { NavigationBar } from './components/NavigationBar';
-import { PasswordResetPage } from './pages/PasswordResetPage';
-import { WelcomeLoggedInUser } from './pages/WelcomeLoggedInUser';
-import { PageNotFoundPage } from "./pages/PageNotFound";
-import { LeavesPage} from "./pages/LeavesPage"
+import { LoginPage } from './Pages/LoginPage'
+import { Homepage } from './Pages/Homepage'
+import { NavigationBar } from './Components/NavigationBar';
+import { PasswordResetPage } from './Pages/PasswordResetPage';
+import { WelcomeLoggedInUser } from './Pages/WelcomeLoggedInUser';
+import { PageNotFoundPage } from "./Pages/PageNotFound";
+import { LeavesPage} from "./Pages/LeavesPage"
 
 function App() {
   return (
@@ -28,6 +27,7 @@ function App() {
 
       <Route path="/welcome" element={<WelcomeLoggedInUser/>} />
       <Route path="/passwordreset" element={<PasswordResetPage/>} />
+      <Route path="*" element={<PageNotFoundPage/>} />
       </Routes>
     </BrowserRouter>
     </>

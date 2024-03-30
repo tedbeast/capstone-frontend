@@ -1,8 +1,15 @@
 import React, { SyntheticEvent, useState } from "react";
-import { getEmployeeById, postPassword } from "../services/LoginAPIService";
+import { Employee } from "../Models/Employee";
+import { getEmployeeById, putPassword } from "../Services/LoginAPIService";
 
-export function ResetPassword (){
-    const [employeeIdInput, setEmployeeIdInput] = useState<number>()
+//interface propsInterface {
+//    data:Employee
+//}
+
+//type PublicProps = propsInterface;
+
+export function ResetPassword (props: { data: { employeeId: any; }; }){
+    const [employeeIdInput, setEmployeeIdInput] = useState<number|undefined>()
     const [passwordInput, setPasswordInput] = useState<string>("")
     const [confirmPasswordInput, setConfirmPasswordInput] = useState<string>("")
     const [alertMessage, setAlertMessage] = useState<string>("")
@@ -20,72 +27,82 @@ export function ResetPassword (){
         setConfirmPasswordInput(confirmPasswordBox.value);
     }
 
-    /*
-    //create function to update/display alert message from conditional checks
-    function displayAlert() {
-        return() => {
-            if (!alertMessage) return "";
-            return <div id="alert">(alertMessage)</div>;
-        }
-    }
-    */
-
-    function resetSubmit (event:SyntheticEvent){
-        //reset alert message to blank on click of button
+    const resetSubmit = async (event:React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
         setAlertMessage("");
-        //get values from input fields and create variables
-        let employeeId = employeeIdInput
-        let password = passwordInput
-        //***update with correct GET by ID API name once determined
-        //check that employee ID is for a valid, existing employee
-        if(getEmployeeById(employeeId) == null) {
+        let id = employeeIdInput
+        let pwd = passwordInput
+        let validEmployee = await getEmployeeById(id)
+        let validity = validEmployee.status
+        if(!employeeIdInput) {
+            return setAlertMessage("Employee ID cannot be blank")
+        }
+        if(validity == 404) {
             return setAlertMessage("Employee ID does not exist")
         }
-        //check if password fields match
+        if(!passwordInput || !confirmPasswordInput) {
+            return setAlertMessage("Password cannot be blank")
+        }
         if(passwordInput !== confirmPasswordInput) {
             return setAlertMessage("Passwords must match");
         }
-        //if no errors, send update to back end
-        postPassword(employeeId, password);
-        //what do we want to have happen? return them to the login page?
+        let employee:Employee = {
+            employeeID:id,
+            password:pwd
+        }
+        await putPassword(employee);
     }
 
     return (
         <div>
+            <h3>Please enter the below information to reset your password.</h3>
             {alertMessage !== "" && 
-            <span>
+            <div style={{color: "red", paddingBottom: 10}}>
                 {alertMessage}
-                </span>}
+                </div>}
             <form onSubmit={resetSubmit}>
+                <div>
                 <label>
                     EmployeeID
+                    <div>
                         <input
                             name="employeeid"
                             type="employeeid"
-                            value={employeeIdInput}
                             onChange={employeeIdInputHandler}
                         />
+                        </div>
                 </label>
+                </div>
+                <div>
                 <label>
                     Password
+                    <div>
                         <input
                             name="password"
                             type="password"
-                            value={passwordInput}
                             onChange={passwordInputHandler}
                         />
+                        </div>
                 </label>
+                </div>
+                <div>
                 <label>
                     Confirm Password
+                    <div>
                         <input
                             name="confirmpassword"
                             type="password"
-                            value={confirmPasswordInput}
                             onChange={confirmPasswordInputHandler}
                         />
+                        </div>
                 </label>
+                </div>
                 <button type="submit">Reset Password</button>
             </form>
         </div>
     )
+
+    //value={employeeIdInput}
+    //value={passwordInput}
+    //value={confirmPasswordInput}
 }

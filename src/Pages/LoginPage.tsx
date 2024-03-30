@@ -1,5 +1,7 @@
 import React from "react";
-import { Login } from "../components/Login";
+import { Link } from "react-router-dom";
+import { Login } from "../Components/Login";
+import { PasswordResetPage } from "./PasswordResetPage";
 
 export function LoginPage() {
     const handleLogin = () => {
@@ -9,7 +11,7 @@ export function LoginPage() {
     return(
         <>
         <Login onLogin={handleLogin}></Login>
-
+        <a href="/passwordreset">Forgot password?</a>
         </>
 
     );
