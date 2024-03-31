@@ -1,13 +1,140 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   MaterialReactTable,
   useMaterialReactTable,
   type MRT_ColumnDef,
+  type MRT_Row,
+  type MRT_Cell,
 } from "material-react-table";
-import { Stack } from "@mui/material";
+import { Stack, Button } from "@mui/material";
 
 import { Leave } from "../models/Leaves";
 
+interface EmployeeLeaveTableData {
+  leaves: Leave[];
+  handleUpdate: any;
+  handleDelete: any;
+  leave: Leave | undefined;
+  setLeave: any;
+}
+
+const EmployeeLeaveTable: React.FC<EmployeeLeaveTableData> = ({
+  leaves,
+  handleUpdate,
+  handleDelete,
+  leave,
+  setLeave,
+}) => {
+  const [data, setData] = useState<Leave[]>(leaves);
+  useEffect(() => {
+    setData(leaves);
+  }, [leaves]);
+
+  const columns: MRT_ColumnDef<Leave>[] = useMemo(
+    () => [
+      {
+        accessorKey: "leaveName",
+        header: "Leave Name",
+        size: 200,
+      },
+      {
+        accessorKey: "startDate",
+        header: "Start Date",
+        Cell: ({ cell }) =>
+          cell.getValue()
+            ? new Date(cell.getValue() as string).toLocaleDateString()
+            : "",
+        size: 150,
+      },
+      {
+        accessorKey: "endDate",
+        header: "End Date",
+        Cell: ({ cell }) =>
+          cell.getValue()
+            ? new Date(cell.getValue() as string).toLocaleDateString()
+            : "",
+        size: 150,
+      },
+      {
+        id: "status",
+        header: "Status",
+        Cell: ({ row }) => {
+          const { activeFlag, acceptedFlag } = row.original;
+          let status = "Pending";
+          let badgeColor = activeFlag ? "blue" : acceptedFlag ? "green" : "red";
+
+          return (
+            <span
+              style={{
+                color: "white",
+                backgroundColor: badgeColor,
+                padding: "5px 10px",
+                borderRadius: "5px",
+              }}
+            >
+              {activeFlag ? "Pending" : acceptedFlag ? "Accepted" : "Rejected"}
+            </span>
+          );
+        },
+        size: 100,
+      },
+      {
+        id: "actions",
+        header: "Actions",
+        Cell: ({ row }) => {
+          return (
+            <div
+              style={{
+                display: "flex",
+              }}
+            >
+              <Button
+                color="error"
+                variant="contained"
+                onClick={() => handleDelete(row.original.id)}
+                style={{ marginRight: "8px" }}
+              >
+                Delete
+              </Button>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={() => handleUpdate(row.original.id, row.original)}
+              >
+                Update
+              </Button>
+            </div>
+          );
+        },
+        size: 200,
+      },
+    ],
+    []
+  );
+
+  const table = useMaterialReactTable({
+    columns,
+    data,
+  });
+
+  return (
+    <>
+      <Stack
+        direction={"row"}
+        spacing={4}
+        justifyContent={"center"}
+        alignItems={"center"}
+      >
+        <MaterialReactTable table={table} />
+      </Stack>
+    </>
+  );
+};
+
+export default EmployeeLeaveTable;
+
+/**
+ * 
 //nested data is ok, see accessorKeys in ColumnDef below
 const initialData: Leave[] = [
   {
@@ -171,114 +298,5 @@ const initialData: Leave[] = [
     managerID: 202,
   },
 ];
-
-const EmployeeLeaveTable = () => {
-  const [data, setData] = useState<Leave[]>(initialData);
-  const columns = useMemo<MRT_ColumnDef<Leave>[]>(
-    () => [
-      {
-        accessorKey: "leaveName",
-        header: "Leave Name",
-        size: 200,
-      },
-      {
-        accessorKey: "startDate",
-        header: "Start Date",
-        Cell: ({ cell }) => cell.getValue<Date>()?.toLocaleDateString() || "",
-        size: 150,
-      },
-      {
-        accessorKey: "endDate",
-        header: "End Date",
-        Cell: ({ cell }) => cell.getValue<Date>()?.toLocaleDateString() || "",
-        size: 150,
-      },
-      {
-        accessorKey: "acceptedFlag",
-        header: "Status",
-        Cell: ({ row, table, cell }) => {
-          const accepted = cell.getValue<boolean>();
-          const badgeColor = accepted ? "green" : "red";
-          const badgeText = accepted ? "ACCEPTED" : "REJECTED";
-
-          return (
-            <button
-              style={{
-                color: "white",
-                backgroundColor: badgeColor,
-                padding: "5px 10px",
-                border: "none",
-                borderRadius: "5px",
-                cursor: "pointer",
-              }}
-              onClick={() => {
-                const newData = [...table.options.data];
-                const rowIndex = row.index;
-                newData[rowIndex] = {
-                  ...newData[rowIndex],
-                  acceptedFlag: !newData[rowIndex].acceptedFlag,
-                };
-
-                setData(newData);
-              }}
-            >
-              {badgeText}
-            </button>
-          );
-        },
-        size: 100,
-      },
-      {
-        accessorKey: "activeFlag",
-        header: "Active",
-        Cell: ({ row, table, cell }) => {
-          const active = cell.getValue<boolean>();
-          const badgeColor = active ? "green" : "red";
-          const badgeText = active ? "ACTIVE" : "NOT-ACTIVE";
-
-          return (
-            <button
-              style={{
-                color: "white",
-                backgroundColor: badgeColor,
-                padding: "5px 10px",
-                border: "none",
-                borderRadius: "5px",
-                cursor: "pointer",
-              }}
-            >
-              {badgeText}
-            </button>
-          );
-        },
-        size: 100,
-      },
-      {
-        accessorKey: "managerID",
-        header: "Manager ID",
-        size: 150,
-      },
-    ],
-    []
-  );
-
-  const table = useMaterialReactTable({
-    columns,
-    data,
-  });
-
-  return (
-    <>
-      <Stack
-        direction={"row"}
-        spacing={4}
-        justifyContent={"center"}
-        alignItems={"center"}
-      >
-        <MaterialReactTable table={table} />
-      </Stack>
-    </>
-  );
-};
-
-export default EmployeeLeaveTable;
+ * 
+ */

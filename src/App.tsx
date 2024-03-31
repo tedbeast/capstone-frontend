@@ -7,23 +7,26 @@ import { NavigationBar } from "./Components/NavigationBar";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Employee } from "./models/Employee";
 import { Roles } from "./models/Roles";
+import "@material-ui/core/styles";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const sampleEmployee: Employee = {
     employeeID: 1,
-    password: null,
-    role: Roles.MANAGER,
-    name: "Jane Doe",
-    jobTitle: "Senior Developer",
-    phoneNumber: "555-1234",
-    email: "jane.doe@example.com",
-    addressLine1: "123 Elm Street",
-    addressLine2: "",
+    password: "examplePassword",
+    name: "DJ Developer",
+    jobTitle: "Software Developer",
+    phoneNumber: "123-456-7890",
+    email: "john.doe@example.com",
+    addressLine1: "123 Main St",
+    addressLine2: "Apt 4",
     city: "Anytown",
     state: "Anystate",
     postalCode: "12345",
     birthDate: new Date("1990-01-01"), // or "1990-01-01" if you're using string dates
-    anniversary: new Date("2015-06-01"), // or "2015-06-01" if you're using string dates
+    anniversary: new Date("2015-06-01"),
+    role: Roles.MANAGER,
   };
 
   return (
@@ -42,6 +45,7 @@ function App() {
             element={<PageNotFoundPage></PageNotFoundPage>}
           ></Route>
         </Routes>
+        <ToastContainer />
       </BrowserRouter>
     </>
   );

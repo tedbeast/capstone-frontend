@@ -13,6 +13,6 @@ export const LeavesPage: React.FC<LeavesPageProps> = ({ employee }) => {
   return employee.role === Roles.MANAGER ? (
     <ManagerLeaveUI employee={employee} />
   ) : (
-    <EmployeeLeaveUI />
+    <EmployeeLeaveUI employee={employee} />
   );
 };
