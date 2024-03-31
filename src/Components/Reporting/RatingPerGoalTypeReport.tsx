@@ -6,11 +6,14 @@ interface RatingData {
     goalType: string;
     averageRating: number;
     employeeID: number;
+    name: string;
+    jobTitle: string;
     managerID: number;
 }
 
 function RatingPerGoalTypeReport() {
     const [averageRatings, setAverageRatings] = useState<RatingData[]>([]);
+    const [filterText, setFilterText] = useState('');
 
     useEffect(() => {
         async function fetchData() {
@@ -18,11 +21,13 @@ function RatingPerGoalTypeReport() {
                 const response = await getRatingPerGoalType();
                 if (response.ok) {
                     const data: number[][] = await response.json();
-                    const formattedData: RatingData[] = data.map((item, index) => ({
+                    const formattedData: RatingData[] = data.map((item) => ({
                         goalType: String(item[0]),
                         averageRating: item[1],
                         employeeID: item[2],
-                        managerID: item[3],
+                        name: item[3].toString(),
+                        jobTitle: item[4].toString(),
+                        managerID: item[5],
                     }));
                     setAverageRatings(formattedData);
                 } else {
@@ -35,24 +40,42 @@ function RatingPerGoalTypeReport() {
         fetchData();
     }, []);
 
+    const handleFilterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setFilterText(e.target.value);
+    };
+
+    const filteredRatings = averageRatings.filter((rating) =>
+        rating.goalType.toLowerCase().includes(filterText.toLowerCase())
+    );
+
     return (
         <div className="average-ratings-container">
             <h2>Average Ratings per Goal Type</h2>
+            <input
+                type="text"
+                placeholder="Filter by Goal Type"
+                value={filterText}
+                onChange={handleFilterChange}
+            />
             <table className="ratings-table">
                 <thead>
                     <tr>
                         <th>Goal Type</th>
                         <th>Average Rating</th>
                         <th>Employee ID</th>
+                        <th>Employee Name</th>
+                        <th>Job Title</th>
                         <th>Manager ID</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {averageRatings.map((rating, index) => (
-                        <tr key={index}>
+                    {filteredRatings.map((rating) => (
+                        <tr key={rating.employeeID}>
                             <td>{rating.goalType}</td>
                             <td>{rating.averageRating}</td>
                             <td>{rating.employeeID}</td>
+                            <td>{rating.name}</td>
+                            <td>{rating.jobTitle}</td>
                             <td>{rating.managerID}</td>
                         </tr>
                     ))}

@@ -7,6 +7,8 @@ interface RatingData {
     employeeId: number;
     employeeName: string;
     managerId: number;
+    jobTitle: string; // Change the type to string
+    deadlineDate: string; // Change the type to string (formatted as YYYY-MM-DD)
     averageRating: number;
 }
 
@@ -23,7 +25,9 @@ function AverageRatingReport() {
                         employeeId: item[0],
                         employeeName: item[1].toString(),
                         managerId: item[2],
-                        averageRating: item[3],
+                        jobTitle: item[3].toString(), // Convert to string
+                        deadlineDate: item[4].toString(), // Convert to string
+                        averageRating: item[5],
                     }));
                     setAverageRatings(formattedData);
                 } else {
@@ -41,7 +45,7 @@ function AverageRatingReport() {
             <h1>Average Ratings Report</h1>
             <BarChart width={600} height={400} data={averageRatings}>
                 <XAxis dataKey="employeeName" />
-                <YAxis type="number" domain={[0,5]} /> {/* Set the y-axis domain */}
+                <YAxis type="number" domain={[0, 5]} /> {/* Set the y-axis domain */}
                 <Tooltip />
                 <Legend />
                 <Bar dataKey="averageRating" fill="#8884d8" />
