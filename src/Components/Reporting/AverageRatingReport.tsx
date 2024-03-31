@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getAverageRatingPerEmployeeId } from '../../Services/ReportingAPIServices';
 import './AverageRatingReports.css'; // Import your CSS file
+import { Bar, BarChart, Legend, Tooltip, XAxis, YAxis } from 'recharts';
 
 interface RatingData {
     employeeId: number;
@@ -38,26 +39,13 @@ function AverageRatingReport() {
     return (
         <div className="average-ratings-container">
             <h1>Average Ratings Report</h1>
-            <table className="ratings-table">
-                <thead>
-                    <tr>
-                        <th>Employee ID</th>
-                        <th>Employee Name</th>
-                        <th>Manager ID</th>
-                        <th>Average Rating</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {averageRatings.map((rating) => (
-                        <tr key={rating.employeeId}>
-                            <td>{rating.employeeId}</td>
-                            <td>{rating.employeeName}</td>
-                            <td>{rating.managerId}</td>
-                            <td>{rating.averageRating}</td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
+            <BarChart width={600} height={400} data={averageRatings}>
+                <XAxis dataKey="employeeName" />
+                <YAxis type="number" domain={[0,5]} /> {/* Set the y-axis domain */}
+                <Tooltip />
+                <Legend />
+                <Bar dataKey="averageRating" fill="#8884d8" />
+            </BarChart>
         </div>
     );
 }
