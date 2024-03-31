@@ -8,8 +8,9 @@ import { Roles } from "../Models/Roles";
 //component will allow the EmployeePerformanceReview to dynamically display if the Manager comments section should have an input box or be read only
 
 interface reviewProps {
-    data: PerformanceReview
-    customKey: number
+    data: PerformanceReview,
+    customKey: number,
+    role: boolean
 }
 
 
@@ -17,28 +18,28 @@ export function ManagerCommentsRating(props: reviewProps) {
     const [newComments, setNewComments] = useState<string>(''); // State for input box
     const [debouncedComments, setDebouncedComments] = useState('');
     const [newRating, setNewRating] = useState<number>(5); // State for input box
-    const [roleMgr, setRoleMgr] = useState(false);
+    // const [roleMgr, setRoleMgr] = useState(false);
 
-    const currentRole = 'MANAGER'; 
+    const currentRole = props.role; 
     console.log(props);
 
     //check what the current role is
-    function checkRole(currentRole: 'EMPLOYEE'|'MANAGER'|'ADMIN') {
-        if(currentRole === 'MANAGER'){
-            setRoleMgr(true)
-        } 
-    }
+    // function checkRole(currentRole: 'EMPLOYEE'|'MANAGER'|'ADMIN') {
+    //     if(currentRole === 'MANAGER'){
+    //         setRoleMgr(true)
+    //     } 
+    // }
 
-    useEffect(()=>{
-        //When you don't give useEffect a second parameter the logic of this function will trigger everytime the component mounts
-        //check role everytime component mounts
-        checkRole(currentRole);
-        return ()=>{
-            //If you return a function in the useEffect then the returning function will be called when the component unmounts.
-            //check role everytime component unmounts
-            checkRole(currentRole);
-        }
-    },[]);
+    // useEffect(()=>{
+    //     //When you don't give useEffect a second parameter the logic of this function will trigger everytime the component mounts
+    //     //check role everytime component mounts
+    //     checkRole(currentRole);
+    //     return ()=>{
+    //         //If you return a function in the useEffect then the returning function will be called when the component unmounts.
+    //         //check role everytime component unmounts
+    //         checkRole(currentRole);
+    //     }
+    // },[]);
 
     useEffect(() => {
         // Debounce the input value
@@ -94,7 +95,7 @@ export function ManagerCommentsRating(props: reviewProps) {
         <div>
             <h2>Performance Review Manager Comments & Rating</h2>
             {/*localStorage.getItem('role')*/
-            roleMgr ? (
+            props.role ? (
                 <>
                     <p>Manager Comments:</p>
                     <p>{props.data.managerComments}</p>

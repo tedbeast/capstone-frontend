@@ -11,6 +11,27 @@ import { PerformanceReview } from "../Models/PerformanceReview";
 export function GoalsPage(){
     const testManagerID = 1;
         //rendering depending on manager vs employee
+    const currentRole = 'MANAGER';
+    const [roleMgr, setRoleMgr] = useState(false);
+
+    //check what the current role is
+    function checkRole(currentRole: 'EMPLOYEE' | 'MANAGER' | 'ADMIN') {
+        if (currentRole === 'MANAGER') {
+            setRoleMgr(true)
+        }
+    }
+
+    useEffect(() => {
+        //When you don't give useEffect a second parameter the logic of this function will trigger everytime the component mounts
+        //check role everytime component mounts
+        checkRole(currentRole);
+        return () => {
+            //If you return a function in the useEffect then the returning function will be called when the component unmounts.
+            //check role everytime component unmounts
+            checkRole(currentRole);
+        }
+    }, []);
+
     return (
     <>
     <div></div>
@@ -26,7 +47,7 @@ export function GoalsPage(){
     {/* <GoalList></GoalList> */}
     {/* <AddGoal></AddGoal> */}
     {/* <PerformanceReviewList managerIdProp={testManagerID}></PerformanceReviewList> */}
-    <EmployeePerformanceReview></EmployeePerformanceReview>
+    <EmployeePerformanceReview role={roleMgr}></EmployeePerformanceReview>
     </>
         )
 };
