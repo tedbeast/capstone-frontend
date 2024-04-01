@@ -1,5 +1,5 @@
 import React from "react";
-import { getAllGoalsAPI, postGoalsAPI } from "../services/GoalsAPIService";
+import { getAllGoalsAPI, postGoalsAPI } from "../Services/GoalsAPIService";
 import { useEffect, useState } from "react";
 import { EmployeePerformanceReview } from "../Components/EmployeePeformanceReview";
 import { PerformanceReview } from "../Models/PerformanceReview";
