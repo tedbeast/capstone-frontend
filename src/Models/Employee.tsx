@@ -6,6 +6,6 @@ import { Roles } from "./Roles";
 
 export interface Employee{
     employeeID:number; 
-    name:String;
-
+    name:string;
+    performanceReview: PerformanceReview;
 }
