@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Employee } from "./Employee";
 
@@ -8,3 +9,4 @@ export interface Goal {
     employeeComments: string;
     weight: number;
 }
+
