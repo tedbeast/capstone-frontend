@@ -1,5 +1,6 @@
 import { json } from "react-router-dom";
-import { Leaves } from "../models/Leaves";
+import { Leaves } from "../Models/Leaves";
+
 
 const apiBaseURL = "http://localhost:9004/";            // Base URL for the API
 
@@ -50,8 +51,8 @@ export const deleteLeaveAPI = async (leaveId: any) => {
 
 // Update an existing leave via API
 export const updateLeaveAPI = async (leave: Leaves) => {
-  console.log("update api: ", `${apiBaseURL}leave/${leave.id}`);
-  const response =  await fetch(`${apiBaseURL}leave/${leave.id}`, {
+  console.log("update api: ", `${apiBaseURL}leave/${leave.leaveId}`);
+  const response =  await fetch(`${apiBaseURL}leave/${leave.leaveId}`, {
     method: "PUT",
     mode: "cors",
     headers: { "Content-Type": "application/json" },
