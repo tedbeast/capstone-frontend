@@ -1,3 +1,6 @@
+import { Employee } from "./Employee";
+
+
 export interface Leaves {
     leaveId?: number;
     leaveName: string;

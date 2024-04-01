@@ -3,8 +3,8 @@ import { updateAdminAPI } from "../Services/AdminAPIService";
 import { Modal, Button } from 'react-bootstrap';
 import { PerformanceReview } from "../Models/PerformanceReview";
 import { Employee } from "../Models/Employee";
-import { Leave } from "../Models/Leave";
 import { Roles } from "../Models/Roles";
+import { Leaves } from "../Models/Leaves";
 
 function UpdateAdmin() {
   const [show, setShow] = useState(false);
@@ -23,7 +23,7 @@ function UpdateAdmin() {
   const [anniversary, setAnniversary] = useState<Date>(new Date());
   const [managerID, setManagerID] = useState<number>(0);
   const [performanceReview, setPerformanceReview] = useState<PerformanceReview[]>([]);
-  const [leave, setLeave] = useState<Leave[]>([]);
+  const [leaves, setLeave] = useState<Leaves[]>([]);
   const [role, setRole] = useState<Roles>(Roles.EMPLOYEE);
 
   const handleClose = () => setShow(false);
@@ -46,7 +46,7 @@ function UpdateAdmin() {
         anniversary,
         manager: { managerID, employees: [] },
         performanceReview,
-        leave,
+        leaves,
         role
     };
 

@@ -4,7 +4,7 @@ import { Roles } from "../Models/Roles";
 import { Modal, Button } from 'react-bootstrap';
 import { Employee } from "../Models/Employee";
 import { PerformanceReview } from "../Models/PerformanceReview";
-import { Leave } from "../Models/Leave";
+import { Leaves } from "../Models/Leaves";
 
 function AddAdmin() {
   const [show, setShow] = useState(false);
@@ -23,7 +23,7 @@ function AddAdmin() {
   const [anniversary, setAnniversary] = useState<Date>(new Date());
   const [managerID, setManagerID] = useState<number>(0);
   const [performanceReview, setPerformanceReview] = useState<PerformanceReview[]>([]);
-  const [leave, setLeave] = useState<Leave[]>([]);
+  const [leaves, setLeaves] = useState<Leaves[]>([]);
   const [role, setRole] = useState<Roles>(Roles.EMPLOYEE);
 
     const handleClose = () => setShow(false);
@@ -47,7 +47,7 @@ function AddAdmin() {
         anniversary,
         manager: { managerID:managerID, employees: [] },
         performanceReview,
-        leave,
+        leaves,
         role
     };
   
