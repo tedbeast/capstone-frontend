@@ -5,6 +5,7 @@ import AddAdmin from "../Components/AddAdmin";
 import AddManager from "../Components/AddManager";
 import { EmployeeList } from "../Components/EmployeeList";
 import DeleteEmployee from "../Components/DeleteEmployee";
+import UpdateManager from '../Components/UpdateManager';
 
 export function AdminPage() {
     const [selectedComponent, setSelectedComponent] = useState<string | null>(null);
@@ -16,7 +17,8 @@ export function AdminPage() {
     const components: { [key: string]: ReactElement } = {
         'Add Manager': <AddManager />,
         'Add Employee': <AddAdmin />,
-        'Update Admin': <UpdateAdmin />,
+        'Update Employee': <UpdateAdmin />,
+        'Update Manager': <UpdateManager />,
         'Delete Employee': <DeleteEmployee />
     };
 
