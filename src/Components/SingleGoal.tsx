@@ -1,16 +1,25 @@
 import React from "react";
 import { PerformanceReview } from "../Models/PerformanceReview";
+import { EmployeePerformanceReview } from "./EmployeePeformanceReview";
+import { Goal } from "../Models/Goal";
 
-interface PerformanceReviewInterface {
-    data:PerformanceReview;
+interface GoalInterface {
+  data: Goal;
 }
 
-export function SingleGoal(props:PerformanceReviewInterface){
-    return(
-        <>
-            <h4>Performance Review Details - ID {props.data.performanceReviewID}</h4>
-            {/* <p>Goal Type: {props.data.goalType}</p> */}
-            {/* <p>Employee Comment: {props.data.employeeComments}</p> */}
-        </>
-    )
+interface PerformanceReviewInterface {
+  data: PerformanceReview;
+}
+
+interface thisEmployee {
+  employeeID: number;
+  role: boolean;
+}
+
+export function SingleGoal(props: PerformanceReviewInterface) {
+  return (
+    <>
+      <h4>Performance Review Details - ID {props.data.performanceReviewID}</h4>
+    </>
+  );
 }
