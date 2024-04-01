@@ -1,5 +1,5 @@
 import React from "react";
-import {Login} from "../components/Login";
+import {Login} from "../Components/Login";
 
 export function Homepage() {
     const userId = localStorage.getItem("username");

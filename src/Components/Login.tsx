@@ -17,6 +17,9 @@ const getCredentials = async (event: React.FormEvent<HTMLFormElement>) => {
     let getPassword = (document.getElementById('password') as HTMLInputElement).value;
     let role = localStorage.getItem('role');
 
+    console.log("getEmployeeID:", getEmployeeID);
+    console.log("getPassword:", getPassword);
+
     try {
 
         if(getEmployeeID == "" || getEmployeeID == null){
@@ -40,7 +43,9 @@ const getCredentials = async (event: React.FormEvent<HTMLFormElement>) => {
             body: JSON.stringify({ employeeID: getEmployeeID, password:
             getPassword }),
         });
+
         console.log("reached response block");
+
         if (!response.ok){
             if(response.status === 401) {
                 setError("Invalid credentials. Please check your username and password.");
@@ -57,6 +62,8 @@ const getCredentials = async (event: React.FormEvent<HTMLFormElement>) => {
             navigate('/welcome');
             localStorage.setItem('username', getEmployeeID);
             localStorage.setItem('role', data.role);
+            //localStorage.setItem('managerID', data.managerID);
+
     } catch (error) {
         console.error('Error:', error);
         setError('An error occurred. Please try again later.');
