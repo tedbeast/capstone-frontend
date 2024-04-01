@@ -26,6 +26,7 @@ const EmployeeLeaveTable: React.FC<EmployeeLeaveTableData> = ({
   setLeave,
 }) => {
   const [data, setData] = useState<Leave[]>(leaves);
+
   useEffect(() => {
     setData(leaves);
   }, [leaves]);
@@ -99,7 +100,10 @@ const EmployeeLeaveTable: React.FC<EmployeeLeaveTableData> = ({
               <Button
                 variant="contained"
                 color="primary"
-                onClick={() => handleUpdate(row.original.id, row.original)}
+                onClick={() => {
+                  setLeave(row.original);
+                  handleUpdate(row.original.id, row.original);
+                }}
               >
                 Update
               </Button>

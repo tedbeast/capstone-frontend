@@ -14,6 +14,7 @@ import { getAllLeavesByEmployeeId } from "../services/LeavesAPI";
 import { Leave } from "../models/Leaves";
 import { deleteLeaveAPI } from "../services/LeavesAPI";
 import { toast } from "react-toastify";
+import UpdateLeaveForm from "./UpdateLeaveForm";
 
 interface EmployeeLeaveTableProps {
   employee: Employee;
@@ -24,10 +25,10 @@ const ManagerLeaveUI: React.FC<EmployeeLeaveTableProps> = ({ employee }) => {
   const [showForm, setShowForm] = useState(false);
   const [allLeaves, setAllLeaves] = useState<Leave[]>([]);
   const [leave, setLeave] = useState<Leave>();
+  const [showUpdateForm, setShowUpdateForm] = useState(false);
 
   useEffect(() => {
     getAllLeavesByEmployeeId(employee.employeeID).then((data) => {
-      console.log(data);
       setAllLeaves(data);
     });
   }, []);
@@ -43,17 +44,14 @@ const ManagerLeaveUI: React.FC<EmployeeLeaveTableProps> = ({ employee }) => {
   };
 
   const handleUpdate = (id: number) => {
-    setLeave(allLeaves.find((leave) => leave.leaveId === id));
+    setShowUpdateForm(true);
   };
 
-  const handleChange = (event: React.MouseEvent<HTMLElement>, view: string) => {
-    setToggleView(view === "true");
-  };
-
-  const control = {
-    value: toggleView ? "true" : "false",
-    onChange: handleChange,
-    exclusive: true,
+  const handleChange = (
+    event: React.MouseEvent<HTMLElement>,
+    nextView: boolean
+  ) => {
+    setToggleView(nextView);
   };
 
   return (
@@ -67,12 +65,18 @@ const ManagerLeaveUI: React.FC<EmployeeLeaveTableProps> = ({ employee }) => {
         mx={4}
         px={15}
       >
-        <ToggleButtonGroup {...control}>
+        <ToggleButtonGroup
+          value={toggleView}
+          exclusive
+          onChange={(event, view) => handleChange(event, view === "manager")}
+        >
           <ToggleButton value="false">
             <PersonOutlineOutlined />
+            Employee View
           </ToggleButton>
-          <ToggleButton value="true">
+          <ToggleButton value="manager">
             <ManageAccountsOutlined />
+            Manager View
           </ToggleButton>
         </ToggleButtonGroup>
         {toggleView ? (
@@ -83,7 +87,7 @@ const ManagerLeaveUI: React.FC<EmployeeLeaveTableProps> = ({ employee }) => {
             startIcon={<Add />}
             onClick={(e) => setShowForm(!showForm)}
           >
-            Leave
+            Apply Leave
           </Button>
         )}
       </Stack>
@@ -110,7 +114,29 @@ const ManagerLeaveUI: React.FC<EmployeeLeaveTableProps> = ({ employee }) => {
             justifyContent: "center",
           }}
         >
-          <LeaveForm />
+          <LeaveForm
+            employee={employee}
+            setAllLeaves={setAllLeaves}
+            allLeaves={allLeaves}
+            setShowForm={setShowForm}
+          />
+        </Modal>
+      ) : (
+        <> </>
+      )}
+      {showUpdateForm ? (
+        <Modal
+          open={showUpdateForm}
+          onClose={() => setShowUpdateForm(false)}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <UpdateLeaveForm leave={leave} setShowForm={setShowUpdateForm} />
         </Modal>
       ) : (
         <> </>

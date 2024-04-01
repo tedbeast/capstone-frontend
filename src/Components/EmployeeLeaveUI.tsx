@@ -25,9 +25,8 @@ const EmployeeLeaveUI: React.FC<EmployeeLeaveUIProps> = ({ employee }) => {
   useEffect(() => {
     getAllLeavesByEmployeeId(employee.employeeID).then((data) => {
       setAllLeaves(data);
-      console.log(data);
     });
-  }, []);
+  }, [showUpdateForm, showForm]);
 
   const handleDelete = async (id: number) => {
     const result = await deleteLeaveAPI(id);
@@ -39,15 +38,13 @@ const EmployeeLeaveUI: React.FC<EmployeeLeaveUIProps> = ({ employee }) => {
     }
     toast.success("Leave deleted successfully");
     getAllLeavesByEmployeeId(employee.employeeID).then((data) => {
-      setAllLeaves(data);
+      if (data.length !== 0) setAllLeaves(data);
+      else setAllLeaves([]);
     });
   };
 
   const handleUpdate = useCallback(
     (id: number, leave: Leave) => {
-      console.log(id);
-      console.log(leave);
-      setLeave(leave);
       setShowUpdateForm(true);
     },
     [allLeaves]
@@ -69,7 +66,7 @@ const EmployeeLeaveUI: React.FC<EmployeeLeaveUIProps> = ({ employee }) => {
           startIcon={<Add />}
           onClick={(e) => setShowForm(!showForm)}
         >
-          Leave
+          Apply For Leave
         </Button>
         {showForm ? (
           <Modal
@@ -83,7 +80,12 @@ const EmployeeLeaveUI: React.FC<EmployeeLeaveUIProps> = ({ employee }) => {
               justifyContent: "center",
             }}
           >
-            <LeaveForm />
+            <LeaveForm
+              employee={employee}
+              setAllLeaves={setAllLeaves}
+              allLeaves={allLeaves}
+              setShowForm={setShowForm}
+            />
           </Modal>
         ) : (
           <> </>
@@ -102,7 +104,7 @@ const EmployeeLeaveUI: React.FC<EmployeeLeaveUIProps> = ({ employee }) => {
             justifyContent: "center",
           }}
         >
-          <UpdateLeaveForm leave={leave} />
+          <UpdateLeaveForm leave={leave} setShowForm={setShowUpdateForm} />
         </Modal>
       ) : (
         <> </>

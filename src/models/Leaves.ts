@@ -8,4 +8,5 @@ export interface Leave {
   activeFlag: boolean;
   employeeID?: number;
   managerID?: number;
+  employeeName?: string;
 }

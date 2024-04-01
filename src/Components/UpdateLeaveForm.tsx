@@ -60,12 +60,18 @@ const validationSchema = Yup.object({
 
 interface UpdateLeaveFormProps {
   leave: Leave | undefined;
+  setShowForm: any;
 }
 
-const UpdateLeaveForm: React.FC<UpdateLeaveFormProps> = ({ leave }) => {
+const UpdateLeaveForm: React.FC<UpdateLeaveFormProps> = ({
+  leave,
+  setShowForm,
+}) => {
   console.log(leave);
+
   const formatDate = (date: Date | null | undefined): string =>
     date ? new Date(date).toISOString().split("T")[0] : "";
+
   const [initialValues, setInitialValues] = useState<FormValues>({
     leaveId: leave?.id,
     leaveName: leave?.leaveName || "",
@@ -105,6 +111,7 @@ const UpdateLeaveForm: React.FC<UpdateLeaveFormProps> = ({ leave }) => {
     console.log("Update Code: " + values.leaveId);
     console.log(values);
     console.log(otherLeaveType);
+    setShowForm(false);
     try {
       values.leaveId = leave?.id;
       console.log(values);
@@ -120,7 +127,7 @@ const UpdateLeaveForm: React.FC<UpdateLeaveFormProps> = ({ leave }) => {
     <Grid container justifyContent="center" spacing={2}>
       <Grid item xs={12} md={6}>
         <Card>
-          <CardHeader title="Leave Request Form" />
+          <CardHeader title="Update Leave" />
           <CardContent>
             <Formik
               initialValues={initialValues}

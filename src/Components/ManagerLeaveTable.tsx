@@ -12,6 +12,7 @@ import {
   acceptLeave,
   getAllLeaveAPI,
   getAllLeavesByEmployeeId,
+  getAllLeavesByManagerId,
   rejectLeave,
 } from "../services/LeavesAPI";
 import { Employee } from "../models/Employee";
@@ -19,6 +20,19 @@ import { toast } from "react-toastify";
 
 interface ManagerLeaveTable {
   employee: Employee;
+}
+
+interface ManagerLeaveTableData {
+  id?: number;
+  leaveId?: number;
+  leaveName: string;
+  startDate: Date | null;
+  endDate: Date | null;
+  acceptedFlag: boolean;
+  activeFlag: boolean;
+  employeeID?: number;
+  managerID?: number;
+  employeeName?: string;
 }
 
 const ManagerLeaveTable: React.FC<ManagerLeaveTable> = ({ employee }) => {
@@ -33,7 +47,7 @@ const ManagerLeaveTable: React.FC<ManagerLeaveTable> = ({ employee }) => {
         toast.success("Leave accepted successfully");
         const updatedLeaves = await getAllLeavesByEmployeeId(
           employee.employeeID
-        ); // Fetch updated list
+        );
         setData(updatedLeaves);
       } catch (e) {
         toast.error("Error accepting leave");
@@ -56,8 +70,13 @@ const ManagerLeaveTable: React.FC<ManagerLeaveTable> = ({ employee }) => {
     }
   };
 
-  const columns = useMemo<MRT_ColumnDef<Leave>[]>(
+  const columns = useMemo<MRT_ColumnDef<ManagerLeaveTableData>[]>(
     () => [
+      {
+        accessorKey: "employeeName",
+        header: "Employee Name",
+        size: 200,
+      },
       {
         accessorKey: "leaveName",
         header: "Leave Name",
@@ -92,7 +111,7 @@ const ManagerLeaveTable: React.FC<ManagerLeaveTable> = ({ employee }) => {
                 borderRadius: "5px",
               }}
             >
-              {activeFlag ? "Pending" : acceptedFlag ? "Accepted" : "Rejected"}
+              {activeFlag ? "PENDING" : acceptedFlag ? "ACCEPTED" : "REJECTED"}
             </span>
           );
         },
@@ -104,7 +123,7 @@ const ManagerLeaveTable: React.FC<ManagerLeaveTable> = ({ employee }) => {
         Cell: ({ row, table, cell }) => {
           const active = cell.getValue<boolean>();
           const badgeColor = active ? "green" : "red";
-          const badgeText = active ? "ACTIVE" : "NOT-ACTIVE";
+          const badgeText = active ? "YES" : "NOT";
 
           return (
             <button
@@ -152,7 +171,7 @@ const ManagerLeaveTable: React.FC<ManagerLeaveTable> = ({ employee }) => {
   );
 
   useEffect(() => {
-    getAllLeavesByEmployeeId(employee.employeeID).then((data) => {
+    getAllLeavesByManagerId(employee.employeeID).then((data) => {
       setData(data);
     });
   }, []);

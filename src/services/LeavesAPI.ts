@@ -12,9 +12,10 @@ export function getAllLeaveAPI() {
 }
 
 // Add a new leave via API
-export async function postLeaveAPI(leave: Leave) {
+// http://localhost:8080/employee/2/leave
+export async function postLeaveAPI(leave: Leave, employeeID: number) {
   console.log("post API: ", apiBaseURL + "leave");
-  const response = await fetch(apiBaseURL + "leave", {
+  const response = await fetch(apiBaseURL + `employee/${employeeID}/leave`, {
     method: "POST",
     mode: "cors",
     headers: { "Content-Type": "application/json" }, // Set request header for JSON data
@@ -76,7 +77,7 @@ export const updateLeaveAPI = async (leave: Leave) => {
 
 export const getAllLeavesByEmployeeId = async (employeeId: number) => {
   try {
-    const response = await fetch(`${apiBaseURL}leave`, {
+    const response = await fetch(`${apiBaseURL}employee/${employeeId}/leave`, {
       method: "GET",
       mode: "cors",
       headers: {
@@ -144,5 +145,35 @@ export const rejectLeave = async (leaveId: number) => {
   } catch (error) {
     console.error("Error rejecting leave:", error);
     throw error;
+  }
+};
+
+export const getAllLeavesByManagerId = async (employeeId: number) => {
+  try {
+    const response = await fetch(`${apiBaseURL}manager/${employeeId}/leaves`, {
+      method: "GET",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+
+    const leaves: Leave[] = await response.json();
+
+    // Assuming each leave record has startDate and endDate properties
+    return leaves.map((leave) => {
+      return {
+        ...leave,
+        startDate: leave.startDate ? new Date(leave.startDate) : null,
+        endDate: leave.endDate ? new Date(leave.endDate) : null,
+      };
+    });
+  } catch (error) {
+    console.error("There was a problem with the fetch operation:", error);
+    throw new Error(`Unable to retrieve leaves: ${error}`);
   }
 };
