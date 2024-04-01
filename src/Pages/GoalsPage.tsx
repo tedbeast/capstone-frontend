@@ -1,19 +1,19 @@
 import React from "react";
 import { getAllGoalsAPI, postGoalsAPI } from "../services/GoalsAPIService";
 import { useEffect, useState } from "react";
-// import { AddGoal } from "../Components/AddGoal";
-
-// import { PerformanceReviewList } from "../Components/PerformanceListByManager";
 import { EmployeePerformanceReview } from "../Components/EmployeePeformanceReview";
 import { PerformanceReview } from "../Models/PerformanceReview";
 import { EmployeeDropdown } from "../Components/PerformanceReviewGetEmployeeReview";
 import { sortAndDeduplicateDiagnostics } from "typescript";
+import { AddGoal } from "../Components/AddGoal";
+import { PerformanceReviewList } from "../Components/PerformanceListByManager";
+import { ListGoal } from "../Components/ListGoal";
 
 
-export function GoalsPage() {
+export function GoalsPage(){
     const testManagerID = 1;
-    const testEmpID = 1; //login id
-    //rendering depending on manager vs employee
+    const testEmpID = 1;
+        //rendering depending on manager vs employee
     const currentRole = 'MANAGER';
     const [roleMgr, setRoleMgr] = useState(false);
     const [dropDown, setDropDown] = useState(false); //false = does not appear
@@ -50,9 +50,10 @@ export function GoalsPage() {
     //if employee: show only employee review
 
     return (
-        <>
-            <div></div>
-            {/*
+    <>
+
+    <div></div>
+    {/*
         if role = Manager 
         <button> Self or AllEmployees?
         if button = Self
@@ -61,25 +62,19 @@ export function GoalsPage() {
         <EmployeeDrodown>
         else <EmployeePerformanceReview>
     */}
-            {roleMgr ? (
-                <div>
-                    <button onClick={toggleMgrView}>Switch View</button>
-                    {dropDown ? (
-                        <div>
-                            <EmployeeDropdown role={roleMgr} managerID={testEmpID}></EmployeeDropdown>
-                        </div>
-                    ) : (
-                    <EmployeePerformanceReview role={roleMgr} employeeID={testEmpID}></EmployeePerformanceReview>    
-                    )    
+    {roleMgr && 
+            <div>
+            <button onClick={toggleMgrView}>Switch View</button>
+                {dropDown && 
+                    <div>
+                    <EmployeeDropdown role={roleMgr} managerID={testEmpID}></EmployeeDropdown>
+                    </div>
                     }
-                    
-                </div>
-            ) : (
-                <p>nothing</p>
-            /*<EmployeePerformanceReview role={roleMgr} employeeID={testEmpID}></EmployeePerformanceReview>*/
-            )
+            </div>
             }
-
-        </>
+    <EmployeePerformanceReview role={roleMgr} employeeID={testEmpID}></EmployeePerformanceReview>
+    <ListGoal data = {1}></ListGoal>
+    {/*<PerformanceReviewList managerIdProp={testManagerID}></PerformanceReviewList> */}
+    </>
     )
 };
