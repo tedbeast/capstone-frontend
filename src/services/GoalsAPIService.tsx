@@ -1,7 +1,7 @@
 import { Goal } from "../Models/Goal";
 import { PerformanceReview } from "../Models/PerformanceReview";
 
-const apiBaseURL = "http://localhost:9004/";
+const apiBaseURL = "http://localhost:8080/";
 
 export function getAllGoalsAPI() {
   return fetch(apiBaseURL + "performanceReview", {
@@ -34,14 +34,36 @@ export function postGoalsAPI(
 }
 
 //get performance review by employeeID
-/*
-export function getPerformanceByEmployeeAPI(employeeID: number){
-    return fetch(apiBaseURL + "employee/" + employeeID + "/performanceReview", {
-        method:"GET",
-        mode:"cors"
-    })
+
+export function getPerformanceByEmployeeAPI(employeeID: number) {
+  return fetch(apiBaseURL + "employee/" + employeeID + "/performanceReview", {
+    method: "GET",
+    mode: "cors",
+  });
 }
-*/
+
+//employee, add comments to goals during performance review period
+export function updateEmployeeCommentsRatingAPI(
+  employeeID: number,
+  goalID: number,
+  data: Goal
+) {
+  return fetch(
+    apiBaseURL +
+      "employee/" +
+      employeeID +
+      "/goals/" +
+      goalID +
+      "/employeeReview",
+    {
+      method: "PUT",
+      mode: "cors",
+      headers: { "Content-Type": "application/json" },
+      //body:JSON.stringify({name:name, id:10})
+      body: JSON.stringify(data),
+    }
+  );
+}
 
 //Manager Related API calls
 

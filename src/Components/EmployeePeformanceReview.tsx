@@ -3,7 +3,7 @@ import { PerformanceReview } from "../Models/PerformanceReview";
 import { Goal } from "../Models/Goal";
 import { Employee } from "../Models/Employee";
 import { ManagerCommentsRating } from "./ManagerCommentsRating";
-//import { getPerformanceByEmployeeAPI } from "../services/GoalsAPIService";
+import { getPerformanceByEmployeeAPI } from "../services/GoalsAPIService";
 import { EmployeeDropdown } from "./PerformanceReviewGetEmployeeReview";
 
 interface thisEmployee {
@@ -28,16 +28,15 @@ export function EmployeePerformanceReview(props: thisEmployee) {
     const storedEmployeeId = getItem<string>("username");
     // if (storedEmployeeId) {
     //     const employeeIdAsInt = parseInt(storedEmployeeId, 10);
-    /*getPerformanceByEmployeeAPI(props.employeeID)
-            .then((response) => {
-                console.log(response);
-                return response.json();
-            })
-            .then((data) => {
-                setperformanceReview(data);
-                console.log(data)
-            }
-            );*/
+    getPerformanceByEmployeeAPI(props.employeeID)
+      .then((response) => {
+        console.log(response);
+        return response.json();
+      })
+      .then((data) => {
+        setperformanceReview(data);
+        console.log(data);
+      });
     // }
   }, []);
 
@@ -46,13 +45,12 @@ export function EmployeePerformanceReview(props: thisEmployee) {
   return (
     <>
       <div>
-        <h1>Employee Performance Review</h1>
+        <h1>Your Performance Goals</h1>
         {performanceReview.map((review) => (
           <div key={review.performanceReviewID}>
-            {/* <p>Review ID: {review.performanceReviewID}</p> */}
-            <p>Deadline Date: {review.deadlineDate}</p>
+            {/*<p>Review ID: {review.performanceReviewID}</p>*/}
+            {/*<p>Deadline Date: {review.deadlineDate}</p>*/}
             {/*Node should structure where if employee allow to edit for comments*/}
-            <h2>Goals</h2>
             <ul>
               {review.goals.map((goal) => (
                 <li key={goal.goalID}>

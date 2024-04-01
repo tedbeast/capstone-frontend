@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { PerformanceReview } from "../Models/PerformanceReview";
-//import { getAllGoalsAPI, getGoalsByEmployeeAPI } from "../services/GoalsAPIService";
+import {
+  getAllGoalsAPI,
+  getPerformanceByEmployeeAPI,
+} from "../services/GoalsAPIService";
 import { AddGoal } from "./AddGoal";
 import { SingleGoal } from "./SingleGoal";
+import { Goal } from "../Models/Goal";
 
-interface PerformanceReviewInterface {
-  data: number;
-}
-
-export function ListGoal(props: PerformanceReviewInterface) {
+export function ListGoal() {
   const [allGoals, setAllGoals] = useState<PerformanceReview[]>([]);
   const [showAddGoalComponent, setShowAddGoalComponent] = useState(false);
 
@@ -19,13 +19,16 @@ export function ListGoal(props: PerformanceReviewInterface) {
       setShowAddGoalComponent(true);
     }
   }
-  /*
-    useEffect(()=>{
-        getGoalsByEmployeeAPI(props.data)
-        .then(response => {return response.json()})
-        .then(json => {setAllGoals(json)})
-    }, []);
-    */
+
+  useEffect(() => {
+    getPerformanceByEmployeeAPI(1)
+      .then((response) => {
+        return response.json();
+      })
+      .then((json) => {
+        setAllGoals(json);
+      });
+  }, []);
 
   return (
     <>
