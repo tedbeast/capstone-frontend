@@ -1,0 +1,40 @@
+/* Container for the reporting sections */
+.reporting-container {
+    display: flex;
+    flex-direction: column; /* Stack sections vertically */
+    gap: 20px; /* Adjust the gap between sections */
+}
+
+/* Styling for each reporting section */
+.reporting-section {
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+/* Heading style */
+.reporting-section h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+/* Table styling (if applicable) */
+.reporting-section table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.reporting-section th,
+.reporting-section td {
+    padding: 8px;
+    border: 1px solid #ccc;
+}
+
+/* Input field styling (if applicable) */
+.reporting-section input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}

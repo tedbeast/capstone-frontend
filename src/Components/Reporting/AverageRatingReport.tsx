@@ -14,6 +14,7 @@ interface RatingData {
 
 function AverageRatingReport() {
     const [averageRatings, setAverageRatings] = useState<RatingData[]>([]);
+    const [filterText, setFilterText] = useState('');
 
     useEffect(() => {
         async function fetchData() {
@@ -40,12 +41,28 @@ function AverageRatingReport() {
         fetchData();
     }, []);
 
+    const handleFilterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setFilterText(e.target.value);
+    };
+
+    const filteredRatings = averageRatings.filter((rating) =>
+        rating.employeeName.toLowerCase().includes(filterText.toLowerCase()) ||
+        rating.jobTitle.toLowerCase().includes(filterText.toLowerCase()) ||
+        rating.managerId.toString().includes(filterText)
+    );
+
     return (
         <div className="average-ratings-container">
             <h1>Average Ratings Report</h1>
-            <BarChart width={600} height={400} data={averageRatings}>
+            <input
+                type="text"
+                placeholder="Filter by Name, Job Title, or Manager ID"
+                value={filterText}
+                onChange={handleFilterChange}
+            />
+            <BarChart width={750} height={400} data={filteredRatings}>
                 <XAxis dataKey="employeeName" />
-                <YAxis type="number" domain={[0, 5]} /> {/* Set the y-axis domain */}
+                <YAxis type="number" domain={[0, 5]} />
                 <Tooltip />
                 <Legend />
                 <Bar dataKey="averageRating" fill="#8884d8" />
