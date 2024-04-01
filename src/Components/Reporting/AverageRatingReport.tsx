@@ -59,6 +59,7 @@ function AverageRatingReport() {
                 placeholder="Filter by Name, Job Title, or Manager ID"
                 value={filterText}
                 onChange={handleFilterChange}
+                style={{ width: '50%', padding: '8px', fontSize: '16px' }}  
             />
             <BarChart width={750} height={400} data={filteredRatings}>
                 <XAxis dataKey="employeeName" />
@@ -67,6 +68,28 @@ function AverageRatingReport() {
                 <Legend />
                 <Bar dataKey="averageRating" fill="#8884d8" />
             </BarChart>
+            <br></br>
+
+            <table className="rating-table">
+                <thead>
+                    <tr>
+                        <th>Employee Name</th>
+                        <th>Job Title</th>
+                        <th>Manager ID</th>
+                        <th>Average Rating</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {filteredRatings.map((rating) => (
+                        <tr key={rating.employeeId}>
+                            <td>{rating.employeeName}</td>
+                            <td>{rating.jobTitle}</td>
+                            <td>{rating.managerId}</td>
+                            <td>{rating.averageRating.toFixed(2)}</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
         </div>
     );
 }

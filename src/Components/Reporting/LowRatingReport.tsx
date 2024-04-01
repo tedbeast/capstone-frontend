@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getLowRatingEmployees } from '../../Services/ReportingAPIServices';
 import './AverageRatingReports.css'; // Import your CSS file
+import { Bar, BarChart, Legend, Tooltip, XAxis, YAxis } from 'recharts';
 
 interface RatingData {
     employeeId: number;
@@ -12,6 +13,7 @@ interface RatingData {
 
 function LowRatingEmployees() {
     const [lowRatings, setLowRatings] = useState<RatingData[]>([]);
+    const [filterText, setFilterText] = useState('');
 
     useEffect(() => {
         async function fetchData() {
@@ -37,9 +39,33 @@ function LowRatingEmployees() {
         fetchData();
     }, []);
 
+    const handleFilterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setFilterText(e.target.value);
+    };
+
+    const filteredRatings = lowRatings.filter((rating) =>
+        rating.employeeName.toLowerCase().includes(filterText.toLowerCase()) ||
+        rating.jobTitle.toLowerCase().includes(filterText.toLowerCase()) ||
+        rating.managerId.toString().includes(filterText)
+    );
+
     return (
         <div className="low-ratings-container">
             <h1>Low Ratings Report</h1>
+            <input
+                type="text"
+                placeholder="Filter by Name, Job Title, or Manager ID"
+                value={filterText}
+                onChange={handleFilterChange}
+                style={{ width: '50%', padding: '8px', fontSize: '16px' }}  
+            />
+            <BarChart width={750} height={400} data={filteredRatings}>
+                <XAxis dataKey="employeeName" />
+                <YAxis type="number" domain={[0, 5]} />
+                <Tooltip />
+                <Legend />
+                <Bar dataKey="averageRating" fill="#8884d8" />
+            </BarChart>
             <table className="ratings-table">
                 <thead>
                     <tr>
@@ -51,13 +77,13 @@ function LowRatingEmployees() {
                     </tr>
                 </thead>
                 <tbody>
-                    {lowRatings.map((rating) => (
+                    {filteredRatings.map((rating) => (
                         <tr key={rating.employeeId}>
                             <td>{rating.employeeId}</td>
                             <td>{rating.employeeName}</td>
                             <td>{rating.jobTitle}</td>
                             <td>{rating.managerId}</td>
-                            <td>{rating.averageRating}</td>
+                            <td>{rating.averageRating.toFixed(2)}</td>
                         </tr>
                     ))}
                 </tbody>
