@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { getAverageRatingPerEmployeeId } from '../../Services/ReportingAPIServices';
-import './AverageRatingReports.css'; // Import your CSS file
+import './AverageRatingReports.css'; 
 import { Bar, BarChart, Legend, Tooltip, XAxis, YAxis } from 'recharts';
 
 interface RatingData {
     employeeId: number;
     employeeName: string;
     managerId: number;
-    jobTitle: string; // Change the type to string
-    deadlineDate: string; // Change the type to string (formatted as YYYY-MM-DD)
+    jobTitle: string; 
+    deadlineDate: string;
     averageRating: number;
 }
 
@@ -25,9 +25,9 @@ function AverageRatingReport() {
                     const formattedData: RatingData[] = data.map((item) => ({
                         employeeId: item[0],
                         employeeName: item[1].toString(),
-                        managerId: item[2],
-                        jobTitle: item[3].toString(), // Convert to string
-                        deadlineDate: item[4].toString(), // Convert to string
+                        jobTitle: item[2].toString(), 
+                        managerId: item[3],
+                        deadlineDate: item[4].toString(), 
                         averageRating: item[5],
                     }));
                     setAverageRatings(formattedData);
@@ -70,12 +70,13 @@ function AverageRatingReport() {
             </BarChart>
             <br></br>
 
-            <table className="rating-table">
+            <table className="ratings-table">
                 <thead>
                     <tr>
                         <th>Employee Name</th>
+                        <th>Employee ID</th>
+                        <th>ManagerID</th>
                         <th>Job Title</th>
-                        <th>Manager ID</th>
                         <th>Average Rating</th>
                     </tr>
                 </thead>
@@ -83,8 +84,9 @@ function AverageRatingReport() {
                     {filteredRatings.map((rating) => (
                         <tr key={rating.employeeId}>
                             <td>{rating.employeeName}</td>
-                            <td>{rating.jobTitle}</td>
+                            <td>{rating.employeeId}</td>
                             <td>{rating.managerId}</td>
+                            <td>{rating.jobTitle}</td>
                             <td>{rating.averageRating.toFixed(2)}</td>
                         </tr>
                     ))}

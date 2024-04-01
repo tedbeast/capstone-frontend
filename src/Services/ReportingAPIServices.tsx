@@ -15,9 +15,4 @@ export function getLowRatingEmployees() {
       });
     }
 
-  export function getRatingPerGoalType() {
-      return fetch(apiBaseURL +"average-rating-per-goal-type", {
-               method: "GET",
-               mode: "cors",
-           });
-         }
+ 
