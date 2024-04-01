@@ -1,7 +1,7 @@
 import { json } from "react-router-dom";
 import { Leaves } from "../models/Leaves";
 
-const apiBaseURL = "http://localhost:9002/";            // Base URL for the API
+const apiBaseURL = "http://localhost:9004/";            // Base URL for the API
 
 // Fetch all products from the API
 export function getAllLeavesAPI() {
