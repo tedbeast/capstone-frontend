@@ -4,56 +4,40 @@ import { getPerformanceByEmployeeAPI } from "../Services/GoalsAPIService";
 import { AddGoal } from "./AddGoal";
 import { SinglePerformance } from "./SinglePerformance";
 
-interface PerformanceReviewInterface {
-  data: number;
-}
 
 export function ListGoal() {
-  const [allGoals, setAllGoals] = useState<PerformanceReview[]>([]);
+  const [allPerformanceReviews, setAllPerformanceReviews] = useState<PerformanceReview[]>([]);
   const [showAddGoalComponent, setShowAddGoalComponent] = useState(false);
-  const [generate, setGenerate] = useState(false);
+
+  const [goalCounter, setGoalCounter] = useState(1);
+
+  const listGoalCounterFunction = (goalCounterFromAddGoal: number) => {
+    setGoalCounter(goalCounterFromAddGoal + 1);
+  }
 
   function showAddGoalFunction() {
     if (showAddGoalComponent) {
       setShowAddGoalComponent(false);
+      document.getElementById("addgoalbutton")!.innerText = "Add a New Goal";
+
     } else {
       setShowAddGoalComponent(true);
+      document.getElementById("addgoalbutton")!.innerText = "Hide 'Enter Your Goals' Section";
     }
-
-    document.getElementById("addgoalbutton")!.innerText =
-      "Hide Add Goal Button";
-  }
-
-  function refresh() {
-    setGenerate(!generate);
   }
 
   useEffect(() => {
     getPerformanceByEmployeeAPI(1)
-      .then((response) => {
-        return response.json();
-      })
-      .then((json) => {
-        setAllGoals(json);
-      });
-  }, [generate]);
+      .then((response) => {return response.json();})
+      .then((json) => {setAllPerformanceReviews(json);})
+  }, [goalCounter]);
 
   return (
     <>
       <h3>All Goals List!</h3>
-      <button id="addgoalbutton" onClick={showAddGoalFunction}>
-        Add a new Goal
-      </button>
-      {showAddGoalComponent && <AddGoal></AddGoal>}
-      <button onClick={refresh}>Refresh</button>
-      {allGoals.map((prs) => {
-        return (
-          <SinglePerformance
-            key={prs.performanceReviewID}
-            data={prs}
-          ></SinglePerformance>
-        );
-      })}
+      <button id="addgoalbutton" onClick={showAddGoalFunction}>Add a New Goal</button>
+      {showAddGoalComponent && <AddGoal goalCounterFunction={listGoalCounterFunction}></AddGoal>}
+      {allPerformanceReviews.map((prs) => {return (<SinglePerformance key={prs.performanceReviewID} data={prs}></SinglePerformance>);})}
     </>
   );
 }
