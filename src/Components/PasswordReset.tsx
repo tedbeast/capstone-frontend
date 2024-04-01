@@ -62,6 +62,7 @@ export function ResetPassword(props: { data: { employeeId: any; }; }) {
       phoneNumber:'',
       employeeAddress:'',
       employeeAnniversary: new Date(),
+      employeeManagerID:0
 
     }
     await putPassword(employee);
