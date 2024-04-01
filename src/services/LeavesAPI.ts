@@ -1,7 +1,7 @@
 import { json } from "react-router-dom";
 import { Leave } from "../models/Leaves";
 
-const apiBaseURL = "http://localhost:8080/"; // Base URL for the API
+const apiBaseURL = "http://localhost:9004/"; // Base URL for the API
 
 // Fetch all products from the API
 export function getAllLeaveAPI() {
