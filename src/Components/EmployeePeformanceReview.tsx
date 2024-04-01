@@ -8,7 +8,7 @@ import { EmployeeDropdown } from "./PerformanceReviewGetEmployeeReview";
 
 
 interface thisEmployee {
-    // data: Employee,
+    employeeID: number,
     role: boolean
 }
 
@@ -17,9 +17,9 @@ export function EmployeePerformanceReview(props:thisEmployee) {
     //API call
     const [performanceReview, setperformanceReview] = useState<PerformanceReview[]>([]);
     const [employeeID, setEmployeeID] = useState<number>(3);
-    const [roleMgr, setRoleMgr] = useState(false);
 
 
+    //potentially move all this to GoalsPage as to pass employeeID down through child components?
     function getItem<T>(key: string): T | null {
         const item = localStorage.getItem(key);
         return item ? JSON.parse(item) as T : null;
@@ -29,7 +29,7 @@ export function EmployeePerformanceReview(props:thisEmployee) {
         const storedEmployeeId = getItem<string>('username');
         // if (storedEmployeeId) {
         //     const employeeIdAsInt = parseInt(storedEmployeeId, 10);
-        getPerformanceByEmployeeAPI(employeeID)
+        getPerformanceByEmployeeAPI(props.employeeID)
             .then((response) => {
                 console.log(response);
                 return response.json();
@@ -42,17 +42,12 @@ export function EmployeePerformanceReview(props:thisEmployee) {
         // }
     }, []);
 
-    const [showMenu, setShowMenu] = useState(false);
-    const toggleMenu = () => {
-        setShowMenu(!showMenu);
-    }
 
     //map to single employee review component
     // displays all fields - finalized view?
     return (
         <>
-            <button onClick={toggleMenu}>Switch View</button>
-            {showMenu &&
+            
             <div>
                 <h1>Employee Performance Review</h1>
                 {performanceReview.map((review) => (
@@ -79,11 +74,9 @@ export function EmployeePerformanceReview(props:thisEmployee) {
 
                 ))}
             </div>
-            }
+    
 
-            <div>
-                <EmployeeDropdown></EmployeeDropdown>
-            </div>
+
         </>
 
     )

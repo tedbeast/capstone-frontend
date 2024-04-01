@@ -23,24 +23,6 @@ export function ManagerCommentsRating(props: reviewProps) {
     const currentRole = props.role; 
     console.log(props);
 
-    //check what the current role is
-    // function checkRole(currentRole: 'EMPLOYEE'|'MANAGER'|'ADMIN') {
-    //     if(currentRole === 'MANAGER'){
-    //         setRoleMgr(true)
-    //     } 
-    // }
-
-    // useEffect(()=>{
-    //     //When you don't give useEffect a second parameter the logic of this function will trigger everytime the component mounts
-    //     //check role everytime component mounts
-    //     checkRole(currentRole);
-    //     return ()=>{
-    //         //If you return a function in the useEffect then the returning function will be called when the component unmounts.
-    //         //check role everytime component unmounts
-    //         checkRole(currentRole);
-    //     }
-    // },[]);
-
     useEffect(() => {
         // Debounce the input value
         const delay = 500; // Set your desired delay (in milliseconds)

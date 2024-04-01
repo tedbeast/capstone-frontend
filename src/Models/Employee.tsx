@@ -7,5 +7,5 @@ import { Roles } from "./Roles";
 export interface Employee{
     employeeID:number; 
     name:string;
-
+    performanceReview: PerformanceReview;
 }
