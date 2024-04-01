@@ -1,7 +1,7 @@
 import { Goal } from "../Models/Goal";
 import { PerformanceReview } from "../Models/PerformanceReview";
 
-const apiBaseURL = "http://localhost:8080/";
+const apiBaseURL = "http://localhost:9004/";
 
 export function getAllGoalsAPI() {
   return fetch(apiBaseURL + "performanceReview", {
@@ -9,18 +9,7 @@ export function getAllGoalsAPI() {
   });
 }
 
-//export function getGoalsByEmployeeAPI(data:PerformanceReview["performanceReviewID"]){
-/*
-export function getGoalsByEmployeeAPI(
-  data: PerformanceReview["employee"]["employeeID"]
-) {
-  return fetch(apiBaseURL + "employee/" + data + "/performanceReview", {
-    method: "GET",
-    mode: "cors",
-  });
-}
-*/
-
+//post a new goal
 export function postGoalsAPI(
   data: Goal,
   id: PerformanceReview["employee"]["employeeID"]

@@ -7,19 +7,19 @@ interface GoalInterface {
   data: Goal;
 }
 
-interface PerformanceReviewInterface {
-  data: PerformanceReview;
-}
-
 interface thisEmployee {
   employeeID: number;
   role: boolean;
 }
 
-export function SingleGoal(props: PerformanceReviewInterface) {
+export function SingleGoal(props: GoalInterface) {
   return (
     <>
-      <h4>Performance Review Details - ID {props.data.performanceReviewID}</h4>
+      <h4>Goal Details - ID {props.data.goalID}</h4>
+      <p>Goal Type: {props.data.goalType}</p>
+      <p>Goal Description: {props.data.goalDescription}</p>
+      <p>Employee Comments: {props.data.employeeComments}</p>
+      <p>Weight: {props.data.weight.toFixed(2)}%</p>
     </>
   );
 }
