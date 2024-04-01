@@ -22,9 +22,3 @@ export interface Employee {
   leaves: Leaves[];
   role: Roles;
 }
-
-export interface Employee {
-  employeeID: number;
-  name: string;
-  performanceReview: PerformanceReview;
-}

@@ -6,7 +6,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { LeavesPage } from "./Pages/LeavesPage";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { GoalsPage } from "./Pages/GoalsPage";
-import { NavigationBar } from "./Components/NavBar";
+import { NavigationBar } from "./Components/NavigationBar";
 import { PageNotFoundPage } from "./Pages/PageNotFoundPage";
 import { AdminPage } from "./Pages/AdminPage";
 import { WelcomePage } from "./Pages/WelcomePage";

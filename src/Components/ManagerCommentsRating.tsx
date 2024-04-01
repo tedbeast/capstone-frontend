@@ -6,7 +6,7 @@ import React, {
 } from "react";
 import { PerformanceReview } from "../Models/PerformanceReview";
 import { interfaceExtends } from "@babel/types";
-import { updateManagerCommentsRatingAPI } from "../services/GoalsAPIService";
+import { updateManagerCommentsRatingAPI } from "../Services/GoalsAPIService";
 import { Roles } from "../Models/Roles";
 
 //component will allow the EmployeePerformanceReview to dynamically display if the Manager comments section should have an input box or be read only

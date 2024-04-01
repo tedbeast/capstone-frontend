@@ -3,7 +3,7 @@ import { PerformanceReview } from "../Models/PerformanceReview";
 import { Goal } from "../Models/Goal";
 import { Employee } from "../Models/Employee";
 import { ManagerCommentsRating } from "./ManagerCommentsRating";
-import { getPerformanceByEmployeeAPI } from "../services/GoalsAPIService";
+import { getPerformanceByEmployeeAPI } from "../Services/GoalsAPIService";
 import { EmployeeDropdown } from "./PerformanceReviewGetEmployeeReview";
 
 interface thisEmployee {
