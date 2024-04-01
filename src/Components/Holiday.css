@@ -1,0 +1,46 @@
+.holiday-container {
+  position: fixed;
+  bottom: 10px;
+  left: 20px;
+  padding: 10px;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin: 5px;
+}
+    
+ 
+  
+  /* Header for the year */
+  .year-header {
+    text-align: center;
+    margin-top: 0
+    
+
+    
+    
+    /* Add styling for the year header (e.g., font size, color, etc.) */
+  }
+  
+  /* List of holidays */
+  .holiday-list {
+    list-style: none; /* Remove default list bullet points */
+    padding: 0; /* Remove default padding */
+    background-color: transparent;
+    margin-top: 20px;
+    text-align: center;
+    
+    
+  }
+  
+  /* Individual holiday items */
+  .holiday-list li {
+    margin-bottom: 20px; /* Add spacing between each holiday */
+    /* Add any other styling you need for the list items */
+  }
+
+  .holiday-container .holiday-list {
+    display: flex;
+    flex-direction: column;
+    
+} 
