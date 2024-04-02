@@ -3,12 +3,12 @@ import React, { useState, useEffect, useCallback } from "react";
 import { Button, Modal, Stack } from "@mui/material";
 import { Add } from "@mui/icons-material";
 import LeaveForm from "./LeaveForm";
-import { Employee } from "../models/Employee";
-import { Leave } from "../models/Leaves";
+import { Employee } from "../Models/Employee";
+import { Leave } from "../Models/Leaves";
 import {
   deleteLeaveAPI,
   getAllLeavesByEmployeeId,
-} from "../services/LeavesAPI";
+} from "../Services/LeavesAPI";
 import { toast } from "react-toastify";
 import UpdateLeaveForm from "./UpdateLeaveForm";
 
