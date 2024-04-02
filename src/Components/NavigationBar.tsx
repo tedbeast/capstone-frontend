@@ -7,6 +7,8 @@ export function NavigationBar() {
     <ul>
         <li><Link to="home">Home Page</Link></li>
         <li><Link to="leave">Leave Page</Link></li>
+        <li><Link to="admin">Admin Page</Link></li>
+        <li><Link to="reporting">Reporting Page</Link></li>
     </ul>
     </>);
 }
