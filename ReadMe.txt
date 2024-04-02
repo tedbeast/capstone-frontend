@@ -13,3 +13,4 @@ Run This Command for adding Material UI:
 
 If this Command did not work
 use --legacy-peer-deps AT THe end of the command
+
