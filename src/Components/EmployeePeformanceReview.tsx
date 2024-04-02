@@ -5,6 +5,7 @@ import { Employee } from "../Models/Employee";
 import { ManagerCommentsRating } from "./ManagerCommentsRating";
 import { getPerformanceByEmployeeAPI } from "../Services/GoalsAPIService";
 import { EmployeeDropdown } from "./PerformanceReviewGetEmployeeReview";
+import { ListGoal } from "./ListGoal";
 
 interface thisEmployee {
   employeeID: number;
@@ -46,6 +47,7 @@ export function EmployeePerformanceReview(props: thisEmployee) {
     <>
       <div>
         <h1>Your Performance Goals</h1>
+        <ListGoal></ListGoal>
         {performanceReview.map((review) => (
           <div key={review.performanceReviewID}>
             {/*<p>Review ID: {review.performanceReviewID}</p>*/}

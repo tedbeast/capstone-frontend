@@ -11,11 +11,28 @@ interface PerformanceReviewInterface {
 export function SinglePerformance(props: PerformanceReviewInterface) {
   return (
     <>
-      <h4>Performance Review Details - ID {props.data.performanceReviewID}</h4>
-      <p>Deadline Date: {props.data.deadlineDate}</p>
-      <p>Manager Comments: {props.data.managerComments}</p>
-      <p>Rating: {props.data.rating}</p>
-      {props.data.goals.map(goals =>{return <SingleGoal key={goals.goalID} data={goals}></SingleGoal>})}
+      <div className="container">
+        <ul>
+          <li>
+            <h4>
+              Performance Review Details - ID {props.data.performanceReviewID}
+            </h4>
+            <p>
+              <strong>Deadline Date: </strong> {props.data.deadlineDate}
+            </p>
+            <p>
+              <strong>Manager Comments: </strong> {props.data.managerComments}
+            </p>
+            <p>
+              <strong>Rating: </strong>
+              {props.data.rating}
+            </p>
+            {props.data.goals.map((goals) => {
+              return <SingleGoal key={goals.goalID} data={goals}></SingleGoal>;
+            })}
+          </li>
+        </ul>
+      </div>
     </>
   );
 }
