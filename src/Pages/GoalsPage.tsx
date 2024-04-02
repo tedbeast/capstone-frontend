@@ -55,6 +55,7 @@ export function GoalsPage() {
                     <button onClick={toggleMgrView}>Switch View</button>
                     {dropDown ? (
                         <div>
+                          <p>Manage Employees</p>
                             <EmployeeDropdown role={roleMgr} managerID={testEmpID}></EmployeeDropdown>
                         </div>
                     ) : (
@@ -64,11 +65,11 @@ export function GoalsPage() {
 
                 </div>
             ) : (
-                <p>nothing</p>
-                /*<EmployeePerformanceReview role={roleMgr} employeeID={testEmpID}></EmployeePerformanceReview>*/
+              <>
+                <EmployeePerformanceReview role={roleMgr} employeeID={testEmpID} managerID={testManagerID}></EmployeePerformanceReview>
+              </>
             )
             }
-            <ListGoal></ListGoal>
         </>
     )
 };
