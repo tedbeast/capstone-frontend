@@ -1,10 +1,6 @@
-import React from "react";
-import { PerformanceReview } from "../Models/PerformanceReview";
-import { EmployeePerformanceReview } from "./EmployeePeformanceReview";
+import React, { useState } from "react";
 import { Goal } from "../Models/Goal";
-import { updateEmployeeCommentsAPI } from "../Services/GoalsAPIService";
 import { UpdatePR } from "./UpdatePR";
-import { useState } from "react";
 
 interface GoalInterface {
   data: Goal;
@@ -43,13 +39,12 @@ export function SingleGoal(props: any) {
       <p>Employee Comments: {props.data.employeeComments}</p>
       <p>Weight: {props.data.weight.toFixed(2)}%</p>
       <br></br>
-      <button
+      {props.role && (<button
         id="addcommentbutton"
         className="buttons"
-        onClick={showAddCommentFunction}
-      >
+        onClick={showAddCommentFunction}>
         Add Goal Comments
-      </button>
+      </button>)}
       {showAddCommentsComponent && (
         <UpdatePR data={props.data.goalID}></UpdatePR>
       )}

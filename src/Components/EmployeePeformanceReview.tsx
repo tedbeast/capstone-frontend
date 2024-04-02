@@ -50,31 +50,13 @@ export function EmployeePerformanceReview(props: thisEmployee) {
         <>
 
             <div>
-                <h1>Your Performance Goals</h1>
-                <ListGoal></ListGoal>
                 {performanceReview.map((review) => (
                     <div key={review.performanceReviewID}>
-                        {/* <p>Review ID: {review.performanceReviewID}</p> */}
-                        <p>Deadline Date: {review.deadlineDate}</p>
-                        {/*Node should structure where if employee allow to edit for comments*/}
-                        <h2>Goals</h2>
-                        <ul>
-                            {review.goals.map((goal) => (
-                                <li key={goal.goalID}>
-                                    <strong>Goal Type:</strong> {goal.goalType}
-                                    <br />
-                                    <strong>Description:</strong> {goal.goalDescription}
-                                    <br />
-                                    <strong>Weight:</strong>{goal.weight.toFixed(2)}%
-                                    {/* Render other goal attributes as needed */}
-                                </li>
-                            ))}
-                        </ul>
                         {/* Node for if manager then allow edit, otherwise display */}
                         <ManagerCommentsRating key={review.performanceReviewID} data={review} customKey={props.employeeID} role={props.role} managerID={props.managerID}></ManagerCommentsRating>
                     </div>
-
                 ))}
+                <ListGoal employeeID={props.employeeID} role={props.role}></ListGoal>
             </div>
 
 
