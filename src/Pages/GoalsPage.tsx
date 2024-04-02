@@ -7,12 +7,13 @@ import { EmployeeDropdown } from "../Components/PerformanceReviewGetEmployeeRevi
 import { sortAndDeduplicateDiagnostics } from "typescript";
 import { AddGoal } from "../Components/AddGoal";
 import { ListGoal } from "../Components/ListGoal";
+import "../App.css";
 
 export function GoalsPage() {
   const testManagerID = 1;
   const testEmpID = 1;
   //rendering depending on manager vs employee
-  const currentRole = "EMPLOYEE";
+  const currentRole = "MANAGER";
   const [roleMgr, setRoleMgr] = useState(false);
   const [dropDown, setDropDown] = useState(false); //false = does not appear
 

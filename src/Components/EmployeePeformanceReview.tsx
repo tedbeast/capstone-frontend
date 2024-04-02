@@ -5,6 +5,7 @@ import { Employee } from "../Models/Employee";
 import { ManagerCommentsRating } from "./ManagerCommentsRating";
 import { getPerformanceByEmployeeAPI } from "../Services/GoalsAPIService";
 import { EmployeeDropdown } from "./PerformanceReviewGetEmployeeReview";
+import { ListGoal } from "./ListGoal";
 
 interface thisEmployee {
     employeeID: number,
@@ -12,18 +13,18 @@ interface thisEmployee {
     managerID: number
 }
 
-export function EmployeePerformanceReview(props:thisEmployee) {
+export function EmployeePerformanceReview(props: thisEmployee) {
 
     //API call
     const [performanceReview, setperformanceReview] = useState<PerformanceReview[]>([]);
     // const [employeeID, setEmployeeID] = useState<number>(3);
 
 
-  //potentially move all this to GoalsPage as to pass employeeID down through child components?
-  function getItem<T>(key: string): T | null {
-    const item = localStorage.getItem(key);
-    return item ? (JSON.parse(item) as T) : null;
-  }
+    //potentially move all this to GoalsPage as to pass employeeID down through child components?
+    function getItem<T>(key: string): T | null {
+        const item = localStorage.getItem(key);
+        return item ? (JSON.parse(item) as T) : null;
+    }
 
     useEffect(() => {
         const storedEmployeeId = getItem<string>('username');
@@ -47,9 +48,10 @@ export function EmployeePerformanceReview(props:thisEmployee) {
     // displays all fields - finalized view?
     return (
         <>
-            
+
             <div>
-                <h1>Employee Performance Review</h1>
+                <h1>Your Performance Goals</h1>
+                <ListGoal></ListGoal>
                 {performanceReview.map((review) => (
                     <div key={review.performanceReviewID}>
                         {/* <p>Review ID: {review.performanceReviewID}</p> */}
@@ -74,7 +76,7 @@ export function EmployeePerformanceReview(props:thisEmployee) {
 
                 ))}
             </div>
-    
+
 
 
         </>
