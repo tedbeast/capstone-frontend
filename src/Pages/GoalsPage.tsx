@@ -13,7 +13,7 @@ export function GoalsPage() {
   const testManagerID = 1;
   const testEmpID = 1;
   //rendering depending on manager vs employee
-  const currentRole = "MANAGER";
+  const currentRole = "EMPLOYEE";
   const [roleMgr, setRoleMgr] = useState(false);
   const [dropDown, setDropDown] = useState(false); //false = does not appear
 
@@ -48,28 +48,36 @@ export function GoalsPage() {
 
   //if employee: show only employee review
 
-    return (
+  return (
+    <>
+      {roleMgr ? (
+        <div>
+          <button onClick={toggleMgrView}>Switch View</button>
+          {dropDown ? (
+            <div>
+              <p>Manage Employees</p>
+              <EmployeeDropdown
+                role={roleMgr}
+                managerID={testEmpID}
+              ></EmployeeDropdown>
+            </div>
+          ) : (
+            <EmployeePerformanceReview
+              role={false}
+              employeeID={testEmpID}
+              managerID={testManagerID}
+            ></EmployeePerformanceReview>
+          )}
+        </div>
+      ) : (
         <>
-            {roleMgr ? (
-                <div>
-                    <button onClick={toggleMgrView}>Switch View</button>
-                    {dropDown ? (
-                        <div>
-                          <p>Manage Employees</p>
-                            <EmployeeDropdown role={roleMgr} managerID={testEmpID}></EmployeeDropdown>
-                        </div>
-                    ) : (
-                        <EmployeePerformanceReview role={roleMgr} employeeID={testEmpID} managerID={testManagerID}></EmployeePerformanceReview>
-                    )
-                    }
-
-                </div>
-            ) : (
-              <>
-                <EmployeePerformanceReview role={roleMgr} employeeID={testEmpID} managerID={testManagerID}></EmployeePerformanceReview>
-              </>
-            )
-            }
+          <EmployeePerformanceReview
+            role={roleMgr}
+            employeeID={testEmpID}
+            managerID={testManagerID}
+          ></EmployeePerformanceReview>
         </>
-    )
-};
+      )}
+    </>
+  );
+}
