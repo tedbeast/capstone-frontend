@@ -18,7 +18,7 @@ export function AdminPage() {
         'Add Manager': <AddManager />,
         'Add Employee': <AddAdmin />,
         'Update Employee': <UpdateAdmin />,
-        'Update Manager': <UpdateManager />,
+        'Assign Manager': <UpdateManager />,
         'Delete Employee': <DeleteEmployee />
     };
 
