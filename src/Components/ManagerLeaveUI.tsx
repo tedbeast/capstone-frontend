@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Employee } from "../models/Employee";
+import { Employee } from "../Models/Employee";
 import { ToggleButtonGroup, ToggleButton, Button } from "@mui/material";
 import { ManageAccountsOutlined } from "@mui/icons-material";
 import { PersonOutlineOutlined } from "@mui/icons-material";
@@ -10,9 +10,9 @@ import { PlusOneRounded } from "@mui/icons-material";
 import { Add } from "@mui/icons-material";
 import LeaveForm from "./LeaveForm";
 import { Modal, Box, Typography } from "@mui/material";
-import { getAllLeavesByEmployeeId } from "../services/LeavesAPI";
-import { Leave } from "../models/Leaves";
-import { deleteLeaveAPI } from "../services/LeavesAPI";
+import { getAllLeavesByEmployeeId } from "../Services/LeavesAPI";
+import { Leave } from "../Models/Leaves";
+import { deleteLeaveAPI } from "../Services/LeavesAPI";
 import { toast } from "react-toastify";
 import UpdateLeaveForm from "./UpdateLeaveForm";
 

@@ -7,15 +7,15 @@ import {
 import { Stack } from "@mui/material";
 import { Button } from "@mui/material"; // Import MUI Button for a consistent UI
 
-import { Leave } from "../models/Leaves";
+import { Leave } from "../Models/Leaves";
 import {
   acceptLeave,
   getAllLeaveAPI,
   getAllLeavesByEmployeeId,
   getAllLeavesByManagerId,
   rejectLeave,
-} from "../services/LeavesAPI";
-import { Employee } from "../models/Employee";
+} from "../Services/LeavesAPI";
+import { Employee } from "../Models/Employee";
 import { toast } from "react-toastify";
 
 interface ManagerLeaveTable {

@@ -1,5 +1,5 @@
 import { json } from "react-router-dom";
-import { Leave } from "../models/Leaves";
+import { Leave } from "../Models/Leaves";
 
 const apiBaseURL = "http://localhost:9004/"; // Base URL for the API
 
