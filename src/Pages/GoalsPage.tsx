@@ -48,33 +48,27 @@ export function GoalsPage() {
 
   //if employee: show only employee review
 
-  return (
-    <>
-      <div></div>
-      {/*
-        if role = Manager 
-        <button> Self or AllEmployees?
-        if button = Self
-        <EmployeePerformanceReview>
-        if button = AllEmployees
-        <EmployeeDrodown>
-        else <EmployeePerformanceReview>
-    */}
-      {roleMgr && (
-        <div>
-          <button onClick={toggleMgrView}>Switch View</button>
-          {dropDown && (
-            <div>
-              <EmployeeDropdown
-                role={roleMgr}
-                managerID={testEmpID}
-              ></EmployeeDropdown>
-            </div>
-          )}
-        </div>
-      )}
-      <ListGoal></ListGoal>
-      {/*<PerformanceReviewList managerIdProp={testManagerID}></PerformanceReviewList> */}
-    </>
-  );
-}
+    return (
+        <>
+            {roleMgr ? (
+                <div>
+                    <button onClick={toggleMgrView}>Switch View</button>
+                    {dropDown ? (
+                        <div>
+                            <EmployeeDropdown role={roleMgr} managerID={testEmpID}></EmployeeDropdown>
+                        </div>
+                    ) : (
+                        <EmployeePerformanceReview role={roleMgr} employeeID={testEmpID} managerID={testManagerID}></EmployeePerformanceReview>
+                    )
+                    }
+
+                </div>
+            ) : (
+                <p>nothing</p>
+                /*<EmployeePerformanceReview role={roleMgr} employeeID={testEmpID}></EmployeePerformanceReview>*/
+            )
+            }
+            <ListGoal></ListGoal>
+        </>
+    )
+};
