@@ -6,6 +6,7 @@ import { SingleGoal } from "./SingleGoal";
 interface PerformanceReviewInterface {
   data: PerformanceReview;
   role: boolean;
+  employeeID: number;
 }
 
 export function SinglePerformance(props: PerformanceReviewInterface) {
@@ -20,7 +21,7 @@ export function SinglePerformance(props: PerformanceReviewInterface) {
                   key={goals.goalID}
                   data={goals}
                   role={props.role}
-                  employeeID={props.data.employee.employeeID}
+                  employeeID={props.employeeID}
                 ></SingleGoal>
               );
             })}

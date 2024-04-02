@@ -15,13 +15,12 @@ export function SingleGoal(props: thisInterface) {
 
   function showAddCommentFunction() {
     if (showAddCommentsComponent) {
-      setShowAddCommentsComponent(false);
+      setShowAddCommentsComponent(false);      
+      document.getElementById(props.data.goalID.toString())!.innerText = "Add Goal Comments";
     } else {
       setShowAddCommentsComponent(true);
+      document.getElementById(props.data.goalID.toString())!.innerText = "Hide 'Add Goal Comments' Section";
     }
-
-    //document.getElementById("addcommentbutton")!.innerText =
-    //  "Hide Add Comment Button";
   }
 
   function refresh() {
@@ -38,7 +37,7 @@ export function SingleGoal(props: thisInterface) {
       <br></br>
       {!props.role && (
         <button
-          id="addcommentbutton"
+          id={props.data.goalID.toString()}
           className="buttons"
           onClick={showAddCommentFunction}
         >

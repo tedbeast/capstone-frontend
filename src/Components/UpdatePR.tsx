@@ -45,7 +45,7 @@ export function UpdatePR(props: myInterface) {
 
   return (
     <React.Fragment>
-      <h1>Add Goal Comments</h1>
+      <h3>Add Goal Comments</h3>
       <input
         type="string"
         value={thisEmployeeComments}
@@ -56,6 +56,7 @@ export function UpdatePR(props: myInterface) {
       <button className="buttons" onClick={updateThisGoal}>
         Update Goal
       </button>
+      <br></br>
     </React.Fragment>
   );
 }
