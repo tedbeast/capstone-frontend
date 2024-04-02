@@ -8,7 +8,7 @@ import {
 } from "material-react-table";
 import { Stack, Button } from "@mui/material";
 
-import { Leave } from "../models/Leaves";
+import { Leave } from "../Models/Leaves";
 
 interface EmployeeLeaveTableData {
   leaves: Leave[];

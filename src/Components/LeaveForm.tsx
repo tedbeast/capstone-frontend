@@ -16,10 +16,10 @@ import {
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import { TextField } from "formik-material-ui";
-import { Leave } from "../models/Leaves";
-import { postLeaveAPI } from "../services/LeavesAPI";
+import { Leave } from "../Models/Leaves";
+import { postLeaveAPI } from "../Services/LeavesAPI";
 import { toast } from "react-toastify";
-import { Employee } from "../models/Employee";
+import { Employee } from "../Models/Employee";
 
 const useStyle = makeStyles((theme) => ({
   padding: {
