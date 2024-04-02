@@ -10,7 +10,8 @@ import { Roles } from "../Models/Roles";
 interface reviewProps {
     data: PerformanceReview,
     customKey: number,
-    role: boolean
+    role: boolean,
+    managerID: number
 }
 
 
@@ -20,7 +21,7 @@ export function ManagerCommentsRating(props: reviewProps) {
     const [newRating, setNewRating] = useState<number>(5); // State for input box
     // const [roleMgr, setRoleMgr] = useState(false);
 
-    const currentRole = props.role; 
+    const currentRole = props.role;
     console.log(props);
 
     useEffect(() => {
@@ -44,7 +45,7 @@ export function ManagerCommentsRating(props: reviewProps) {
         setNewRating(parseInt(e.target.value));
     };
 
-    
+
     const handleSaveComments = () => {
         let updatedReview: PerformanceReview = {
             performanceReviewID: props.data.performanceReviewID,
@@ -68,39 +69,44 @@ export function ManagerCommentsRating(props: reviewProps) {
             })
             .catch((error) => {
                 console.error('Error:', error.message);
-                alert('Failed to update product. Please review inputs and try again.')
+                alert('Failed to update comments. Please review inputs and try again.')
             });
-        };
+    };
 
     return (
-        
+
         <div>
             <h2>Performance Review Manager Comments & Rating</h2>
             {/*localStorage.getItem('role')*/
-            props.role ? (
-                <>
-                    <p>Manager Comments:</p>
-                    <p>{props.data.managerComments}</p>
-                    <input
-                        type="text"
-                        placeholder="Enter new comments"
-                        value={newComments}
-                        onChange={handleCommentChange}
-                    />
-                    <p>Rating:</p>
-                    <p>{props.data.rating}</p>
-                    <input
-                        type="number"
-                        placeholder="5"
-                        value={newRating}
-                        onChange={handleRatingChange}
-                    />
-                    <div></div>
-                    <button onClick={handleSaveComments}>Save</button>
-                </>
-            ) : (
-                <p>{props.data.managerComments}</p>
-            )}
+                props.role && props.customKey != props.managerID ? (
+                    <>
+                        <p>Manager Comments:</p>
+                        <p>{props.data.managerComments}</p>
+                        <input
+                            type="text"
+                            placeholder="Enter new comments"
+                            value={newComments}
+                            onChange={handleCommentChange}
+                        />
+                        <p>Rating:</p>
+                        <p>{props.data.rating}</p>
+                        <input
+                            type="number"
+                            placeholder="5"
+                            value={newRating}
+                            onChange={handleRatingChange}
+                        />
+                        <div></div>
+                        <button onClick={handleSaveComments}>Save</button>
+                    </>
+                ) : (
+                    <>
+                        <p>Manager Comments:</p>
+                        <p>{props.data.managerComments}</p>
+                        <p>Rating:</p>
+                        <p>{props.data.rating}</p>
+                    </>
+                )}
         </div>
     );
 }

@@ -9,14 +9,15 @@ import { EmployeeDropdown } from "./PerformanceReviewGetEmployeeReview";
 
 interface thisEmployee {
     employeeID: number,
-    role: boolean
+    role: boolean,
+    managerID: number
 }
 
 export function EmployeePerformanceReview(props:thisEmployee) {
 
     //API call
     const [performanceReview, setperformanceReview] = useState<PerformanceReview[]>([]);
-    const [employeeID, setEmployeeID] = useState<number>(3);
+    // const [employeeID, setEmployeeID] = useState<number>(3);
 
 
     //potentially move all this to GoalsPage as to pass employeeID down through child components?
@@ -40,7 +41,7 @@ export function EmployeePerformanceReview(props:thisEmployee) {
             }
             );
         // }
-    }, []);
+    }, [props.employeeID]);
 
 
     //map to single employee review component
@@ -69,7 +70,7 @@ export function EmployeePerformanceReview(props:thisEmployee) {
                             ))}
                         </ul>
                         {/* Node for if manager then allow edit, otherwise display */}
-                        <ManagerCommentsRating key={review.performanceReviewID} data={review} customKey={employeeID} role={props.role}></ManagerCommentsRating>
+                        <ManagerCommentsRating key={review.performanceReviewID} data={review} customKey={props.employeeID} role={props.role} managerID={props.managerID}></ManagerCommentsRating>
                     </div>
 
                 ))}

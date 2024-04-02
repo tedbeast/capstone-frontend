@@ -16,7 +16,7 @@ interface thisEmployee {
 export function EmployeeDropdown(props: thisEmployee) {
     const [employees, setEmployees] = useState<Employee[]>([]);
     const [selectedEmployee, setSelectedEmployee] = useState<string>('TEST');
-    const [selectedEmployeeID, setSelectedEmployeeID] = useState<number>(0);
+    const [selectedEmployeeID, setSelectedEmployeeID] = useState<number>();
     const [selectedEmployeeRender, setSelectedEmployeeRender] = useState(false);
 
     const roleMgr = props.role;
@@ -38,21 +38,30 @@ export function EmployeeDropdown(props: thisEmployee) {
             });
     }, []);
 
+    
     useEffect(() => {
-        getSelectedEmployeeID();
-        console.log("getSelectedEmployeeID started")
-    },[selectedEmployee]
+        console.log('Selected Employee:', selectedEmployee);
+        const selectedEmployeeObject = employees.find((employee) => employee.name === selectedEmployee);
+        if (selectedEmployeeObject) {
+                    // Extract the EmployeeID
+                    setSelectedEmployeeID(selectedEmployeeObject.employeeID);
+                }
+            //  console.log("selected employee"+selectedEmployeeID);
+        // Any other side effects you want to perform when selectedEmployee changes
+      }, [selectedEmployee]);
 
-    )
+
+      useEffect(() => {
+        // Handle side effects based on the updated selectedEmployeeID
+        console.log("Updated selected employee ID:", selectedEmployeeID);
+        // Other side effects...
+    }, [selectedEmployeeID]);
 
     // this will be the function to then populate the review
-    const handleEmployeeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        setSelectedEmployee(event.target.value);
+    const handleEmployeeChange = (event: SyntheticEvent) => {
+        let selectedValue = event.target as HTMLSelectElement;
+        setSelectedEmployee(selectedValue.value);
         // Assuming each employee object has an 'id' property representing the EmployeeID
-        console.log(event.target.value);
-        console.log(selectedEmployee);
-        // setTimeout(getSelectedEmployeeID, 1000);
-        console.log("handleEmployeeChange timeout ran");
     };
 
     const getSelectedEmployeeID = () => {
@@ -66,18 +75,12 @@ export function EmployeeDropdown(props: thisEmployee) {
             setSelectedEmployeeID(selectedEmployeeObject.employeeID);
         }
         console.log(selectedEmployeeObject?.employeeID);
-        console.log("selected employee"+selectedEmployeeID);
+        console.log("selected employee: "+selectedEmployeeID);
     };
-
-
-
-    // const handleSelectedEmployeeChange = () => {
-    //     setSelectedEmployeeRender(!selectedEmployeeRender);
-    // };
 
     return (
         <div>
-            <select value={selectedEmployee} onChange={handleEmployeeChange}>
+            <select onChange={handleEmployeeChange} value={selectedEmployee}>
                 <option value="">Select an Employee</option>
                 {employees.map((employee) => (
                     <option key={employee.employeeID} value={employee.name}>
@@ -85,9 +88,10 @@ export function EmployeeDropdown(props: thisEmployee) {
                     </option>
                 ))}
             </select>
+
             {selectedEmployeeID &&
                 <p>You Selected: {selectedEmployee}
-                    <EmployeePerformanceReview role={roleMgr} employeeID={selectedEmployeeID}></EmployeePerformanceReview>
+                    <EmployeePerformanceReview role={roleMgr} employeeID={selectedEmployeeID} managerID={props.managerID}></EmployeePerformanceReview>
                 </p>
             }
         </div>

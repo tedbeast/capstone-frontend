@@ -1,6 +1,6 @@
 import React, { SyntheticEvent, useState } from "react";
 import { Goal } from "../Models/Goal";
-import { postGoalsAPI } from "../services/GoalsAPIService";
+// import { postGoalsAPI } from "../services/GoalsAPIService";
 
 export function AddGoal(){
     const [userGoalType, setUserGoalType] = useState("");
@@ -26,9 +26,9 @@ export function AddGoal(){
             weight:0
         }
 
-        postGoalsAPI(newGoal, 1)
-        .then(response => {return response.json()})
-        .then(json => {console.log(json)});
+        // postGoalsAPI(newGoal, 1)
+        // .then(response => {return response.json()})
+        // .then(json => {console.log(json)});
     }
 
     return(<>
