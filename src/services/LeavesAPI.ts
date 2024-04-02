@@ -51,12 +51,15 @@ export const deleteLeaveAPI = async (leaveId: any) => {
 // Update an existing leave via API
 export const updateLeaveAPI = async (leave: Leave) => {
   console.log("update api: ", `${apiBaseURL}leave/${leave.leaveId}`);
-  const response = await fetch(`${apiBaseURL}leave/${leave.leaveId}`, {
-    method: "PUT",
-    mode: "cors",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(leave),
-  });
+  const response = await fetch(
+    `${apiBaseURL}employee/${leave.employeeID}/leave/${leave.leaveId}`,
+    {
+      method: "PUT",
+      mode: "cors",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(leave),
+    }
+  );
 
   if (!response.ok) {
     console.log("put error: ", response); // Log the entire response for debugging

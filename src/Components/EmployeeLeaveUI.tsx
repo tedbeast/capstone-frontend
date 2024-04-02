@@ -45,6 +45,7 @@ const EmployeeLeaveUI: React.FC<EmployeeLeaveUIProps> = ({ employee }) => {
 
   const handleUpdate = useCallback(
     (id: number, leave: Leave) => {
+      setLeave(leave);
       setShowUpdateForm(true);
     },
     [allLeaves]

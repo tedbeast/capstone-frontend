@@ -31,7 +31,7 @@ const ManagerLeaveUI: React.FC<EmployeeLeaveTableProps> = ({ employee }) => {
     getAllLeavesByEmployeeId(employee.employeeID).then((data) => {
       setAllLeaves(data);
     });
-  }, []);
+  }, [showUpdateForm, showForm]);
 
   const handleDelete = async (id: number) => {
     const result = await deleteLeaveAPI(id);

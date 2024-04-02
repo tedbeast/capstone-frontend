@@ -73,7 +73,7 @@ const UpdateLeaveForm: React.FC<UpdateLeaveFormProps> = ({
     date ? new Date(date).toISOString().split("T")[0] : "";
 
   const [initialValues, setInitialValues] = useState<FormValues>({
-    leaveId: leave?.id,
+    leaveId: leave?.leaveId == undefined ? leave?.id : leave?.leaveId,
     leaveName: leave?.leaveName || "",
     startDate: formatDate(leave?.startDate), // Use the adjusted formatDate function
     endDate: formatDate(leave?.endDate), // Use the adjusted formatDate function
@@ -109,6 +109,7 @@ const UpdateLeaveForm: React.FC<UpdateLeaveFormProps> = ({
     else values.leaveName = otherLeaveType;
     console.log("Update Code: " + values.id);
     console.log("Update Code: " + values.leaveId);
+    values.id = values.leaveId;
     console.log(values);
     console.log(otherLeaveType);
     setShowForm(false);
@@ -116,7 +117,7 @@ const UpdateLeaveForm: React.FC<UpdateLeaveFormProps> = ({
       values.leaveId = leave?.id;
       console.log(values);
       console.log(await updateLeaveAPI(values));
-
+      setShowForm(false);
       toast.success("Leave request updated successfully");
     } catch (error) {
       toast.error("Failed to update leave request");
