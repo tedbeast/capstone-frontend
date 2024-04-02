@@ -1,6 +1,11 @@
 import React, {SyntheticEvent, useState} from "react";
 import {Employee} from "../Models/Employee";
 import {getEmployeeById, putPassword} from "../Services/LoginAPIService";
+import {Roles} from "../Models/Roles";
+import {Manager} from "../Models/Manager";
+import {PerformanceReview} from "../Models/PerformanceReview";
+import {Leaves} from "../Models/Leaves";
+import {ResetPasswordEmployee} from "../Models/ResetPasswordEmployee";
 
 //interface propsInterface {
 //    data:Employee
@@ -53,19 +58,15 @@ export function ResetPassword(props: { data: { employeeId: any; }; }) {
       return setAlertMessage("Employee ID does not exist")
     }
 
-    let employee: Employee = {
-      employeeID: id,
-      password: pwd,
-      name: '',
-      role: '',
-      email:'',
-      phoneNumber:'',
-      employeeAddress:'',
-      employeeAnniversary: new Date(),
-      employeeManagerID:0
-
-    }
-    await putPassword(employee);
+    // let employee: Employee = {
+    //     employeeID: id,
+    //     password: pwd
+    //  }
+    // let employee: ResetPasswordEmployee = {
+    //   employeeID: id,
+    //   password: pwd
+    // }
+    // await putPassword(employee); //Requires REsetPasswordEmployee
   }
 
     return (
