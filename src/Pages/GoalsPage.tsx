@@ -11,9 +11,9 @@ import "../App.css";
 
 export function GoalsPage() {
   const testManagerID = 1;
-  const testEmpID = 1;
+  const testEmpID = 2;
   //rendering depending on manager vs employee
-  const currentRole = "MANAGER";
+  const currentRole = "EMPLOYEE";
   const [roleMgr, setRoleMgr] = useState(false);
   const [dropDown, setDropDown] = useState(false); //false = does not appear
 
@@ -55,7 +55,7 @@ export function GoalsPage() {
                     <button onClick={toggleMgrView}>Switch View</button>
                     {dropDown ? (
                         <div>
-                          <p>Manage Employees</p>
+                          <h3>Manage Employees</h3>
                             <EmployeeDropdown role={roleMgr} managerID={testEmpID}></EmployeeDropdown>
                         </div>
                     ) : (
