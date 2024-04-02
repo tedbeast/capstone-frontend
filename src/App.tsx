@@ -13,7 +13,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const sampleEmployee: Employee = {
-    employeeID: 1,
+    employeeID: 2,
     password: "examplePassword",
     name: "DJ Developer",
     jobTitle: "Software Developer",
@@ -26,7 +26,7 @@ function App() {
     postalCode: "12345",
     birthDate: new Date("1990-01-01"), // or "1990-01-01" if you're using string dates
     anniversary: new Date("2015-06-01"),
-    role: Roles.MANAGER,
+    role: Roles.EMPLOYEE,
   };
 
   return (
