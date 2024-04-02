@@ -38,7 +38,7 @@ export function ListGoal(props : ListGoalInterface) {
 
   return (
     <>
-      <h1>Your Performance Goals</h1>
+      <h2>Your Performance Goals</h2>
       <button id="addgoalbutton" onClick={showAddGoalFunction}>Add a New Goal</button>
       {showAddGoalComponent && <AddGoal goalCounterFunction={listGoalCounterFunction}></AddGoal>}
       {allPerformanceReviews.map((prs) => {return (<SinglePerformance key={prs.performanceReviewID} data={prs} role={props.role}></SinglePerformance>);})}

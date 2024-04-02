@@ -11,7 +11,7 @@ import "../App.css";
 
 export function GoalsPage() {
   const testManagerID = 1;
-  const testEmpID = 1;
+  const testEmpID = 2;
   //rendering depending on manager vs employee
   const currentRole = "EMPLOYEE";
   const [roleMgr, setRoleMgr] = useState(false);

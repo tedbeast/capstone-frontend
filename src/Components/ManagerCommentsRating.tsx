@@ -1,13 +1,6 @@
-import React, {
-  SelectHTMLAttributes,
-  SyntheticEvent,
-  useState,
-  useEffect,
-} from "react";
+import React, {useState, useEffect} from "react";
 import { PerformanceReview } from "../Models/PerformanceReview";
-import { interfaceExtends } from "@babel/types";
 import { updateManagerCommentsRatingAPI } from "../Services/GoalsAPIService";
-import { Roles } from "../Models/Roles";
 
 //component will allow the EmployeePerformanceReview to dynamically display if the Manager comments section should have an input box or be read only
 
@@ -19,43 +12,21 @@ interface reviewProps {
 }
 
 export function ManagerCommentsRating(props: reviewProps) {
-  const [newComments, setNewComments] = useState<string>(""); // State for input box
-  const [debouncedComments, setDebouncedComments] = useState("");
-  const [newRating, setNewRating] = useState<number>(5); // State for input box
-  // const [roleMgr, setRoleMgr] = useState(false);
-  const [isManagerCommentEmpty, setIsManagerCommentEmpty] = useState(true);
+    const [newComments, setNewComments] = useState<string>(""); // State for input box
+    const [newRating, setNewRating] = useState<number>(5); // State for input box
+    // const [roleMgr, setRoleMgr] = useState(false);
+    const [updateTracker, setUpdateTracker] = useState(false);
 
-  function isManagerCommentEmptyFunction() {
-    if (props.data.managerComments != "") {
-        setIsManagerCommentEmpty(false);
-    }
-  }
-    const currentRole = props.role;
-    console.log(props);
-
-  useEffect(() => {
-    // Debounce the input value
-    const delay = 500; // Set your desired delay (in milliseconds)
-    const timeoutId = setTimeout(() => {
-      setDebouncedComments(newComments);
-    }, delay);
-
-    return () => {
-      clearTimeout(timeoutId); // Cleanup: clear the timeout when component unmounts
+    // Handle input change
+    const handleCommentChange = (e: {
+        target: { value: React.SetStateAction<string> };
+    }) => {
+        setNewComments(e.target.value);
     };
-  }, [newComments]);
-
-  // Handle input change
-  const handleCommentChange = (e: {
-    target: { value: React.SetStateAction<string> };
-  }) => {
-    setNewComments(e.target.value);
-  };
 
     const handleRatingChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setNewRating(parseInt(e.target.value));
     };
-
 
     const handleSaveComments = () => {
         let updatedReview: PerformanceReview = {
@@ -74,11 +45,12 @@ export function ManagerCommentsRating(props: reviewProps) {
                 }
                 return response.json();
             })
+            .then(() => {setUpdateTracker(!updateTracker); props.data.managerComments = newComments; props.data.rating = newRating;})
             .then((data) => {
                 console.log('Data:', data);
                 console.log('Saving comments: ', newComments);
                 console.log('Saving rating: ', newRating)
-            })
+            })            
             .catch((error) => {
                 console.error('Error:', error.message);
                 alert('Failed to update comments. Please review inputs and try again.')
@@ -89,21 +61,19 @@ export function ManagerCommentsRating(props: reviewProps) {
 
         <div>
             <h2>Performance Review Manager Comments & Rating</h2>
-            {/*localStorage.getItem('role')*/
+            {
                 props.role && props.customKey != props.managerID ? (
                     <>
                         <p><strong>Deadline Date: </strong> {props.data.deadlineDate}</p>
-                        <p><strong>Manager Comments: </strong></p>
-                        <p>{props.data.managerComments}</p>
+                        <p><strong>Current Manager Comments: </strong> {props.data.managerComments}</p>
                         <input
                             type="text"
-                            placeholder="Enter new comments"
+                            placeholder="Enter New Comments"
                             value={newComments}
                             onChange={handleCommentChange}
                         />
-                        <p><strong>Rating: </strong></p>
-                        <p>{props.data.rating}</p>
-                        <input
+                        <p><strong>Current Rating: </strong>{props.data.rating}</p>
+                        <label>Enter New Rating:</label><input
                             type="number"
                             placeholder="5"
                             min="1"
@@ -115,12 +85,10 @@ export function ManagerCommentsRating(props: reviewProps) {
                         <button onClick={handleSaveComments}>Save</button>
                     </>
                 ) : (
-                    <>
+                    <> 
                         <p><strong>Deadline Date: </strong> {props.data.deadlineDate}</p>
-                        {isManagerCommentEmpty && (<p><strong>Manager Comments: </strong></p>)}
-                        {isManagerCommentEmpty && (<p>{props.data.managerComments}</p>)}
-                        <p><strong>Rating: </strong></p>
-                        <p>{props.data.rating}</p>
+                        {props.data.managerComments && (<><p><strong>Manager Comments: </strong>{props.data.managerComments}</p></>)}
+                        {props.data.managerComments && (<><p><strong>Rating: </strong>{props.data.rating}</p></>)}
                     </>
                 )}
         </div>
