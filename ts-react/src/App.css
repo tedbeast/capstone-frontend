@@ -21,7 +21,7 @@
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: rgb(167, 188, 228);
+  color: white;
 }
 
 .App-link {
@@ -35,26 +35,4 @@
   to {
     transform: rotate(360deg);
   }
-}
-
-.input-container {
-  display: flex;
- /* flex-direction: column;*/
-  margin-bottom: 5px;
-  align-items: center;
-  list-style-type: none; /* Remove bullets */
-}
-
-.input-container label{
-  margin-bottom: 30px;
-  margin-right: 200px;
-  padding: 5px;
-}
-
-.input-container input{
-  padding: 50px;
-  margin-bottom: 30px;
-  margin-right: 200px;
-  width: 50%;
-  border: 2px solid black;
 }
