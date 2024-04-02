@@ -34,7 +34,7 @@ export function ListGoal() {
 
   return (
     <>
-      <h3>All Goals List!</h3>
+      <h1>Your Performance Goals</h1>
       <button id="addgoalbutton" onClick={showAddGoalFunction}>Add a New Goal</button>
       {showAddGoalComponent && <AddGoal goalCounterFunction={listGoalCounterFunction}></AddGoal>}
       {allPerformanceReviews.map((prs) => {return (<SinglePerformance key={prs.performanceReviewID} data={prs}></SinglePerformance>);})}

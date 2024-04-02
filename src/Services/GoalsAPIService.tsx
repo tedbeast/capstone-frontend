@@ -32,7 +32,7 @@ export function getPerformanceByEmployeeAPI(employeeID: number) {
 }
 
 //employee, add comments to goals during performance review period
-export function updateEmployeeCommentsRatingAPI(
+export function updateEmployeeCommentsAPI(
   employeeID: number,
   goalID: number,
   data: Goal
