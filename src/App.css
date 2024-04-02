@@ -39,19 +39,18 @@
 
 .input-container {
   display: flex;
- /* flex-direction: column;*/
   margin-bottom: 5px;
   align-items: center;
   list-style-type: none; /* Remove bullets */
 }
 
-.input-container label{
+.input-container label {
   margin-bottom: 30px;
   margin-right: 200px;
   padding: 5px;
 }
 
-.input-container input{
+.input-container input {
   padding: 50px;
   margin-bottom: 30px;
   margin-right: 200px;

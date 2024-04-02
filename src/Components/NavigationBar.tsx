@@ -4,7 +4,7 @@ import "./Nav.css";
 import "../Components/Nav.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { faSquareCaretDown } from "@fortawesome/free-solid-svg-icons";
-import { faBars } from "@fortawesome/free-solid-svg-icons";
+import { fa1, faAddressBook, faBars, faChartBar, faChartSimple } from "@fortawesome/free-solid-svg-icons";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { faKey } from "@fortawesome/free-solid-svg-icons";
 import { faDoorOpen } from "@fortawesome/free-solid-svg-icons";
@@ -44,6 +44,16 @@ export function NavigationBar() {
                 <FontAwesomeIcon icon={faKey} className="icon"/> Password Reset
               </Link>
             </li>
+            <li>
+              <Link to="admin">
+                <FontAwesomeIcon icon={faAddressBook} className="icon"/> Admin 
+              </Link>
+            </li>
+            <li>
+              <Link to="reporting">
+                <FontAwesomeIcon icon={faChartSimple} className="icon"/> Reporting 
+              </Link>
+            </li>
           </ul>
         </li>
         <li>
@@ -56,10 +66,10 @@ export function NavigationBar() {
           <Link to="Goals">Goals Page</Link>
         </li>
         <li>
-          <Link to="Admin">Admin Page</Link>
+          <Link to="Reporting">Reporting Page</Link>
         </li>
         <li>
-          <Link to="Reporting">Reporting Page</Link>
+          <Link to="Admin">Admin Page</Link>
         </li>
         <li>
           <Link to="login">Login Page</Link>
