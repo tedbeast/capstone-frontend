@@ -14,7 +14,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #121213;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -42,12 +42,15 @@
   margin-bottom: 5px;
   align-items: center;
   list-style-type: none; /* Remove bullets */
+  color: white;
+  background-color: #121213;
 }
 
 .input-container label {
   margin-bottom: 30px;
   margin-right: 200px;
   padding: 5px;
+  color: white;
 }
 
 .input-container input {
@@ -56,4 +59,14 @@
   margin-right: 200px;
   width: 50%;
   border: 2px solid black;
+  color: white;
+}
+
+.container{
+  color:white;
+  background-color: #282c34;
+  position: absolute;
+  left: 0px;
+  margin-top: 20px;
+  padding: 0px;
 }

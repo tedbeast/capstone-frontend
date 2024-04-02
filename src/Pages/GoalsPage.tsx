@@ -7,10 +7,11 @@ import { EmployeeDropdown } from "../Components/PerformanceReviewGetEmployeeRevi
 import { sortAndDeduplicateDiagnostics } from "typescript";
 import { AddGoal } from "../Components/AddGoal";
 import { ListGoal } from "../Components/ListGoal";
+import "../App.css";
 
 export function GoalsPage() {
   const testManagerID = 1;
-  const testEmpID = 1;
+  const testEmpID = 2;
   //rendering depending on manager vs employee
   const currentRole = "EMPLOYEE";
   const [roleMgr, setRoleMgr] = useState(false);
@@ -49,35 +50,34 @@ export function GoalsPage() {
 
   return (
     <>
-      <div></div>
-      {/*
-        if role = Manager 
-        <button> Self or AllEmployees?
-        if button = Self
-        <EmployeePerformanceReview>
-        if button = AllEmployees
-        <EmployeeDrodown>
-        else <EmployeePerformanceReview>
-    */}
-      {roleMgr && (
+      {roleMgr ? (
         <div>
           <button onClick={toggleMgrView}>Switch View</button>
-          {dropDown && (
+          {dropDown ? (
             <div>
+              <p>Manage Employees</p>
               <EmployeeDropdown
                 role={roleMgr}
                 managerID={testEmpID}
               ></EmployeeDropdown>
             </div>
+          ) : (
+            <EmployeePerformanceReview
+              role={false}
+              employeeID={testEmpID}
+              managerID={testManagerID}
+            ></EmployeePerformanceReview>
           )}
         </div>
+      ) : (
+        <>
+          <EmployeePerformanceReview
+            role={roleMgr}
+            employeeID={testEmpID}
+            managerID={testManagerID}
+          ></EmployeePerformanceReview>
+        </>
       )}
-      <EmployeePerformanceReview
-        role={roleMgr}
-        employeeID={testEmpID}
-      ></EmployeePerformanceReview>
-      <ListGoal></ListGoal>
-      {/*<PerformanceReviewList managerIdProp={testManagerID}></PerformanceReviewList> */}
     </>
   );
 }

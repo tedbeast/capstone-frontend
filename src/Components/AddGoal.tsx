@@ -41,7 +41,7 @@ export function AddGoal(props : AddGoalInterface) {
 
   return (
     <>
-      <h1>Enter your Goals</h1>
+      <h2>Enter your Goals</h2>
       <div className="w3-half">
         <label>Goal Type: </label>
         <input type="text" onChange={goalTypeHandler} value={userGoalType}></input>
