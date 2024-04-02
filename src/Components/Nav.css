@@ -1,23 +1,102 @@
+
 ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
-    overflow: hidden;
-    background-color: #666;
+    width:100%;
+    position:block;
+    height:70px;
+    background-color: #582e41;
+    z-index:0;
+    float:none;
+    /* basic styling for the navigation bar */
   }
   
   li {
-    float: left;
+    float: right;
   }
   
   li a {
     display: block;
-    color: white;
+    color: #c4b7ab;
     text-align: center;
-    padding: 14px 16px;
+    padding: 24px 50px;
     text-decoration: none;
+    /*Color settings for nav bar items*/
   }
   
   li a:hover {
-    background-color: #111;
+    background-color: #647295;
+    color: #ffffff;
+    /*Color settings for the hover state of the navigation bar*/
   }
+
+    .icon {
+      margin-right: 15px;
+      /* Adjust space on right side of icons*/
+    }
+
+    .dropdown {
+      position: relative;
+      display: inline-block;
+      color:#c4b7ab;
+      line-height:70px;
+      cursor:pointer;
+      padding:0;
+      z-index:1;
+      text-align:center;
+      width:223px;
+      /* basic styling for the dropdown menu */
+    }
+
+    .dropdown:hover
+    {
+      background-color: #647295;
+      /*Color settings for the hover state of the dropdown menu*/
+    }
+
+        .dropdown ul
+        {
+          display:none;
+          /*Hides the dropdown menu content*/
+        }
+
+        .dropdown ul li {
+          display: block;
+          float:none;
+          line-height:40px;
+          /* basic styling for the dropdown menu content */ 
+        }
+
+    /* .dropdown-content {
+      display: block;
+      min-width: 160px;
+      position: relative;
+        z-index: 999;
+        left:0;
+        top:0;
+        clear:both;
+        float:left;
+        width: 223px;
+        /*Don't think this is needed any longer
+    } */
+
+   
+    .dropdown-content a {
+      color: #c4b7ab;
+      background: #582e41;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+      text-align: left;
+      /*controls the display of the dropdown-content*/
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+      color: #ffffff;
+      /*controls the display of the dropdown-content when the dropdown is hovered over*/
+    }
+
+
+    
