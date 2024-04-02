@@ -12,9 +12,10 @@ import { Roles } from "../Models/Roles";
 //component will allow the EmployeePerformanceReview to dynamically display if the Manager comments section should have an input box or be read only
 
 interface reviewProps {
-  data: PerformanceReview;
-  customKey: number;
-  role: boolean;
+    data: PerformanceReview,
+    customKey: number,
+    role: boolean,
+    managerID: number
 }
 
 export function ManagerCommentsRating(props: reviewProps) {
@@ -23,8 +24,8 @@ export function ManagerCommentsRating(props: reviewProps) {
   const [newRating, setNewRating] = useState<number>(5); // State for input box
   // const [roleMgr, setRoleMgr] = useState(false);
 
-  const currentRole = props.role;
-  console.log(props);
+    const currentRole = props.role;
+    console.log(props);
 
   useEffect(() => {
     // Debounce the input value
@@ -45,72 +46,73 @@ export function ManagerCommentsRating(props: reviewProps) {
     setNewComments(e.target.value);
   };
 
-  const handleRatingChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setNewRating(parseInt(e.target.value));
-  };
-
-  const handleSaveComments = () => {
-    let updatedReview: PerformanceReview = {
-      performanceReviewID: props.data.performanceReviewID,
-      deadlineDate: props.data.deadlineDate,
-      managerComments: newComments,
-      rating: newRating,
-      employee: props.data.employee,
-      goals: props.data.goals,
+    const handleRatingChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setNewRating(parseInt(e.target.value));
     };
-    console.log(updatedReview);
-    updateManagerCommentsRatingAPI(
-      props.customKey,
-      props.data.performanceReviewID,
-      updatedReview
-    )
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("HTTP error! Status: " + response.status);
-        }
-        return response.json();
-      })
-      .then((data) => {
-        console.log("Data:", data);
-        console.log("Saving comments: ", newComments);
-        console.log("Saving rating: ", newRating);
-      })
-      .catch((error) => {
-        console.error("Error:", error.message);
-        alert("Failed to update product. Please review inputs and try again.");
-      });
-  };
 
-  return (
-    <div>
-      <h2>Performance Review Manager Comments & Rating</h2>
-      {
-        /*localStorage.getItem('role')*/
-        props.role ? (
-          <>
-            <p>Manager Comments:</p>
-            <p>{props.data.managerComments}</p>
-            <input
-              type="text"
-              placeholder="Enter new comments"
-              value={newComments}
-              onChange={handleCommentChange}
-            />
-            <p>Rating:</p>
-            <p>{props.data.rating}</p>
-            <input
-              type="number"
-              placeholder="5"
-              value={newRating}
-              onChange={handleRatingChange}
-            />
-            <div></div>
-            <button onClick={handleSaveComments}>Save</button>
-          </>
-        ) : (
-          <p>{props.data.managerComments}</p>
-        )
-      }
-    </div>
-  );
+
+    const handleSaveComments = () => {
+        let updatedReview: PerformanceReview = {
+            performanceReviewID: props.data.performanceReviewID,
+            deadlineDate: props.data.deadlineDate,
+            managerComments: newComments,
+            rating: newRating,
+            goals: props.data.goals,
+            employee: props.data.employee
+        }
+        console.log(updatedReview);
+        updateManagerCommentsRatingAPI(props.customKey, props.data.performanceReviewID, updatedReview)
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error('HTTP error! Status: ' + response.status)
+                }
+                return response.json();
+            })
+            .then((data) => {
+                console.log('Data:', data);
+                console.log('Saving comments: ', newComments);
+                console.log('Saving rating: ', newRating)
+            })
+            .catch((error) => {
+                console.error('Error:', error.message);
+                alert('Failed to update comments. Please review inputs and try again.')
+            });
+    };
+
+    return (
+
+        <div>
+            <h2>Performance Review Manager Comments & Rating</h2>
+            {/*localStorage.getItem('role')*/
+                props.role && props.customKey != props.managerID ? (
+                    <>
+                        <p>Manager Comments:</p>
+                        <p>{props.data.managerComments}</p>
+                        <input
+                            type="text"
+                            placeholder="Enter new comments"
+                            value={newComments}
+                            onChange={handleCommentChange}
+                        />
+                        <p>Rating:</p>
+                        <p>{props.data.rating}</p>
+                        <input
+                            type="number"
+                            placeholder="5"
+                            value={newRating}
+                            onChange={handleRatingChange}
+                        />
+                        <div></div>
+                        <button onClick={handleSaveComments}>Save</button>
+                    </>
+                ) : (
+                    <>
+                        <p>Manager Comments:</p>
+                        <p>{props.data.managerComments}</p>
+                        <p>Rating:</p>
+                        <p>{props.data.rating}</p>
+                    </>
+                )}
+        </div>
+    );
 }
