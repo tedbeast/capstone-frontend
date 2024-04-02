@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { EmployeePerformanceReview } from "../Components/EmployeePeformanceReview";
 import { PerformanceReview } from "../Models/PerformanceReview";
 import { EmployeeDropdown } from "../Components/PerformanceReviewGetEmployeeReview";
-import { sortAndDeduplicateDiagnostics } from "typescript";
+// import { sortAndDeduplicateDiagnostics } from "typescript";
 import { AddGoal } from "../Components/AddGoal";
 import { ListGoal } from "../Components/ListGoal";
 import "../App.css";
