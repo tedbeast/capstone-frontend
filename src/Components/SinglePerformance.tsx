@@ -15,8 +15,15 @@ export function SinglePerformance(props: PerformanceReviewInterface) {
         <ul>
           <li>
             {props.data.goals.map((goals) => {
-              return <SingleGoal key={goals.goalID} data={goals}></SingleGoal>;
-            })}            
+              return (
+                <SingleGoal
+                  key={goals.goalID}
+                  data={goals}
+                  role={props.role}
+                  employeeID={props.data.employee.employeeID}
+                ></SingleGoal>
+              );
+            })}
           </li>
         </ul>
       </div>

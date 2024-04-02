@@ -2,16 +2,13 @@ import React, { useState } from "react";
 import { Goal } from "../Models/Goal";
 import { UpdatePR } from "./UpdatePR";
 
-interface GoalInterface {
+interface thisInterface {
+  employeeID: number;
+  role: boolean;
   data: Goal;
 }
 
-interface thisEmployee {
-  employeeID: number;
-  role: boolean;
-}
-
-export function SingleGoal(props: any) {
+export function SingleGoal(props: thisInterface) {
   const [showAddCommentsComponent, setShowAddCommentsComponent] =
     useState(false);
   const [generate, setGenerate] = useState(false);
@@ -23,8 +20,8 @@ export function SingleGoal(props: any) {
       setShowAddCommentsComponent(true);
     }
 
-    document.getElementById("addcommentbutton")!.innerText =
-      "Hide Add Comment Button";
+    //document.getElementById("addcommentbutton")!.innerText =
+    //  "Hide Add Comment Button";
   }
 
   function refresh() {
@@ -39,14 +36,21 @@ export function SingleGoal(props: any) {
       <p>Employee Comments: {props.data.employeeComments}</p>
       <p>Weight: {props.data.weight.toFixed(2)}%</p>
       <br></br>
-      {props.role && (<button
-        id="addcommentbutton"
-        className="buttons"
-        onClick={showAddCommentFunction}>
-        Add Goal Comments
-      </button>)}
+      {!props.role && (
+        <button
+          id="addcommentbutton"
+          className="buttons"
+          onClick={showAddCommentFunction}
+        >
+          Add Goal Comments
+        </button>
+      )}
       {showAddCommentsComponent && (
-        <UpdatePR data={props.data.goalID}></UpdatePR>
+        <UpdatePR
+          data={props.data}
+          employeeID={props.employeeID}
+          role={props.role}
+        ></UpdatePR>
       )}
     </>
   );

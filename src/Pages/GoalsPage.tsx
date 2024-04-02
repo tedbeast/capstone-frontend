@@ -48,28 +48,36 @@ export function GoalsPage() {
 
   //if employee: show only employee review
 
-    return (
+  return (
+    <>
+      {roleMgr ? (
+        <div>
+          <button onClick={toggleMgrView}>Switch View</button>
+          {dropDown ? (
+            <div>
+              <p>Manage Employees</p>
+              <EmployeeDropdown
+                role={roleMgr}
+                managerID={testEmpID}
+              ></EmployeeDropdown>
+            </div>
+          ) : (
+            <EmployeePerformanceReview
+              role={false}
+              employeeID={testEmpID}
+              managerID={testManagerID}
+            ></EmployeePerformanceReview>
+          )}
+        </div>
+      ) : (
         <>
-            {roleMgr ? (
-                <div>
-                    <button onClick={toggleMgrView}>Switch View</button>
-                    {dropDown ? (
-                        <div>
-                          <h3>Manage Employees</h3>
-                            <EmployeeDropdown role={roleMgr} managerID={testEmpID}></EmployeeDropdown>
-                        </div>
-                    ) : (
-                        <EmployeePerformanceReview role={roleMgr} employeeID={testEmpID} managerID={testManagerID}></EmployeePerformanceReview>
-                    )
-                    }
-
-                </div>
-            ) : (
-              <>
-                <EmployeePerformanceReview role={roleMgr} employeeID={testEmpID} managerID={testManagerID}></EmployeePerformanceReview>
-              </>
-            )
-            }
+          <EmployeePerformanceReview
+            role={roleMgr}
+            employeeID={testEmpID}
+            managerID={testManagerID}
+          ></EmployeePerformanceReview>
         </>
-    )
-};
+      )}
+    </>
+  );
+}
