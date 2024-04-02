@@ -23,7 +23,13 @@ export function ManagerCommentsRating(props: reviewProps) {
   const [debouncedComments, setDebouncedComments] = useState("");
   const [newRating, setNewRating] = useState<number>(5); // State for input box
   // const [roleMgr, setRoleMgr] = useState(false);
+  const [isManagerCommentEmpty, setIsManagerCommentEmpty] = useState(true);
 
+  function isManagerCommentEmptyFunction() {
+    if (props.data.managerComments != "") {
+        setIsManagerCommentEmpty(false);
+    }
+  }
     const currentRole = props.role;
     console.log(props);
 
@@ -86,7 +92,8 @@ export function ManagerCommentsRating(props: reviewProps) {
             {/*localStorage.getItem('role')*/
                 props.role && props.customKey != props.managerID ? (
                     <>
-                        <p>Manager Comments:</p>
+                        <p><strong>Deadline Date: </strong> {props.data.deadlineDate}</p>
+                        <p><strong>Manager Comments: </strong></p>
                         <p>{props.data.managerComments}</p>
                         <input
                             type="text"
@@ -94,11 +101,13 @@ export function ManagerCommentsRating(props: reviewProps) {
                             value={newComments}
                             onChange={handleCommentChange}
                         />
-                        <p>Rating:</p>
+                        <p><strong>Rating: </strong></p>
                         <p>{props.data.rating}</p>
                         <input
                             type="number"
                             placeholder="5"
+                            min="1"
+                            max="5"
                             value={newRating}
                             onChange={handleRatingChange}
                         />
@@ -107,9 +116,10 @@ export function ManagerCommentsRating(props: reviewProps) {
                     </>
                 ) : (
                     <>
-                        <p>Manager Comments:</p>
-                        <p>{props.data.managerComments}</p>
-                        <p>Rating:</p>
+                        <p><strong>Deadline Date: </strong> {props.data.deadlineDate}</p>
+                        {isManagerCommentEmpty && (<p><strong>Manager Comments: </strong></p>)}
+                        {isManagerCommentEmpty && (<p>{props.data.managerComments}</p>)}
+                        <p><strong>Rating: </strong></p>
                         <p>{props.data.rating}</p>
                     </>
                 )}
