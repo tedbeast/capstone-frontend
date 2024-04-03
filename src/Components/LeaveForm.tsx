@@ -93,7 +93,7 @@ const LeaveForm: React.FC<LeaveFormProps> = ({
 
     const response = await postLeaveAPI(values, employee.employeeID);
     if (response) {
-      setAllLeaves([...allLeaves, values]);
+      setAllLeaves([...allLeaves, response]);
       setShowForm(false);
       toast.success("Leave Requested Successfully");
     } else {
