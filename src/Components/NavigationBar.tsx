@@ -169,7 +169,7 @@ export function NavigationBar() {
         </li>
         <li>
           <Link to="Leave">Leave Page</Link>
-        </li>
+       </li> 
         <li>
           <Link to="Goals">Goals Page</Link>
         </li>

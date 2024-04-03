@@ -11,7 +11,7 @@ import { Add } from "@mui/icons-material";
 import LeaveForm from "./LeaveForm";
 import { Modal, Box, Typography } from "@mui/material";
 import { getAllLeavesByEmployeeId } from "../Services/LeavesAPI";
-import { Leave } from "../Models/Leaves";
+import { Leaves } from "../Models/Leaves";
 import { deleteLeaveAPI } from "../Services/LeavesAPI";
 import { toast } from "react-toastify";
 import UpdateLeaveForm from "./UpdateLeaveForm";
@@ -23,8 +23,8 @@ interface EmployeeLeaveTableProps {
 const ManagerLeaveUI: React.FC<EmployeeLeaveTableProps> = ({ employee }) => {
   const [toggleView, setToggleView] = useState(false);
   const [showForm, setShowForm] = useState(false);
-  const [allLeaves, setAllLeaves] = useState<Leave[]>([]);
-  const [leave, setLeave] = useState<Leave>();
+  const [allLeaves, setAllLeaves] = useState<Leaves[]>([]);
+  const [leave, setLeave] = useState<Leaves>();
   const [showUpdateForm, setShowUpdateForm] = useState(false);
 
   useEffect(() => {
@@ -40,7 +40,7 @@ const ManagerLeaveUI: React.FC<EmployeeLeaveTableProps> = ({ employee }) => {
       return;
     }
     toast.success("Leave deleted successfully");
-    setAllLeaves(allLeaves.filter((leave) => leave.leaveId !== id));
+    setAllLeaves(allLeaves.filter((leave) => leave.Id !== id));
   };
 
   const handleUpdate = (id: number) => {

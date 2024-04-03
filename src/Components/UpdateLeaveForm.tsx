@@ -16,7 +16,7 @@ import {
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import { TextField } from "formik-material-ui";
-import { Leave } from "../Models/Leaves";
+import { Leaves } from "../Models/Leaves";
 import { postLeaveAPI, updateLeaveAPI } from "../Services/LeavesAPI";
 import { toast } from "react-toastify";
 
@@ -59,7 +59,7 @@ const validationSchema = Yup.object({
 });
 
 interface UpdateLeaveFormProps {
-  leave: Leave | undefined;
+  leave: Leaves | undefined;
   setShowForm: any;
 }
 
@@ -73,7 +73,7 @@ const UpdateLeaveForm: React.FC<UpdateLeaveFormProps> = ({
     date ? new Date(date).toISOString().split("T")[0] : "";
 
   const [initialValues, setInitialValues] = useState<FormValues>({
-    leaveId: leave?.id,
+    leaveId: leave?.Id == undefined ? leave?.Id : leave?.Id,
     leaveName: leave?.leaveName || "",
     startDate: formatDate(leave?.startDate), // Use the adjusted formatDate function
     endDate: formatDate(leave?.endDate), // Use the adjusted formatDate function
@@ -113,7 +113,7 @@ const UpdateLeaveForm: React.FC<UpdateLeaveFormProps> = ({
     console.log(otherLeaveType);
     setShowForm(false);
     try {
-      values.leaveId = leave?.id;
+      values.leaveId = leave?.Id;
       console.log(values);
       console.log(await updateLeaveAPI(values));
 
