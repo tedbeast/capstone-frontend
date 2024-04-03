@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { WelcomeLoggedInUser } from '../Pages/WelcomeLoggedInUser';
+import "./Login.css";
 
 interface LoginProps {
 onLogin: () => void;
@@ -77,21 +78,20 @@ return (
         <WelcomeLoggedInUser />
     ) : (
 
-    <div>
-        <form onSubmit={getCredentials}>
-            <div>
-                <label>Employee ID: </label><input type="text"
-                name="employeeID" placeholder="Enter Employee ID"
-                id="employeeID" />
-            </div>
-            <div>
-                <label>Password: </label><input type="password"
-                name="password" placeholder="Enter Password" id="password" />
-            </div>
-            <button type="submit">Login</button>
-        </form>
-        {error && <div style={{ color:'red' }}>{error}</div>}
-        </div>
+   <div className="login-container">
+       <form onSubmit={getCredentials}>
+           <div className="login-container">
+               <label htmlFor="employeeID">Employee ID:</label>
+               <input type="text" name="employeeID" id="employeeID" placeholder="Enter Employee ID" />
+           </div>
+           <div className="login-container">
+               <label htmlFor="password">Password:</label>
+               <input type="password" name="password" id="password" placeholder="Enter Password" />
+           </div>
+           <button type="submit">Login</button>
+       </form>
+       {error && <div style={{ color:'red' }}>{error}</div>}
+   </div>
     )
 );
 };
