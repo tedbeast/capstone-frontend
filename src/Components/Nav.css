@@ -102,18 +102,7 @@ ul {
           /* basic styling for the dropdown menu content */ 
         }
 
-    /* .dropdown-content {
-      display: block;
-      min-width: 160px;
-      position: relative;
-        z-index: 999;
-        left:0;
-        top:0;
-        clear:both;
-        float:left;
-        width: 223px;
-        /*Don't think this is needed any longer
-    } */
+
 
    
     .dropdown-content a {

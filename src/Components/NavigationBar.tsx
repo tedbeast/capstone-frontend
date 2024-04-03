@@ -4,13 +4,19 @@ import "./Nav.css";
 import "../Components/Nav.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { faSquareCaretDown } from "@fortawesome/free-solid-svg-icons";
-import { faBars, faDoorClosed } from "@fortawesome/free-solid-svg-icons";
+import {
+  faBars,
+  faChartColumn,
+  faDoorClosed,
+} from "@fortawesome/free-solid-svg-icons";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { faKey } from "@fortawesome/free-solid-svg-icons";
 import { faDoorOpen } from "@fortawesome/free-solid-svg-icons";
 import { faPersonThroughWindow } from "@fortawesome/free-solid-svg-icons";
+import { faUserTie } from "@fortawesome/free-solid-svg-icons";
 import logo from "../Images/HR (7).png";
 import { useState } from "react";
+import { faStar } from "@fortawesome/free-solid-svg-icons";
 
 export function NavigationBar() {
   const [useState] = React.useState(false);
@@ -63,6 +69,7 @@ export function NavigationBar() {
                 </li>
               </ul>
             </li>
+
             <li className="dropdown">
               {" "}
               Leave{" "}
@@ -78,14 +85,36 @@ export function NavigationBar() {
                 </li>
               </ul>
             </li>
-            <li>
-              <Link to="Goals">Goals</Link>
+
+            <li className="dropdown">
+              {" "}
+              Performance{" "}
+              <ul className="dropdown-content">
+                <li>
+                  <Link to="Goals">
+                    <FontAwesomeIcon icon={faStar} className="icon" /> Goals{" "}
+                  </Link>{" "}
+                </li>
+              </ul>
             </li>
-            <li>
-              <Link to="Admin">Administrative</Link>
-            </li>
-            <li>
-              <Link to="Reporting">Reporting</Link>
+
+            <li className="dropdown">
+              {" "}
+              Administrative{" "}
+              <ul className="dropdown-content">
+                <li>
+                  <Link to="AdminPage">
+                    <FontAwesomeIcon icon={faUserTie} className="icon" /> Admin
+                    Page{" "}
+                  </Link>{" "}
+                </li>
+                <li>
+                  <Link to="Reporting">
+                    <FontAwesomeIcon icon={faChartColumn} className="icon" />{" "}
+                    Reporting{" "}
+                  </Link>{" "}
+                </li>
+              </ul>
             </li>
           </ul>
         </div>
