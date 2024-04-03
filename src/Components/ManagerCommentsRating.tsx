@@ -21,8 +21,6 @@ export function ManagerCommentsRating(props: reviewProps) {
         console.log(render);
     },[render]);
 
-    
-
     // Handle input change
     const handleCommentChange = (e: {
         target: { value: React.SetStateAction<string> };
@@ -68,7 +66,7 @@ export function ManagerCommentsRating(props: reviewProps) {
 
         <div className="container-perf">
             
-            <h4>Manager Comments & Rating</h4>
+            <h4>Manager Review</h4>
             {
                 props.role && props.customKey != props.managerID && props.data.managerComments == null && !render ? (
                     <>
@@ -94,6 +92,7 @@ export function ManagerCommentsRating(props: reviewProps) {
                     </>
                 ) : (
                     <>
+                        {!props.data.managerComments && (<><p>There is no Manager Review available at this moment!</p></>)}
                         {props.data.managerComments && (<><p><strong>Manager Comments: </strong>{props.data.managerComments}</p></>)}
                         {props.data.managerComments && (<><p><strong>Rating: </strong>{props.data.rating}</p></>)}
                     </>

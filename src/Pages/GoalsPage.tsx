@@ -10,20 +10,40 @@ import { ListGoal } from "../Components/ListGoal";
 import "../App.css";
 
 export function GoalsPage() {
-  const testManagerID = 1;
-  const testEmpID = 1;
+  function getItem<T>(key: string): T | null {
+    const item = localStorage.getItem(key);
+    return item ? (JSON.parse(item) as T) : null;
+  }
+
+  const testManagerID = getItem<string>('managerID');
+  const testEmpID = getItem<string>('username');
+  let managerIDint = 0;
+  let employeeIDint = 0;
+  if (testManagerID) {
+    managerIDint = parseInt(testManagerID, 10);
+  }  
+  
+  if (testEmpID) {
+    employeeIDint = parseInt(testEmpID, 10);
+  }
+
   //rendering depending on manager vs employee
-  const currentRole = "MANAGER";
+  const testCurrentRole = localStorage.getItem('role');
+  let currentRole = "";
+  if (testCurrentRole) {
+    currentRole = testCurrentRole;
+  }  
   const [roleMgr, setRoleMgr] = useState(false);
   const [dropDown, setDropDown] = useState(false); //false = does not appear
 
   //check what the current role is
-  function checkRole(currentRole: "EMPLOYEE" | "MANAGER" | "ADMIN") {
+  function checkRole(currentRole: string) {
     if (currentRole === "MANAGER") {
       setRoleMgr(true);
+      employeeIDint = managerIDint
     }
   }
-
+  
   useEffect(() => {
     //check role everytime component mounts
     checkRole(currentRole);
@@ -31,12 +51,15 @@ export function GoalsPage() {
 
   const [showMenu, setShowMenu] = useState(false);
   const toggleMgrView = () => {
+    if (!showMenu) {
+      document.getElementById("managerswitchview")!.innerText = "Switch to Self-Appraisal";
+    } else {
+      document.getElementById("managerswitchview")!.innerText = "Switch to Manage Employees";
+    }
     setShowMenu(!showMenu);
     setDropDown(!dropDown);
-    console.log(showMenu);
   };
-  console.log(roleMgr);
-  console.log(showMenu);
+
   //if manager: show button to toggle view & manager self peformance review
   //then, toggle view: show button, dropdown, & employee review
   //if employee: show only employee review
@@ -45,20 +68,20 @@ export function GoalsPage() {
     <>
       {roleMgr ? (
         <div>
-          <button onClick={toggleMgrView}>Switch View</button>
+          <button id="managerswitchview" onClick={toggleMgrView}>Switch to Manage Employees</button>
           {dropDown ? (
             <div className="container-perf">
               <h5>Manage Employees</h5>
               <EmployeeDropdown
                 role={roleMgr}
-                managerID={testEmpID}
+                managerID={managerIDint}
               ></EmployeeDropdown>
             </div>
           ) : (
             <EmployeePerformanceReview
               role={false}
-              employeeID={testEmpID}
-              managerID={testManagerID}
+              employeeID={employeeIDint}
+              managerID={managerIDint}
             ></EmployeePerformanceReview>
           )}
         </div>
@@ -66,8 +89,8 @@ export function GoalsPage() {
         <>
           <EmployeePerformanceReview
             role={roleMgr}
-            employeeID={testEmpID}
-            managerID={testManagerID}
+            employeeID={employeeIDint}
+            managerID={managerIDint}
           ></EmployeePerformanceReview>
         </>
       )}

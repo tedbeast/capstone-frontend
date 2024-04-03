@@ -41,7 +41,6 @@ export function UpdatePR(props: myInterface) {
     };
 
     updateEmployeeCommentsAPI(props.employeeID, thisGoalID, myGoal);
-    window.location.reload();
   };
 
   return (
