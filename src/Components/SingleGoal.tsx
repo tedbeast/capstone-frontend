@@ -11,8 +11,8 @@ interface thisInterface {
 
 export function SingleGoal(props: thisInterface) {
   const [showAddCommentsComponent, setShowAddCommentsComponent] =
-    useState(false);
-  const [generate, setGenerate] = useState(false);
+    useState(false);  
+  const [goalCommentCounter, setGoalCommentCounter] = useState(0);
 
   function showAddCommentFunction() {
     if (showAddCommentsComponent) {
@@ -24,10 +24,12 @@ export function SingleGoal(props: thisInterface) {
     }
   }
 
-  function refresh() {
-    setGenerate(!generate);
+  const singleGoalCommentCounterFunction = (goalCommentCounterFromUpdatePR: number) => {
+    if(goalCommentCounter!=goalCommentCounterFromUpdatePR){
+      setGoalCommentCounter(goalCommentCounterFromUpdatePR);
+    }
   }
-
+ 
   return (
     <>
     <div className="container-perf">
@@ -51,6 +53,7 @@ export function SingleGoal(props: thisInterface) {
           data={props.data}
           employeeID={props.employeeID}
           role={props.role}
+          goalCommentCounterFunction={singleGoalCommentCounterFunction}
         ></UpdatePR>
       )}
       </div>

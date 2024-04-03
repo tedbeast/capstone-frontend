@@ -17,16 +17,7 @@ export function EmployeePerformanceReview(props: thisEmployee) {
 
     const [performanceReview, setperformanceReview] = useState<PerformanceReview[]>([]);
 
-    //potentially move all this to GoalsPage as to pass employeeID down through child components?
-    function getItem<T>(key: string): T | null {
-        const item = localStorage.getItem(key);
-        return item ? (JSON.parse(item) as T) : null;
-    }
-
     useEffect(() => {
-        const storedEmployeeId = getItem<string>('username');
-        // if (storedEmployeeId) {
-        //     const employeeIdAsInt = parseInt(storedEmployeeId, 10);
         getPerformanceByEmployeeAPI(props.employeeID)
             .then((response) => {
                 console.log(response);
@@ -45,7 +36,6 @@ export function EmployeePerformanceReview(props: thisEmployee) {
 
             <div>
             <h3>Performance Review</h3>
-            
                 {performanceReview.map((review) => (
                     <div key={review.performanceReviewID}>
                         <p><strong>Deadline Date: </strong> {review.deadlineDate.substring(5, 10) + "-" + review.deadlineDate.substring(0, 4)}</p>
