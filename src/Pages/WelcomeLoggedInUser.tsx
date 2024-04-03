@@ -39,6 +39,7 @@ export function WelcomeLoggedInUser() {
     console.log("User logged out.");
     localStorage.removeItem("username");
     localStorage.removeItem("role");
+    localStorage.removeItem("managerID");
     setIsLoggedIn(false);
     navigate("/login");
   };
@@ -60,7 +61,7 @@ export function WelcomeLoggedInUser() {
                 <p>Employee
                   phone: {employeeDetails ? employeeDetails.phoneNumber : 'null'}</p>
                 <p>Employee
-                  manager: {localStorage.managerID}</p>
+                  manager: {localStorage.managerID ? localStorage.managerID : 'null'}</p>
 
                 {/* Add more fields as needed */}
               </div>
