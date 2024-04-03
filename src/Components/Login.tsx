@@ -88,9 +88,13 @@ return (
                <input type="password" name="password" id="password" placeholder="Enter Password" />
            </div>
            <button type="submit">Login</button>
+        <div className="error-message">
+                      {error && <span>{error}</span>}
+                </div>
        </form>
-       {error && <div style={{ color:'red' }}>{error}</div>}
+
    </div>
+
     )
 );
 };
