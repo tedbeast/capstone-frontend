@@ -1,0 +1,30 @@
+.holiday-container {
+    position: fixed;
+    bottom: 20px; /* Adjust this value to move the container up or down /
+    left: 50%;
+    transform: translateX(-50%); / This will center the container horizontally /
+    padding: 10px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 5px;
+    text-align: center; / This will center the content inside the container */
+    }
+    .year-header {
+    text-align: center;
+    margin-top: 0
+    }
+    .holiday-list {
+    list-style: none;
+    padding: 0;
+    background-color: transparent;
+    margin-top: 20px;
+    text-align: center;
+    }
+    .holiday-list li {
+    margin-bottom: 20px;
+    }
+    .holiday-container .holiday-list{
+    display:flex;
+    flex-direction: column;
+    }
