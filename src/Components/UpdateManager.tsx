@@ -77,7 +77,7 @@ function UpdateManager() {
             <Modal.Body>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
                     <label>  
-                Enter Manager ID to be Updated: <input
+                Enter Employee ID to be Updated: <input
                     type="number"
                     placeholder="Enter Employee ID"
                     value={employeeID}
