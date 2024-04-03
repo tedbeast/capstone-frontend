@@ -37,6 +37,7 @@
   }
 }
 
+
 .input-container {
   display: flex;
   margin-bottom: 5px;
@@ -63,8 +64,4 @@ body{
   font-family: 'Roboto', sans-serif !important;
   margin-right: 200px;
   /* basic styling for the body */  
-}
-
-#employee-id, #password {
-    margin: 5px 0px 0px 0px;
 }
