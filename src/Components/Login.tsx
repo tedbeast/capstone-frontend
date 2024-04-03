@@ -78,12 +78,12 @@ return (
 
     <div>
         <form onSubmit={getCredentials}>
-            <div>
+            <div id="employee-id">
                 <label>Employee ID: </label><input type="text"
                 name="employeeID" placeholder="Enter Employee ID"
                 id="employeeID" />
             </div>
-            <div>
+            <div id="password">
                 <label>Password: </label><input type="password"
                 name="password" placeholder="Enter Password" id="password" />
             </div>
