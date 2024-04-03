@@ -25,7 +25,7 @@ function App() {
           {/* <Route path="/home" element={<WelcomeLoggedInUser></WelcomeLoggedInUser>}></Route> */}
           <Route
             path="/"
-            element={<WelcomeLoggedInUser></WelcomeLoggedInUser>}
+            element={<LoginPage></LoginPage>}
           ></Route>
           <Route
             path="*"
