@@ -8,13 +8,13 @@ import {
 } from "material-react-table";
 import { Stack, Button } from "@mui/material";
 
-import { Leave } from "../Models/Leaves";
+import { Leaves } from "../Models/Leaves";
 
 interface EmployeeLeaveTableData {
-  leaves: Leave[];
+  leaves: Leaves[];
   handleUpdate: any;
   handleDelete: any;
-  leave: Leave | undefined;
+  leave: Leaves | undefined;
   setLeave: any;
 }
 
@@ -25,13 +25,13 @@ const EmployeeLeaveTable: React.FC<EmployeeLeaveTableData> = ({
   leave,
   setLeave,
 }) => {
-  const [data, setData] = useState<Leave[]>(leaves);
+  const [data, setData] = useState<Leaves[]>(leaves);
 
   useEffect(() => {
     setData(leaves);
   }, [leaves]);
 
-  const columns: MRT_ColumnDef<Leave>[] = useMemo(
+  const columns: MRT_ColumnDef<Leaves>[] = useMemo(
     () => [
       {
         accessorKey: "leaveName",
@@ -92,7 +92,7 @@ const EmployeeLeaveTable: React.FC<EmployeeLeaveTableData> = ({
               <Button
                 color="error"
                 variant="contained"
-                onClick={() => handleDelete(row.original.id)}
+                onClick={() => handleDelete(row.original.Id)}
                 style={{ marginRight: "8px" }}
               >
                 Delete
@@ -102,7 +102,7 @@ const EmployeeLeaveTable: React.FC<EmployeeLeaveTableData> = ({
                 color="primary"
                 onClick={() => {
                   setLeave(row.original);
-                  handleUpdate(row.original.id, row.original);
+                  handleUpdate(row.original.Id, row.original);
                 }}
               >
                 Update

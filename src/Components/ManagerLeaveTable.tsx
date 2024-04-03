@@ -7,7 +7,7 @@ import {
 import { Stack } from "@mui/material";
 import { Button } from "@mui/material"; // Import MUI Button for a consistent UI
 
-import { Leave } from "../Models/Leaves";
+import { Leaves } from "../Models/Leaves";
 import {
   acceptLeave,
   getAllLeaveAPI,
@@ -37,8 +37,8 @@ interface ManagerLeaveTableData {
 
 const ManagerLeaveTable: React.FC<ManagerLeaveTable> = ({ employee }) => {
   const [showForm, setShowForm] = useState(false);
-  const [allLeaves, setAllLeaves] = useState<Leave[]>([]);
-  const [data, setData] = useState<Leave[]>([]);
+  const [allLeaves, setAllLeaves] = useState<Leaves[]>([]);
+  const [data, setData] = useState<Leaves[]>([]);
 
   const handleAccept = async (leaveId: number | undefined) => {
     if (leaveId != undefined) {
