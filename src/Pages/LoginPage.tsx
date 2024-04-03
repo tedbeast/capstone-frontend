@@ -2,6 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Login } from "../Components/Login";
 import { PasswordResetPage } from "./PasswordResetPage";
+import "../Components/Login.css";
+
 
 export function LoginPage() {
     const handleLogin = () => {
@@ -11,7 +13,7 @@ export function LoginPage() {
     return(
         <>
         <Login onLogin={handleLogin}></Login>
-        <a href="/passwordreset">Forgot password?</a>
+        <span id="password-reset-link"><a href="/passwordreset">Forgot password?</a></span>
         </>
 
     );
