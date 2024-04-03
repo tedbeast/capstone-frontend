@@ -1,0 +1,34 @@
+#ul-perf {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width:100%;
+    position:block;
+    height:70px;
+    background-color: #e6e6e6;
+    z-index:0;
+    float:none;
+    /* basic styling for the navigation bar */
+  }
+
+.container-perf{
+    color:black;
+    background-color: #e6e6e6;
+    position: block;
+    left: 0px;
+    margin-top: 20px;
+    padding: 10px;
+    box-shadow: 2px 2px 11px 1px #b7b3b3;
+    border-radius: 12px;
+  }
+
+  .container-back-perf{
+    color:black;
+    background-color: #646161;
+    position: block;
+    left: 0px;
+    margin-top: 20px;
+    padding: 10px;
+    box-shadow: 2px 2px 11px 1px #b7b3b3;
+    border-radius: 12px;
+  }

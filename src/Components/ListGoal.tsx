@@ -3,6 +3,7 @@ import { PerformanceReview } from "../Models/PerformanceReview";
 import { getPerformanceByEmployeeAPI } from "../Services/GoalsAPIService";
 import { AddGoal } from "./AddGoal";
 import { SinglePerformance } from "./SinglePerformance";
+import "../Components/Performance.css"
 
 interface ListGoalInterface {
   role:boolean;
@@ -38,10 +39,15 @@ export function ListGoal(props : ListGoalInterface) {
 
   return (
     <>
-      <h2>Your Performance Goals</h2>
+    <div className="container-perf">
+      <h4>Your Performance Goals</h4>
       <button id="addgoalbutton" onClick={showAddGoalFunction}>Add a New Goal</button>
-      {showAddGoalComponent && <AddGoal goalCounterFunction={listGoalCounterFunction}></AddGoal>}
-      {allPerformanceReviews.map((prs) => {return (<SinglePerformance key={prs.performanceReviewID} data={prs} role={props.role} employeeID={props.employeeID}></SinglePerformance>);})}
+      {showAddGoalComponent && 
+      <AddGoal goalCounterFunction={listGoalCounterFunction}></AddGoal>}
+      {allPerformanceReviews.map((prs) => {return (
+      <SinglePerformance key={prs.performanceReviewID} data={prs} role={props.role} employeeID={props.employeeID}></SinglePerformance>
+      );})}
+      </div>
     </>
   );
 }

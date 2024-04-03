@@ -81,7 +81,7 @@ li a:hover {
       /*Don't think this is needed any longer
   } */
 
- 
+
   .dropdown-content a {
     color: #c4b7ab;
     background: #582e41;
@@ -90,7 +90,7 @@ li a:hover {
     display: block;
     text-align: left;
     /*controls the display of the dropdown-content*/
-  }
+ }
 
   .dropdown:hover .dropdown-content {
     display: block;

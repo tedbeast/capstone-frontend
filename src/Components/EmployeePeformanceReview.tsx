@@ -15,10 +15,7 @@ interface thisEmployee {
 
 export function EmployeePerformanceReview(props: thisEmployee) {
 
-    //API call
     const [performanceReview, setperformanceReview] = useState<PerformanceReview[]>([]);
-    // const [employeeID, setEmployeeID] = useState<number>(3);
-
 
     //potentially move all this to GoalsPage as to pass employeeID down through child components?
     function getItem<T>(key: string): T | null {
@@ -44,23 +41,17 @@ export function EmployeePerformanceReview(props: thisEmployee) {
     }, [props.employeeID]);
 
 
-    //map to single employee review component
-    // displays all fields - finalized view?
     return (
         <>
 
             <div>
                 {performanceReview.map((review) => (
                     <div key={review.performanceReviewID}>
-                        {/* Node for if manager then allow edit, otherwise display */}
                         <ManagerCommentsRating key={review.performanceReviewID} data={review} customKey={props.employeeID} role={props.role} managerID={props.managerID}></ManagerCommentsRating>
                     </div>
                 ))}
                 <ListGoal employeeID={props.employeeID} role={props.role}></ListGoal>
             </div>
-
-
-
         </>
 
     )

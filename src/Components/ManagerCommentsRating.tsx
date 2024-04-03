@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { PerformanceReview } from "../Models/PerformanceReview";
 import { updateManagerCommentsRatingAPI } from "../Services/GoalsAPIService";
 
@@ -14,8 +14,14 @@ interface reviewProps {
 export function ManagerCommentsRating(props: reviewProps) {
     const [newComments, setNewComments] = useState<string>(""); // State for input box
     const [newRating, setNewRating] = useState<number>(5); // State for input box
-    // const [roleMgr, setRoleMgr] = useState(false);
     const [updateTracker, setUpdateTracker] = useState(false);
+    const [render, setRender] = useState(false);
+
+    useEffect(() => {
+        console.log(render);
+    },[render]);
+
+    const dateFormated = props.data.deadlineDate.substring(5, 10) + "-" + props.data.deadlineDate.substring(0, 4);
 
     // Handle input change
     const handleCommentChange = (e: {
@@ -45,26 +51,28 @@ export function ManagerCommentsRating(props: reviewProps) {
                 }
                 return response.json();
             })
-            .then(() => {setUpdateTracker(!updateTracker); props.data.managerComments = newComments; props.data.rating = newRating;})
+            .then(() => { setUpdateTracker(!updateTracker); props.data.managerComments = newComments; props.data.rating = newRating; })
             .then((data) => {
                 console.log('Data:', data);
                 console.log('Saving comments: ', newComments);
                 console.log('Saving rating: ', newRating)
-            })            
+            })
             .catch((error) => {
                 console.error('Error:', error.message);
                 alert('Failed to update comments. Please review inputs and try again.')
             });
+            setRender(true);
     };
 
     return (
 
-        <div>
-            <h2>Performance Review Manager Comments & Rating</h2>
+        <div className="container-perf">
+            <h3>Performance Review</h3>
+            <h4>Manager Comments & Rating</h4>
             {
-                props.role && props.customKey != props.managerID ? (
+                props.role && props.customKey != props.managerID && !render ? (
                     <>
-                        <p><strong>Deadline Date: </strong> {props.data.deadlineDate}</p>
+                        <p><strong>Deadline Date: </strong> {dateFormated}</p>
                         <p><strong>Current Manager Comments: </strong> {props.data.managerComments}</p>
                         <input
                             type="text"
@@ -85,8 +93,8 @@ export function ManagerCommentsRating(props: reviewProps) {
                         <button onClick={handleSaveComments}>Save</button>
                     </>
                 ) : (
-                    <> 
-                        <p><strong>Deadline Date: </strong> {props.data.deadlineDate}</p>
+                    <>
+                        <p><strong>Deadline Date: </strong> {dateFormated}</p>
                         {props.data.managerComments && (<><p><strong>Manager Comments: </strong>{props.data.managerComments}</p></>)}
                         {props.data.managerComments && (<><p><strong>Rating: </strong>{props.data.rating}</p></>)}
                     </>

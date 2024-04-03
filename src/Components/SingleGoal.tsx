@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Goal } from "../Models/Goal";
 import { UpdatePR } from "./UpdatePR";
+import "../Components/Performance.css"
 
 interface thisInterface {
   employeeID: number;
@@ -29,8 +30,9 @@ export function SingleGoal(props: thisInterface) {
 
   return (
     <>
-      <h4>Goal Details - ID {props.data.goalID}</h4>
-      <p>Goal Type: {props.data.goalType}</p>
+    <div className="container-perf">
+      {/* <h4>Goal Details - ID {props.data.goalID}</h4> */} {/*changed*/}
+      <h4>{props.data.goalType}</h4> {/*changed*/}
       <p>Goal Description: {props.data.goalDescription}</p>
       <p>Employee Comments: {props.data.employeeComments}</p>
       <p>Weight: {props.data.weight.toFixed(2)}%</p>
@@ -51,6 +53,7 @@ export function SingleGoal(props: thisInterface) {
           role={props.role}
         ></UpdatePR>
       )}
+      </div>
     </>
   );
 }
