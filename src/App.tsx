@@ -2,8 +2,8 @@ import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { LoginPage } from './Pages/LoginPage'
-import { Homepage } from './Pages/Homepage'
+import { LoginPage } from "./Pages/LoginPage";
+// import { Homepage } from './Pages/Homepage'
 import { LeavesPage } from "./Pages/LeavesPage";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { GoalsPage } from "./Pages/GoalsPage";
@@ -19,23 +19,30 @@ import "@material-ui/core/styles";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+
 function App() {
   return (
     <>
       <BrowserRouter>
         <NavigationBar></NavigationBar>
         <Routes>
-          <Route path="/login" element={<LoginPage/>} />
+          <Route path="/login" element={<LoginPage />} />
 
-          <Route path="/home" element={<WelcomeLoggedInUser></WelcomeLoggedInUser>}></Route>
-          <Route path="/" element={<WelcomeLoggedInUser></WelcomeLoggedInUser>}></Route>
-          <Route path="*" element={<PageNotFoundPage></PageNotFoundPage>}></Route>
+          {/* <Route path="/home" element={<WelcomeLoggedInUser></WelcomeLoggedInUser>}></Route> */}
+          <Route
+            path="/"
+            element={<WelcomeLoggedInUser></WelcomeLoggedInUser>}
+          ></Route>
+          <Route
+            path="*"
+            element={<PageNotFoundPage></PageNotFoundPage>}
+          ></Route>
 
-          <Route path="" element={<Homepage/>} />
+          {/* <Route path="" element={<Homepage/>} /> */}
 
-          <Route path="/welcome" element={<WelcomeLoggedInUser/>} />
-          <Route path="/passwordreset" element={<PasswordResetPage/>} />
-          <Route path="*" element={<PageNotFoundPage/>} />
+          <Route path="/welcome" element={<WelcomeLoggedInUser />} />
+          <Route path="/passwordreset" element={<PasswordResetPage />} />
+          <Route path="*" element={<PageNotFoundPage />} />
           <Route path="admin" element={<AdminPage></AdminPage>}></Route>
           <Route
             path="*"
