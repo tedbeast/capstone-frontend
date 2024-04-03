@@ -1,7 +1,7 @@
 import { Employee } from "./Employee";
 
 export interface Leaves {
-  Id?: number;
+  leaveId?: number;
   leaveName: string;
   startDate: Date | null; // Allows for both date object and null value
   endDate: Date | null;

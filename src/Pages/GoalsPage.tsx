@@ -4,80 +4,96 @@ import { useEffect, useState } from "react";
 import { EmployeePerformanceReview } from "../Components/EmployeePeformanceReview";
 import { PerformanceReview } from "../Models/PerformanceReview";
 import { EmployeeDropdown } from "../Components/PerformanceReviewGetEmployeeReview";
-import { sortAndDeduplicateDiagnostics } from "typescript";
+// import { sortAndDeduplicateDiagnostics } from "typescript";
 import { AddGoal } from "../Components/AddGoal";
 import { ListGoal } from "../Components/ListGoal";
+import "../App.css";
 
 export function GoalsPage() {
-  const testManagerID = 1;
-  const testEmpID = 1;
+  function getItem<T>(key: string): T | null {
+    const item = localStorage.getItem(key);
+    return item ? (JSON.parse(item) as T) : null;
+  }
+
+  const testManagerID = getItem<string>('managerID');
+  const testEmpID = getItem<string>('username');
+  let managerIDint = 0;
+  let employeeIDint = 0;
+  if (testManagerID) {
+    managerIDint = parseInt(testManagerID, 10);
+  }  
+  
+  if (testEmpID) {
+    employeeIDint = parseInt(testEmpID, 10);
+  }
+
   //rendering depending on manager vs employee
-  const currentRole = "EMPLOYEE";
+  const testCurrentRole = localStorage.getItem('role');
+  let currentRole = "";
+  if (testCurrentRole) {
+    currentRole = testCurrentRole;
+  }  
   const [roleMgr, setRoleMgr] = useState(false);
   const [dropDown, setDropDown] = useState(false); //false = does not appear
 
   //check what the current role is
-  function checkRole(currentRole: "EMPLOYEE" | "MANAGER" | "ADMIN") {
+  function checkRole(currentRole: string) {
     if (currentRole === "MANAGER") {
       setRoleMgr(true);
+      employeeIDint = managerIDint
     }
   }
-
+  
   useEffect(() => {
-    //When you don't give useEffect a second parameter the logic of this function will trigger everytime the component mounts
     //check role everytime component mounts
     checkRole(currentRole);
-    return () => {
-      //If you return a function in the useEffect then the returning function will be called when the component unmounts.
-      //check role everytime component unmounts
-      // checkRole(currentRole);
-    };
   }, []);
 
   const [showMenu, setShowMenu] = useState(false);
   const toggleMgrView = () => {
+    if (!showMenu) {
+      document.getElementById("managerswitchview")!.innerText = "Switch to Self-Appraisal";
+    } else {
+      document.getElementById("managerswitchview")!.innerText = "Switch to Manage Employees";
+    }
     setShowMenu(!showMenu);
     setDropDown(!dropDown);
-    console.log(showMenu);
   };
-  console.log(roleMgr);
-  console.log(showMenu);
-  //if manager: show button to toggle view & my own peformance review
-  //then, toggle view: show button, dropdown, & employee review
 
+  //if manager: show button to toggle view & manager self peformance review
+  //then, toggle view: show button, dropdown, & employee review
   //if employee: show only employee review
 
   return (
     <>
-      <div></div>
-      {/*
-        if role = Manager 
-        <button> Self or AllEmployees?
-        if button = Self
-        <EmployeePerformanceReview>
-        if button = AllEmployees
-        <EmployeeDrodown>
-        else <EmployeePerformanceReview>
-    */}
-      {roleMgr && (
+      {roleMgr ? (
         <div>
-          <button onClick={toggleMgrView}>Switch View</button>
-          {dropDown && (
-            <div>
+          <button id="managerswitchview" onClick={toggleMgrView}>Switch to Manage Employees</button>
+          {dropDown ? (
+            <div className="container-perf">
+              <h5>Manage Employees</h5>
               <EmployeeDropdown
                 role={roleMgr}
-                managerID={testEmpID}
+                managerID={managerIDint}
               ></EmployeeDropdown>
             </div>
+          ) : (
+            <EmployeePerformanceReview
+              role={false}
+              employeeID={employeeIDint}
+              managerID={managerIDint}
+            ></EmployeePerformanceReview>
           )}
         </div>
+      ) : (
+        <>
+          <EmployeePerformanceReview
+            role={roleMgr}
+            employeeID={employeeIDint}
+            managerID={managerIDint}
+          ></EmployeePerformanceReview>
+        </>
       )}
-      <EmployeePerformanceReview
-        role={roleMgr}
-        employeeID={testEmpID}
-      ></EmployeePerformanceReview>
-      <ListGoal></ListGoal>
-      {/*<PerformanceReviewList managerIdProp={testManagerID}></PerformanceReviewList> */}
     </>
   );
 }

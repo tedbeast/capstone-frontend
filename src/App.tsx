@@ -11,40 +11,10 @@ import { NavigationBar } from "./Components/NavigationBar";
 import { PageNotFoundPage } from "./Pages/PageNotFoundPage";
 import { AdminPage } from "./Pages/AdminPage";
 import { ReportingPage } from "./Pages/ReportingPage";
-import { PasswordResetPage } from './Pages/PasswordResetPage';
-import { WelcomeLoggedInUser } from './Pages/WelcomeLoggedInUser';
-import { Employee } from "./Models/Employee";
-import { Roles } from "./Models/Roles";
-import "@material-ui/core/styles";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-
+import { PasswordResetPage } from "./Pages/PasswordResetPage";
+import { WelcomeLoggedInUser } from "./Pages/WelcomeLoggedInUser";
 
 function App() {
-
-  const sampleEmployee: Employee = {
-    employeeID: 1,
-    password: "examplePassword",
-    name: "DJ Developer",
-    jobTitle: "Software Developer",
-    phoneNumber: "123-456-7890",
-    email: "john.doe@example.com",
-    addressLine1: "123 Main St",
-    addressLine2: "Apt 4",
-    city: "Anytown",
-    state: "Anystate",
-    postalCode: "12345",
-    birthDate: new Date("1990-01-01"), // or "1990-01-01" if you're using string dates
-    anniversary: new Date("2015-06-01"),
-    manager: {
-      managerID: null,
-      employees: []
-    },
-    performanceReview: [],
-    leaves: [],
-    role: Roles.MANAGER
-  };
-
   return (
     <>
       <BrowserRouter>
@@ -77,7 +47,7 @@ function App() {
             path="reporting"
             element={<ReportingPage></ReportingPage>}
           ></Route>
-          <Route path="leave" element={<LeavesPage employee={sampleEmployee}/>}> </Route>
+          <Route path="leave" element={<LeavesPage></LeavesPage>}></Route>
         </Routes>
       </BrowserRouter>
     </>
