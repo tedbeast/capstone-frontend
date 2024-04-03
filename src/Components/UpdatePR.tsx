@@ -21,13 +21,9 @@ export function UpdatePR(props: myInterface) {
     props.data.employeeComments
   );
   const [thisGoalWeight, setThisGoalWeight] = useState(props.data.weight);
-  const [render, setRender] = useState(false);
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    console.log(render);
-  },[render]);
 
   function commentsHandler(event: SyntheticEvent) {
     let commentsTextBox = event.target as HTMLTextAreaElement;
@@ -46,7 +42,6 @@ export function UpdatePR(props: myInterface) {
 
     updateEmployeeCommentsAPI(props.employeeID, thisGoalID, myGoal);
     window.location.reload();
-    setRender(!render);
   };
 
   return (

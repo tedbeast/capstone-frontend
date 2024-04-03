@@ -40,13 +40,15 @@ export function EmployeePerformanceReview(props: thisEmployee) {
         // }
     }, [props.employeeID]);
 
-
     return (
         <>
 
             <div>
+            <h3>Performance Review</h3>
+            
                 {performanceReview.map((review) => (
                     <div key={review.performanceReviewID}>
+                        <p><strong>Deadline Date: </strong> {review.deadlineDate.substring(5, 10) + "-" + review.deadlineDate.substring(0, 4)}</p>
                         <ManagerCommentsRating key={review.performanceReviewID} data={review} customKey={props.employeeID} role={props.role} managerID={props.managerID}></ManagerCommentsRating>
                     </div>
                 ))}

@@ -70,7 +70,7 @@ export function EmployeeDropdown(props: thisEmployee) {
             </select>       
 
             {selectedEmployeeID &&
-                <p>You Selected: {selectedEmployee}
+                <p>
                     <EmployeePerformanceReview role={roleMgr} employeeID={selectedEmployeeID} managerID={props.managerID}></EmployeePerformanceReview>
                 </p>
             }

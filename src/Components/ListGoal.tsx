@@ -41,7 +41,9 @@ export function ListGoal(props : ListGoalInterface) {
     <>
     <div className="container-perf">
       <h4>Your Performance Goals</h4>
-      <button id="addgoalbutton" onClick={showAddGoalFunction}>Add a New Goal</button>
+      {!props.role &&
+        <button id="addgoalbutton" onClick={showAddGoalFunction}>Add a New Goal</button>
+      }
       {showAddGoalComponent && 
       <AddGoal goalCounterFunction={listGoalCounterFunction}></AddGoal>}
       {allPerformanceReviews.map((prs) => {return (

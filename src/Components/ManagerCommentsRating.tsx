@@ -21,7 +21,7 @@ export function ManagerCommentsRating(props: reviewProps) {
         console.log(render);
     },[render]);
 
-    const dateFormated = props.data.deadlineDate.substring(5, 10) + "-" + props.data.deadlineDate.substring(0, 4);
+    
 
     // Handle input change
     const handleCommentChange = (e: {
@@ -67,12 +67,12 @@ export function ManagerCommentsRating(props: reviewProps) {
     return (
 
         <div className="container-perf">
-            <h3>Performance Review</h3>
+            
             <h4>Manager Comments & Rating</h4>
             {
-                props.role && props.customKey != props.managerID && !render ? (
+                props.role && props.customKey != props.managerID && props.data.managerComments == null && !render ? (
                     <>
-                        <p><strong>Deadline Date: </strong> {dateFormated}</p>
+                        
                         <p><strong>Current Manager Comments: </strong> {props.data.managerComments}</p>
                         <input
                             type="text"
@@ -94,7 +94,6 @@ export function ManagerCommentsRating(props: reviewProps) {
                     </>
                 ) : (
                     <>
-                        <p><strong>Deadline Date: </strong> {dateFormated}</p>
                         {props.data.managerComments && (<><p><strong>Manager Comments: </strong>{props.data.managerComments}</p></>)}
                         {props.data.managerComments && (<><p><strong>Rating: </strong>{props.data.rating}</p></>)}
                     </>
