@@ -53,8 +53,8 @@ export function NavigationBar() {
 
                 <li>
                   <Link to="login">
-                    <FontAwesomeIcon icon={faDoorClosed} className="icon" /> Log
-                    Out
+                    <FontAwesomeIcon icon={faDoorClosed} className="icon" />{" "}
+                    Logout
                   </Link>
                 </li>
               </ul>
