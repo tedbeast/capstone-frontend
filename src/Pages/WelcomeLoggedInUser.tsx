@@ -61,7 +61,7 @@ export function WelcomeLoggedInUser() {
                 <p>Employee
                   phone: {employeeDetails ? employeeDetails.phoneNumber : 'null'}</p>
                 <p>Employee
-                  manager: {localStorage.managerID ? localStorage.managerID : 'null'}</p>
+                  manager: {localStorage.managerID ? localStorage.managerID : 'n/a'}</p>
 
                 {/* Add more fields as needed */}
               </div>
