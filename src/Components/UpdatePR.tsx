@@ -8,7 +8,8 @@ import { updateEmployeeCommentsAPI } from "../Services/GoalsAPIService";
 interface myInterface {
   employeeID: number;
   role: boolean;
-  data: Goal;
+  data: Goal;  
+  goalCommentCounterFunction: Function
 }
 
 export function UpdatePR(props: myInterface) {
@@ -22,8 +23,9 @@ export function UpdatePR(props: myInterface) {
   );
   const [thisGoalWeight, setThisGoalWeight] = useState(props.data.weight);
 
-  const navigate = useNavigate();
+  const [goalCommentCounter, setGoalCommentCounter] = useState(1);
 
+  const navigate = useNavigate();
 
   function commentsHandler(event: SyntheticEvent) {
     let commentsTextBox = event.target as HTMLTextAreaElement;
@@ -40,7 +42,12 @@ export function UpdatePR(props: myInterface) {
       weight: thisGoalWeight,
     };
 
-    updateEmployeeCommentsAPI(props.employeeID, thisGoalID, myGoal);
+    updateEmployeeCommentsAPI(props.employeeID, thisGoalID, myGoal) 
+    .then((response) => {return response.json();})   
+    .then(() => {setGoalCommentCounter(goalCommentCounter+1); 
+      props.goalCommentCounterFunction(goalCommentCounter);
+      props.data.employeeComments = thisEmployeeComments;
+    });;
   };
 
   return (
