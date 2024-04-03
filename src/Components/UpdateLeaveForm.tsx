@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Grid,
   makeStyles,
@@ -17,9 +17,8 @@ import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import { TextField } from "formik-material-ui";
 import { Leave } from "../Models/Leaves";
-import { postLeaveAPI } from "../Services/LeavesAPI";
+import { postLeaveAPI, updateLeaveAPI } from "../Services/LeavesAPI";
 import { toast } from "react-toastify";
-import { Employee } from "../Models/Employee";
 
 const useStyle = makeStyles((theme) => ({
   padding: {
@@ -30,16 +29,19 @@ const useStyle = makeStyles((theme) => ({
   },
 }));
 
+interface FormValues {
+  id?: number;
+  leaveId?: number;
+  leaveName: string;
+  acceptedFlag: boolean;
+  activeFlag: boolean;
+  employeeID?: number;
+  managerID?: number;
+  startDate: string; // For Formik state, use strings
+  endDate: string; // For Formik state, use strings
+}
+
 //Data
-const initialValues: Leave = {
-  leaveName: "",
-  startDate: null,
-  endDate: null,
-  acceptedFlag: false,
-  activeFlag: true,
-  employeeID: undefined,
-  managerID: undefined,
-};
 
 const options = [
   { label: "Sick Leave", value: "Sick Leave" },
@@ -47,65 +49,85 @@ const options = [
   { label: "Other", value: "Other" },
 ];
 
-const today = new Date(Date.now());
-today.setHours(0, 0, 0, 0);
-
 const validationSchema = Yup.object({
   leaveName: Yup.string().required("Leave type is required"),
-  startDate: Yup.date()
-    .nullable()
-    .required("Start date is required")
-    .min(today, "Start date can't be before today"),
+  startDate: Yup.date().nullable().required("Start date is required"),
   endDate: Yup.date()
     .nullable()
     .required("End date is required")
     .min(Yup.ref("startDate"), "End date can't be before start date"),
 });
 
-interface LeaveFormProps {
-  employee: Employee;
-  setAllLeaves: any;
-  allLeaves: Leave[];
+interface UpdateLeaveFormProps {
+  leave: Leave | undefined;
   setShowForm: any;
 }
 
-const LeaveForm: React.FC<LeaveFormProps> = ({
-  employee,
-  setAllLeaves,
-  allLeaves,
+const UpdateLeaveForm: React.FC<UpdateLeaveFormProps> = ({
+  leave,
   setShowForm,
 }) => {
-  const [otherLeaveType, setOtherLeaveType] = React.useState("");
+  console.log(leave);
+
+  const formatDate = (date: Date | null | undefined): string =>
+    date ? new Date(date).toISOString().split("T")[0] : "";
+
+  const [initialValues, setInitialValues] = useState<FormValues>({
+    leaveId: leave?.id,
+    leaveName: leave?.leaveName || "",
+    startDate: formatDate(leave?.startDate), // Use the adjusted formatDate function
+    endDate: formatDate(leave?.endDate), // Use the adjusted formatDate function
+    acceptedFlag: leave?.acceptedFlag ?? false,
+    activeFlag: leave?.activeFlag ?? true,
+    employeeID: leave?.employeeID,
+    managerID: leave?.managerID,
+  });
+
   const options = [
     { label: "Sick Leave", value: "Sick Leave" },
     { label: "Vacation", value: "Vacation" },
     { label: "Other", value: "Other" },
   ];
 
-  const handleSubmit = async (values: any) => {
-    console.log("*************************");
-    console.log(values);
-    console.log(employee.employeeID);
-    console.log("*************************");
+  const [otherLeaveType, setOtherLeaveType] = React.useState(
+    leave?.leaveName && !options.find((o) => o.value === leave.leaveName)
+      ? leave.leaveName
+      : ""
+  );
 
+  useEffect(() => {
+    if (leave?.leaveName && !options.find((o) => o.value === leave.leaveName)) {
+      console.log(leave.leaveName);
+      setInitialValues({ ...initialValues, leaveName: "Other" });
+      setOtherLeaveType(leave.leaveName);
+    }
+    console.log(otherLeaveType);
+  }, [leave]);
+
+  const handleSubmit = async (values: any) => {
     if (otherLeaveType == "") values.leaveName = values.leaveName;
     else values.leaveName = otherLeaveType;
+    console.log("Update Code: " + values.id);
+    console.log("Update Code: " + values.leaveId);
+    console.log(values);
+    console.log(otherLeaveType);
+    setShowForm(false);
+    try {
+      values.leaveId = leave?.id;
+      console.log(values);
+      console.log(await updateLeaveAPI(values));
 
-    const response = await postLeaveAPI(values, employee.employeeID);
-    if (response) {
-      setAllLeaves([...allLeaves, values]);
-      setShowForm(false);
-      toast.success("Leave Requested Successfully");
-    } else {
-      toast.error("Error Requesting Leave");
+      toast.success("Leave request updated successfully");
+    } catch (error) {
+      toast.error("Failed to update leave request");
     }
   };
 
   return (
-    <Grid container justify="center" spacing={2}>
+    <Grid container justifyContent="center" spacing={2}>
       <Grid item xs={12} md={6}>
         <Card>
-          <CardHeader title="Leave Request Form" />
+          <CardHeader title="Update Leave" />
           <CardContent>
             <Formik
               initialValues={initialValues}
@@ -125,6 +147,7 @@ const LeaveForm: React.FC<LeaveFormProps> = ({
                         <Select
                           name="leaveName"
                           label="Leave Type"
+                          value={values.leaveName}
                           onChange={(e: any) => {
                             setFieldValue("leaveName", e.target.value);
                             setOtherLeaveType("");
@@ -147,6 +170,7 @@ const LeaveForm: React.FC<LeaveFormProps> = ({
                           label="Specify Leave Type"
                           fullWidth
                           variant="outlined"
+                          value={otherLeaveType}
                           onChange={(e: any) => {
                             setOtherLeaveType(e.target.value);
                           }}
@@ -193,4 +217,4 @@ const LeaveForm: React.FC<LeaveFormProps> = ({
   );
 };
 
-export default LeaveForm;
+export default UpdateLeaveForm;
