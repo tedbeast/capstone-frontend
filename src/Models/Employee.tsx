@@ -1,11 +1,11 @@
-import { Roles } from "./Roles";
-import { PerformanceReview } from "./PrefromanceReview";
-import { Leave } from "./Leaves";
+import { Leaves } from "./Leaves";
 import { Manager } from "./Manager";
+import { PerformanceReview } from "./PerformanceReview";
+import { Roles } from "./Roles";
 
 export interface Employee {
   employeeID: number;
-  password: string | null;
+  password: string;
   name: string;
   jobTitle: string;
   phoneNumber: string;
@@ -15,8 +15,10 @@ export interface Employee {
   city: string;
   state: string;
   postalCode: string;
-  birthDate: Date | null;
-  anniversary: Date | null;
-  manager?: Manager;
+  birthDate: Date;
+  anniversary: Date;
+  manager: Manager;
+  performanceReview: PerformanceReview[];
+  leaves: Leaves[];
   role: Roles;
 }
