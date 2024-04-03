@@ -15,14 +15,12 @@ export function ReportingPage() {
         <div className="reporting-container">
             <div className="reporting-links">
                 <button onClick={() => handleReportChange("average")}>Average Ratings</button>
-                <button onClick={() => handleReportChange("low")}>Low Rating Employees</button>
-                
+                <button onClick={() => handleReportChange("low")}>Low Rated Employees</button>
             </div>
             <div className="reporting-section">
                 {activeReport === "average" && <AverageRatingReport />}
                 {activeReport === "low" && <LowRatingEmployees />}
-                
             </div>
         </div>
     );
-}
+} 

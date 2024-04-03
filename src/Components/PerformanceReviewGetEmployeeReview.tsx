@@ -1,7 +1,6 @@
 // drop down which populates with each employee assigned to manager
 // list is obtained thru getAllEmployessByManagerID
 // map each employee to the dropdown list
-
 import React, { SyntheticEvent, useEffect, useState } from "react";
 import { Employee } from "../Models/Employee";
 import { getAllEmployeeByManagerIdAPI } from "../Services/GoalsAPIService";
@@ -16,13 +15,11 @@ export function EmployeeDropdown(props: thisEmployee) {
     const [employees, setEmployees] = useState<Employee[]>([]);
     const [selectedEmployee, setSelectedEmployee] = useState<string>('TEST');
     const [selectedEmployeeID, setSelectedEmployeeID] = useState<number>();
-    const [selectedEmployeeRender, setSelectedEmployeeRender] = useState(false);
 
     const roleMgr = props.role;
     const managerId = 1;
 
     useEffect(() => {
-        console.log("getAllEmployeeByManagerIdAPI started");
         getAllEmployeeByManagerIdAPI(props.managerID) // this will come as prop???
             .then((response) => {
                 if (!response.ok) {
@@ -39,13 +36,11 @@ export function EmployeeDropdown(props: thisEmployee) {
 
     
     useEffect(() => {
-        console.log('Selected Employee:', selectedEmployee);
         const selectedEmployeeObject = employees.find((employee) => employee.name === selectedEmployee);
         if (selectedEmployeeObject) {
                     // Extract the EmployeeID
                     setSelectedEmployeeID(selectedEmployeeObject.employeeID);
                 }
-            //  console.log("selected employee"+selectedEmployeeID);
         // Any other side effects you want to perform when selectedEmployee changes
       }, [selectedEmployee]);
 
@@ -63,20 +58,6 @@ export function EmployeeDropdown(props: thisEmployee) {
         // Assuming each employee object has an 'id' property representing the EmployeeID
     };
 
-    const getSelectedEmployeeID = () => {
-        console.log(selectedEmployee);
-        console.log(employees);
-        const selectedEmployeeObject = employees.find((employee) => employee.name === selectedEmployee);
-        console.log(selectedEmployeeObject);
-
-        if (selectedEmployeeObject) {
-            // Extract the EmployeeID
-            setSelectedEmployeeID(selectedEmployeeObject.employeeID);
-        }
-        console.log(selectedEmployeeObject?.employeeID);
-        console.log("selected employee: "+selectedEmployeeID);
-    };
-
     return (
         <div>
             <select onChange={handleEmployeeChange} value={selectedEmployee}>
@@ -86,10 +67,10 @@ export function EmployeeDropdown(props: thisEmployee) {
                         {employee.name}
                     </option>
                 ))}
-            </select>
+            </select>       
 
             {selectedEmployeeID &&
-                <p>You Selected: {selectedEmployee}
+                <p>
                     <EmployeePerformanceReview role={roleMgr} employeeID={selectedEmployeeID} managerID={props.managerID}></EmployeePerformanceReview>
                 </p>
             }

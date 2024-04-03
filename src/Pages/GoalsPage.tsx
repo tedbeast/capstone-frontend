@@ -4,16 +4,16 @@ import { useEffect, useState } from "react";
 import { EmployeePerformanceReview } from "../Components/EmployeePeformanceReview";
 import { PerformanceReview } from "../Models/PerformanceReview";
 import { EmployeeDropdown } from "../Components/PerformanceReviewGetEmployeeReview";
-import { sortAndDeduplicateDiagnostics } from "typescript";
+// import { sortAndDeduplicateDiagnostics } from "typescript";
 import { AddGoal } from "../Components/AddGoal";
 import { ListGoal } from "../Components/ListGoal";
 import "../App.css";
 
 export function GoalsPage() {
   const testManagerID = 1;
-  const testEmpID = 2;
+  const testEmpID = 1;
   //rendering depending on manager vs employee
-  const currentRole = "EMPLOYEE";
+  const currentRole = "MANAGER";
   const [roleMgr, setRoleMgr] = useState(false);
   const [dropDown, setDropDown] = useState(false); //false = does not appear
 
@@ -25,14 +25,8 @@ export function GoalsPage() {
   }
 
   useEffect(() => {
-    //When you don't give useEffect a second parameter the logic of this function will trigger everytime the component mounts
     //check role everytime component mounts
     checkRole(currentRole);
-    return () => {
-      //If you return a function in the useEffect then the returning function will be called when the component unmounts.
-      //check role everytime component unmounts
-      // checkRole(currentRole);
-    };
   }, []);
 
   const [showMenu, setShowMenu] = useState(false);
@@ -43,9 +37,8 @@ export function GoalsPage() {
   };
   console.log(roleMgr);
   console.log(showMenu);
-  //if manager: show button to toggle view & my own peformance review
+  //if manager: show button to toggle view & manager self peformance review
   //then, toggle view: show button, dropdown, & employee review
-
   //if employee: show only employee review
 
   return (
@@ -54,8 +47,8 @@ export function GoalsPage() {
         <div>
           <button onClick={toggleMgrView}>Switch View</button>
           {dropDown ? (
-            <div>
-              <p>Manage Employees</p>
+            <div className="container-perf">
+              <h5>Manage Employees</h5>
               <EmployeeDropdown
                 role={roleMgr}
                 managerID={testEmpID}

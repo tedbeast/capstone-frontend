@@ -2,6 +2,7 @@ import React from "react";
 import { PerformanceReview } from "../Models/PerformanceReview";
 import { ManagerCommentsRating } from "./ManagerCommentsRating";
 import { SingleGoal } from "./SingleGoal";
+import "../Components/Performance.css"
 
 interface PerformanceReviewInterface {
   data: PerformanceReview;
@@ -12,9 +13,8 @@ interface PerformanceReviewInterface {
 export function SinglePerformance(props: PerformanceReviewInterface) {
   return (
     <>
-      <div className="container">
-        <ul>
-          <li>
+      <div className="container-back-perf">
+        
             {props.data.goals.map((goals) => {
               return (
                 <SingleGoal
@@ -25,8 +25,7 @@ export function SinglePerformance(props: PerformanceReviewInterface) {
                 ></SingleGoal>
               );
             })}
-          </li>
-        </ul>
+         
       </div>
     </>
   );

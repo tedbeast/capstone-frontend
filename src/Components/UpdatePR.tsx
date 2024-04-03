@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState, SyntheticEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { PerformanceReview } from "../Models/PerformanceReview";
@@ -24,6 +24,7 @@ export function UpdatePR(props: myInterface) {
 
   const navigate = useNavigate();
 
+
   function commentsHandler(event: SyntheticEvent) {
     let commentsTextBox = event.target as HTMLTextAreaElement;
     setThisEmployeeComments(commentsTextBox.value);
@@ -40,12 +41,12 @@ export function UpdatePR(props: myInterface) {
     };
 
     updateEmployeeCommentsAPI(props.employeeID, thisGoalID, myGoal);
-    //window.location.reload();
+    window.location.reload();
   };
 
   return (
     <React.Fragment>
-      <h3>Add Goal Comments</h3>
+      <h5>Add Goal Comments</h5>
       <input
         type="string"
         value={thisEmployeeComments}
