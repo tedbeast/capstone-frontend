@@ -93,7 +93,7 @@ export function NavigationBar() {
               Administrative{" "}
               <ul className="dropdown-content">
                 <li>
-                  <Link to="AdminPage">
+                  <Link to="Admin">
                     <FontAwesomeIcon icon={faUserTie} className="icon" /> Admin
                     Page{" "}
                   </Link>{" "}
