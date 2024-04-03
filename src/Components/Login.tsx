@@ -63,6 +63,7 @@ const getCredentials = async (event: React.FormEvent<HTMLFormElement>) => {
             localStorage.setItem('username', getEmployeeID);
             localStorage.setItem('role', data.role);
             //localStorage.setItem('managerID', data.managerID);
+            console.log("set username and role");
 
     } catch (error) {
         console.error('Error:', error);

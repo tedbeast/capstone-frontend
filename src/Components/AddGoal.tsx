@@ -4,6 +4,7 @@ import { postGoalsAPI } from "../Services/GoalsAPIService";
 
 interface AddGoalInterface {
   goalCounterFunction: Function;
+  employeeID: number
 }
 
 export function AddGoal(props : AddGoalInterface) {
@@ -33,7 +34,7 @@ export function AddGoal(props : AddGoalInterface) {
       weight: 0,
     };
 
-    postGoalsAPI(newGoal, 1)
+    postGoalsAPI(newGoal, props.employeeID)
     .then((response) => {return response.json();})
     .then((json) => {console.log(json);})
     .then(() => {setGoalCounter(goalCounter+1); props.goalCounterFunction(goalCounter);});
@@ -41,7 +42,7 @@ export function AddGoal(props : AddGoalInterface) {
 
   return (
     <>
-      <h1>Enter your Goals</h1>
+      <h4>Enter your Goals</h4>
       <div className="w3-half">
         <label>Goal Type: </label>
         <input type="text" onChange={goalTypeHandler} value={userGoalType}></input>

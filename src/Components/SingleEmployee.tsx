@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Employee } from "../Models/Employee";
-import { Manager } from "../Models/Manager";
 
 interface PropsInterface {
     data: Employee;
