@@ -47,6 +47,7 @@ export function UpdatePR(props: myInterface) {
     .then(() => {setGoalCommentCounter(goalCommentCounter+1); 
       props.goalCommentCounterFunction(goalCommentCounter);
       props.data.employeeComments = thisEmployeeComments;
+      setThisEmployeeComments("");
     });;
   };
 
