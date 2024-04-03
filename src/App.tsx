@@ -11,14 +11,8 @@ import { NavigationBar } from "./Components/NavigationBar";
 import { PageNotFoundPage } from "./Pages/PageNotFoundPage";
 import { AdminPage } from "./Pages/AdminPage";
 import { ReportingPage } from "./Pages/ReportingPage";
-import { PasswordResetPage } from './Pages/PasswordResetPage';
-import { WelcomeLoggedInUser } from './Pages/WelcomeLoggedInUser';
-import { Employee } from "./Models/Employee";
-import { Roles } from "./Models/Roles";
-import "@material-ui/core/styles";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-
+import { PasswordResetPage } from "./Pages/PasswordResetPage";
+import { WelcomeLoggedInUser } from "./Pages/WelcomeLoggedInUser";
 
 function App() {
   return (
