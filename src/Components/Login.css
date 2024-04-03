@@ -33,3 +33,10 @@
 button {
     margin-left: 10px;
 }
+
+.error-message {
+    color:red;
+    font-size: 14px;
+    width: 400px;
+    margin-top: 10px;
+}
