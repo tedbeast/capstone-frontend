@@ -4,7 +4,7 @@ import { Button, Modal, Stack } from "@mui/material";
 import { Add } from "@mui/icons-material";
 import LeaveForm from "./LeaveForm";
 import { Employee } from "../Models/Employee";
-import { Leaves } from "../Models/Leaves";
+import { Leave } from "../Models/Leaves";
 import {
   deleteLeaveAPI,
   getAllLeavesByEmployeeId,
@@ -18,8 +18,8 @@ interface EmployeeLeaveUIProps {
 
 const EmployeeLeaveUI: React.FC<EmployeeLeaveUIProps> = ({ employee }) => {
   const [showForm, setShowForm] = useState(false);
-  const [allLeaves, setAllLeaves] = useState<Leaves[]>([]);
-  const [leave, setLeave] = useState<Leaves>();
+  const [allLeaves, setAllLeaves] = useState<Leave[]>([]);
+  const [leave, setLeave] = useState<Leave>();
   const [showUpdateForm, setShowUpdateForm] = useState(false);
 
   useEffect(() => {
@@ -44,7 +44,7 @@ const EmployeeLeaveUI: React.FC<EmployeeLeaveUIProps> = ({ employee }) => {
   };
 
   const handleUpdate = useCallback(
-    (id: number, leave: Leaves) => {
+    (id: number, leave: Leave) => {
       setShowUpdateForm(true);
     },
     [allLeaves]
