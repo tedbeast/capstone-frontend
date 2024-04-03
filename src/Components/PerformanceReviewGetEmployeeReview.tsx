@@ -17,7 +17,6 @@ export function EmployeeDropdown(props: thisEmployee) {
     const [selectedEmployeeID, setSelectedEmployeeID] = useState<number>();
 
     const roleMgr = props.role;
-    const managerId = 1;
 
     useEffect(() => {
         getAllEmployeeByManagerIdAPI(props.managerID) // this will come as prop???

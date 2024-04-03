@@ -19,6 +19,7 @@ export function GoalsPage() {
   const testEmpID = getItem<string>('username');
   let managerIDint = 0;
   let employeeIDint = 0;
+  
   if (testManagerID) {
     managerIDint = parseInt(testManagerID, 10);
   }  
@@ -26,13 +27,14 @@ export function GoalsPage() {
   if (testEmpID) {
     employeeIDint = parseInt(testEmpID, 10);
   }
-
+  
   //rendering depending on manager vs employee
   const testCurrentRole = localStorage.getItem('role');
   let currentRole = "";
   if (testCurrentRole) {
     currentRole = testCurrentRole;
   }  
+  
   const [roleMgr, setRoleMgr] = useState(false);
   const [dropDown, setDropDown] = useState(false); //false = does not appear
 
@@ -40,10 +42,10 @@ export function GoalsPage() {
   function checkRole(currentRole: string) {
     if (currentRole === "MANAGER") {
       setRoleMgr(true);
-      employeeIDint = managerIDint
+      managerIDint = employeeIDint
     }
   }
-  
+
   useEffect(() => {
     //check role everytime component mounts
     checkRole(currentRole);
@@ -74,7 +76,7 @@ export function GoalsPage() {
               <h5>Manage Employees</h5>
               <EmployeeDropdown
                 role={roleMgr}
-                managerID={managerIDint}
+                managerID={employeeIDint}
               ></EmployeeDropdown>
             </div>
           ) : (
