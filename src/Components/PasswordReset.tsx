@@ -44,18 +44,22 @@ export function ResetPassword(props: { data: { employeeId: any } }) {
     if (passwordInput !== confirmPasswordInput) {
       return setAlertMessage("Passwords must match.");
     }
+
     let data = await response.json();
     let employee: Employee = data;
     employee.password = pwd;
     console.log(employee);
-    let pwdApiCall = await putPassword(employee);
-    let pwdSuccess = pwdApiCall.status;
-    if (pwdSuccess === 400) {
+
+    // TODO: Get error message from response body
+    let pwdApiCallResponse = await putPassword(employee);
+    let pwdStatus = pwdApiCallResponse.status;
+
+    if (pwdStatus === 400) {
       return setAlertMessage(
         "New password cannot be the same as the current password."
       );
     }
-    if (pwdSuccess === 200) {
+    if (pwdStatus === 200) {
       setShowForm(false);
       setShowSuccess(true);
     }
