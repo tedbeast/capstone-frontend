@@ -16,7 +16,7 @@ import {
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import { TextField } from "formik-material-ui";
-import { Leave } from "../Models/Leaves";
+import { Leaves } from "../Models/Leaves";
 import { postLeaveAPI } from "../Services/LeavesAPI";
 import { toast } from "react-toastify";
 import { Employee } from "../Models/Employee";
@@ -31,7 +31,7 @@ const useStyle = makeStyles((theme) => ({
 }));
 
 //Data
-const initialValues: Leave = {
+const initialValues: Leaves = {
   leaveName: "",
   startDate: null,
   endDate: null,
@@ -65,7 +65,7 @@ const validationSchema = Yup.object({
 interface LeaveFormProps {
   employee: Employee;
   setAllLeaves: any;
-  allLeaves: Leave[];
+  allLeaves: Leaves[];
   setShowForm: any;
 }
 
@@ -93,7 +93,7 @@ const LeaveForm: React.FC<LeaveFormProps> = ({
 
     const response = await postLeaveAPI(values, employee.employeeID);
     if (response) {
-      setAllLeaves([...allLeaves, values]);
+      setAllLeaves([...allLeaves, response]);
       setShowForm(false);
       toast.success("Leave Requested Successfully");
     } else {

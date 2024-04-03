@@ -21,6 +21,29 @@ import "react-toastify/dist/ReactToastify.css";
 
 
 function App() {
+
+  const sampleEmployee: Employee = {
+    employeeID: 1,
+    password: "examplePassword",
+    name: "DJ Developer",
+    jobTitle: "Software Developer",
+    phoneNumber: "123-456-7890",
+    email: "john.doe@example.com",
+    addressLine1: "123 Main St",
+    addressLine2: "Apt 4",
+    city: "Anytown",
+    state: "Anystate",
+    postalCode: "12345",
+    birthDate: new Date("1990-01-01"), // or "1990-01-01" if you're using string dates
+    anniversary: new Date("2015-06-01"),
+    role: Roles.MANAGER,
+    manager: {
+      managerID: null,
+      employees: []
+    },
+    performanceReview: [],
+    leaves: []
+  };
   return (
     <>
       <BrowserRouter>
@@ -53,7 +76,9 @@ function App() {
             path="reporting"
             element={<ReportingPage></ReportingPage>}
           ></Route>
-          <Route path="leave" element={<LeavesPage></LeavesPage>}></Route>
+          <Route 
+  path="leave"
+      element={<LeavesPage employee={sampleEmployee} />}></Route>
         </Routes>
       </BrowserRouter>
     </>

@@ -1,5 +1,5 @@
 import { json } from "react-router-dom";
-import { Leave } from "../Models/Leaves";
+import { Leaves } from "../Models/Leaves";
 
 const apiBaseURL = "http://localhost:9004/"; // Base URL for the API
 
@@ -13,7 +13,7 @@ export function getAllLeaveAPI() {
 
 // Add a new leave via API
 // http://localhost:8080/employee/2/leave
-export async function postLeaveAPI(leave: Leave, employeeID: number) {
+export async function postLeaveAPI(leave: Leaves, employeeID: number) {
   console.log("post API: ", apiBaseURL + "leave");
   const response = await fetch(apiBaseURL + `employee/${employeeID}/leave`, {
     method: "POST",
@@ -49,9 +49,9 @@ export const deleteLeaveAPI = async (leaveId: any) => {
 };
 
 // Update an existing leave via API
-export const updateLeaveAPI = async (leave: Leave) => {
-  console.log("update api: ", `${apiBaseURL}leave/${leave.leaveId}`);
-  const response = await fetch(`${apiBaseURL}leave/${leave.leaveId}`, {
+export const updateLeaveAPI = async (leave: Leaves) => {
+  console.log("update api: ", `${apiBaseURL}leave/${leave.Id}`);
+  const response = await fetch(`${apiBaseURL}leave/${leave.Id}`, {
     method: "PUT",
     mode: "cors",
     headers: { "Content-Type": "application/json" },
@@ -89,7 +89,7 @@ export const getAllLeavesByEmployeeId = async (employeeId: number) => {
       throw new Error("Network response was not ok");
     }
 
-    const leaves: Leave[] = await response.json();
+    const leaves: Leaves[] = await response.json();
 
     // Assuming each leave record has startDate and endDate properties
     return leaves.map((leave) => {
@@ -162,7 +162,7 @@ export const getAllLeavesByManagerId = async (employeeId: number) => {
       throw new Error("Network response was not ok");
     }
 
-    const leaves: Leave[] = await response.json();
+    const leaves: Leaves[] = await response.json();
 
     // Assuming each leave record has startDate and endDate properties
     return leaves.map((leave) => {
