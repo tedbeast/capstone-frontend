@@ -137,7 +137,6 @@ export function NavigationBar() {
                 Leave Requests{" "}
               </Link>{" "}
             </li>
-
             <li>
               <Link to="passwordreset">
                 <FontAwesomeIcon icon={faKey} className="icon" /> Password Reset
@@ -147,6 +146,17 @@ export function NavigationBar() {
             <li>
               <Link to="logout">
                 <FontAwesomeIcon icon={faDoorClosed} className="icon" /> Logout
+              </Link>
+            </li>
+            <li>
+              <Link to="admin">
+                <FontAwesomeIcon icon={faAddressBook} className="icon"/> Admin 
+              </Link>
+            </li>
+
+            <li>
+              <Link to="reporting">
+                <FontAwesomeIcon icon={faChartSimple} className="icon"/> Reporting 
               </Link>
             </li>
           </ul>
@@ -164,10 +174,10 @@ export function NavigationBar() {
           <Link to="Goals">Goals Page</Link>
         </li>
         <li>
-          <Link to="Admin">Admin Page</Link>
+          <Link to="Reporting">Reporting Page</Link>
         </li>
         <li>
-          <Link to="Reporting">Reporting Page</Link>
+          <Link to="Admin">Admin Page</Link>
         </li>
 
         //{<li>

@@ -8,7 +8,6 @@ interface RatingData {
     employeeName: string;
     managerId: number;
     jobTitle: string; 
-    deadlineDate: string;
     averageRating: number;
 }
 
@@ -27,8 +26,7 @@ function AverageRatingReport() {
                         employeeName: item[1].toString(),
                         jobTitle: item[2].toString(), 
                         managerId: item[3],
-                        deadlineDate: item[4].toString(), 
-                        averageRating: item[5],
+                        averageRating: item[4],
                     }));
                     setAverageRatings(formattedData);
                 } else {
