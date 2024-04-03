@@ -44,16 +44,6 @@ export function NavigationBar() {
                   </Link>
                 </li>
 
-                {/* <li>
-                  <Link to="leave">
-                    <FontAwesomeIcon
-                      icon={faPersonThroughWindow}
-                      className="icon"
-                    />{" "}
-                    Leave Requests{" "}
-                  </Link>{" "}
-                </li> */}
-
                 <li>
                   <Link to="passwordreset">
                     <FontAwesomeIcon icon={faKey} className="icon" /> Password
@@ -62,9 +52,9 @@ export function NavigationBar() {
                 </li>
 
                 <li>
-                  <Link to="logout">
-                    <FontAwesomeIcon icon={faDoorClosed} className="icon" />{" "}
-                    Logout
+                  <Link to="login">
+                    <FontAwesomeIcon icon={faDoorClosed} className="icon" /> Log
+                    Out
                   </Link>
                 </li>
               </ul>
