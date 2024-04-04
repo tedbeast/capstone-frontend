@@ -13,6 +13,8 @@ import { AdminPage } from "./Pages/AdminPage";
 import { ReportingPage } from "./Pages/ReportingPage";
 import { PasswordResetPage } from "./Pages/PasswordResetPage";
 import { WelcomeLoggedInUser } from "./Pages/WelcomeLoggedInUser";
+import { AuthProvider } from './Components/AuthContext';
+
 
 function App() {
   return (
@@ -51,6 +53,7 @@ function App() {
         </Routes>
       </BrowserRouter>
     </>
+
   );
 }
 
