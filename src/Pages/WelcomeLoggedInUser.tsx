@@ -1,11 +1,15 @@
 import React, {useEffect, useState} from "react";
 import {Login} from "../Components/Login";
 import {useNavigate} from "react-router-dom";
+import { useAuth } from '../Components/AuthContext';
+
 import {Employee} from "../Models/Employee";
 
 export function WelcomeLoggedInUser() {
   const userId = localStorage.getItem("username");
   const userRole = localStorage.getItem("role");
+//   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { loggedIn, login, logout } = useAuth();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [employeeDetails, setEmployeeDetails] = useState<Employee | null>(null);
   const navigate = useNavigate();
@@ -33,13 +37,16 @@ export function WelcomeLoggedInUser() {
     }
   };
   const handleLogin = () => {
-    setIsLoggedIn(true);
+//     setIsLoggedIn(true);
+login();
   };
   const handleLogOut = () => {
-    console.log("User logged out.");
-    localStorage.removeItem("username");
-    localStorage.removeItem("role");
-    setIsLoggedIn(false);
+//     console.log("User logged out.");
+//     localStorage.removeItem("username");
+//     localStorage.removeItem("role");
+//     localStorage.removeItem("managerID");
+//     setIsLoggedIn(false);
+    logout();
     navigate("/login");
   };
 
@@ -60,7 +67,7 @@ export function WelcomeLoggedInUser() {
                 <p>Employee
                   phone: {employeeDetails ? employeeDetails.phoneNumber : 'null'}</p>
                 <p>Employee
-                  manager: {localStorage.managerID}</p>
+                  manager: {localStorage.managerID ? localStorage.managerID : 'null'}</p>
 
                 {/* Add more fields as needed */}
               </div>

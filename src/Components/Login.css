@@ -1,0 +1,42 @@
+
+#login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.login-container {
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+
+
+.login-container label {
+    flex: 0 0 120px;
+    margin-right: 5px;
+}
+
+.login-container input[type="text"],
+.login-container input[type="password"] {
+    flex: 1;
+    width: 200px;
+    height: 35px;
+}
+
+#password-reset-link {
+    margin-left:10px;
+}
+
+button {
+    margin-left: 10px;
+}
+
+.error-message {
+    color:red;
+    font-size: 14px;
+    width: 400px;
+    margin-top: 10px;
+}

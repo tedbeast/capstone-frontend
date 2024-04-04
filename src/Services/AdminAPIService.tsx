@@ -9,6 +9,21 @@ export function getAllEmployeesAPI(){
           mode:"cors"
       });
 }
+export function getEmployeeByIDAPI(employeeID:number){
+  return fetch(apiBaseURL + `employee/${employeeID}`, {
+      method: "GET",
+      mode: "cors"
+    });
+  }
+
+  export function assignManagerID(employeeID: number, data: Employee) {
+    return fetch(apiBaseURL + `manager/${employeeID}`, {
+      method: "PUT",
+      mode: "cors",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    });
+  }
 
 export function updateAdminAPI(employeeID: number, data: Employee) {
     return fetch(apiBaseURL + `employee/${employeeID}`, {
@@ -19,8 +34,8 @@ export function updateAdminAPI(employeeID: number, data: Employee) {
     });
   }
 
-  export function deleteAdminAPI(id:number){
-    return fetch(apiBaseURL + `employee/${id}`, {
+  export function deleteAdminAPI(employeeID:number){
+    return fetch(apiBaseURL + `employee/${employeeID}`, {
         method: "DELETE",
         mode: "cors",
         headers: { "Content-Type": "application/json" },
