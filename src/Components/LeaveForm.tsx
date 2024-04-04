@@ -91,14 +91,13 @@ const LeaveForm: React.FC<LeaveFormProps> = ({
     if (otherLeaveType == "") values.leaveName = values.leaveName;
     else values.leaveName = otherLeaveType;
 
-    const response = await postLeaveAPI(values, employee.employeeID);
-    if (response) {
-      setAllLeaves([...allLeaves, response]);
+    postLeaveAPI(values, employee.employeeID).then((data)=>{
+      setAllLeaves([...allLeaves, data]);
       setShowForm(false);
       toast.success("Leave Requested Successfully");
-    } else {
-      toast.error("Error Requesting Leave");
-    }
+
+    }).catch((error)=> toast.error("Error Requesting Leave"));
+  
   };
 
   return (

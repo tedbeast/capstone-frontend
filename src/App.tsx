@@ -47,9 +47,14 @@ function App() {
 
   return (
     <>
+    
       <BrowserRouter>
+      <ToastContainer/>
+
         <NavigationBar></NavigationBar>
+      
         <Routes>
+
           <Route path="/login" element={<LoginPage />} />
 
           {/* <Route path="/home" element={<WelcomeLoggedInUser></WelcomeLoggedInUser>}></Route> */}
@@ -82,6 +87,7 @@ function App() {
             element={<LeavesPage/>}></Route>
         </Routes>
       </BrowserRouter>
+
     </>
   );
 }
