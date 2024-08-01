@@ -22,7 +22,7 @@ export function ReportingPage() {
 
     const handleClose = () => {
         setShow(false);
-        navigate('/login');
+        navigate('/welcome');
     };
 
     const handleReportChange = (reportType: string) => {

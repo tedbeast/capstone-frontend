@@ -25,7 +25,7 @@ export function AdminPage() {
 
     const handleCloseError = () => {
         setShowError(false);
-        navigate('/login');
+        navigate('/welcome');
     };
 
     const handleCloseComponent = () => {
@@ -63,7 +63,7 @@ export function AdminPage() {
                                 const role = localStorage.getItem('role');
                                 if (role !== 'ADMIN') {
                                     setError('You do not have access to this page.');
-                                    setShowError(true); 
+                                    setShowError(true);
                                 } else {
                                     setSelectedComponent(key); 
                                     setShowComponent(true);

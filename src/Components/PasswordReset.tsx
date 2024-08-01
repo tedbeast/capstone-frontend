@@ -2,6 +2,7 @@ import React, { SyntheticEvent, useState } from "react";
 import { Employee } from "../Models/Employee";
 import { getEmployeeById, putPassword } from "../Services/LoginAPIService";
 
+
 export function ResetPassword(props: { data: { employeeId: any } }) {
   const [showForm, setShowForm] = useState(true);
   const [showSuccess, setShowSuccess] = useState(false);

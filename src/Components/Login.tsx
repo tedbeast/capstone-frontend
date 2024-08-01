@@ -11,6 +11,7 @@ export const Login: React.FC<LoginProps> = ({ onLogin }) => {
     const [error, setError] = useState<string | null>(null);
     const navigate = useNavigate();
 
+
 const getCredentials = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     let getEmployeeID = (document.getElementById('employeeID') as
@@ -20,6 +21,7 @@ const getCredentials = async (event: React.FormEvent<HTMLFormElement>) => {
 
     console.log("getEmployeeID:", getEmployeeID);
     console.log("getPassword:", getPassword);
+
 
     try {
 
@@ -33,7 +35,7 @@ const getCredentials = async (event: React.FormEvent<HTMLFormElement>) => {
             return;
         }
         if(!/^\d+$/.test(getEmployeeID)){
-            setError("Employee ID must contain only numbers");
+            setError("Employee ID must only contain numbers");
             return;
         }
         const response = await fetch('http://localhost:9004/login', {
